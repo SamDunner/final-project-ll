@@ -8,9 +8,7 @@ exports.up = function(knex, Promise) {
     table.boolean('privacy');
     table.boolean('published')
     table.timestamp('created_at');
-    table.timestamp('updated_at');
-    table.integer('user_id');
-    table.foreign('user_id').references('users.id')
+    table.timestamp('updated_at')
   });
 };
 
