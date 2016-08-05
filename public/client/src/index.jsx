@@ -5,7 +5,19 @@ require("../styles/application.scss");
 
 // Render the top-level React component
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { Router, Route, Link, browserHistory } from 'react-router';
 import App from './App.jsx';
+import Signup from './signup/Signup.jsx';
 
-ReactDOM.render(<App />, document.getElementById('react-root'));
+
+render((
+  <Router history={browserHistory}>
+     <Route path="/" component={App}>
+    </Route>
+    <Route path="/signup" component={Signup}>
+    </Route>
+  </Router>
+), document.getElementById('react-root'))
+
+
