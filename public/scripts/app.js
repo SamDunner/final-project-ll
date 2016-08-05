@@ -8,3 +8,15 @@ $(() => {
     }
   });;
 });
+
+$(() => {
+  $.ajax({
+    method: "GET",
+    url: "/users/:id/maps"
+  }).done((maps) => {
+    for(map of maps) {
+      $("<div>").text(user.name).appendTo($("body"));
+      console.log(map);
+    }
+  });;
+});
