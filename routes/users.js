@@ -14,11 +14,11 @@ module.exports = (knex) => {
     });
   });
 
-  router.get("/:id", (req, res) => {
+  router.get("/:user_id", (req, res) => {
     knex
       .select("*")
       .from("users")
-      .where('id', req.params.id)
+      .where('user_id', req.params.user_id)
       .then((results) => {
         res.json(results);
         console.log(results);
@@ -38,8 +38,8 @@ module.exports = (knex) => {
     });
   });
 
-  router.put("/:id", (req, res) => {
-    knex("users").where('id', req.params.id)
+  router.put("/:user_id", (req, res) => {
+    knex("users").where('user_id', req.params.user_id)
     .update({
       'first_name': req.body.first_name,
       'last_name': req.body.last_name,
@@ -52,8 +52,8 @@ module.exports = (knex) => {
     });
   });
 
-  router.delete("/:id", (req, res) => {
-    knex("users").where('id', req.params.id)
+  router.delete("/:user_id", (req, res) => {
+    knex("users").where('user_id', req.params.user_id)
     .del().then((results) => {
       console.log("user deleted")
     });

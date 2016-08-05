@@ -39,8 +39,8 @@ app.use(express.static("public"));
 
 // Mount all resource routes
 app.use("/users", usersRoutes(knex));
-app.use("/users/:id/maps", mapsRoutes(knex));
-app.use("/users/:id/maps/:id/pins", pinsRoutes(knex));
+app.use("/users/:user_id/maps", mapsRoutes(knex));
+app.use("/users/:user_id/maps/:map_id/pins", pinsRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {

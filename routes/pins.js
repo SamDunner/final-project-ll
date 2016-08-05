@@ -8,17 +8,17 @@ module.exports = (knex) => {
   router.get("/", (req, res) => {
     knex
       .select("*")
-      .from("maps")
+      .from("pins")
       .then((results) => {
         res.json(results);
     });
   });
 
-  router.get("/:map_id", (req, res) => {
+  router.get("/:pin_id", (req, res) => {
     knex
       .select("*")
-      .from("maps")
-      .where('map_id', req.params.map_id)
+      .from("pins")
+      .where('pin_id', req.params.pin_id)
       .then((results) => {
         res.json(results);
         console.log(results);
@@ -26,38 +26,38 @@ module.exports = (knex) => {
   });
 
   router.post("/", (req, res) => {
-    knex("maps").insert({
+    knex("pins").insert({
       'title': req.body.title,
-      'location': req.body.location,
+      'description': req.body.description,
       'latitude': req.body.latitude,
       'longitude': req.body.longitude,
-      'privacy': req.body.privacy,
-      'published': req.body.published
+      'rating': req.body.rating,
+      'map_id': req.params.map_id
     })
     .then((results) => {
-      console.log("map posted")
+      console.log("pin posted")
     });
   });
 
-  router.put("/:map_id", (req, res) => {
-    knex("maps").where('map_id', req.params.map_id)
+  router.put("/:pin_id", (req, res) => {
+    knex("pins").where('pin_id', req.params.pin_id)
     .update({
       'title': req.body.title,
-      'location': req.body.location,
+      'description': req.body.description,
       'latitude': req.body.latitude,
       'longitude': req.body.longitude,
-      'privacy': req.body.privacy,
-      'published': req.body.published
+      'rating': req.body.rating,
+      'map_id': req.params.map_id
     })
     .then((results) => {
-      console.log("map updated")
+      console.log("pin updated")
     });
   });
 
-  router.delete("/:map_id", (req, res) => {
-    knex("maps").where('map_id', req.params.map_id)
+  router.delete("/:pin_id", (req, res) => {
+    knex("pins").where('pin_id', req.params.pin_id)
     .del().then((results) => {
-      console.log("map deleted")
+      console.log("pin deleted")
 // Might be issue with deleting maps that have pins
     });
   });

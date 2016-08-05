@@ -12,7 +12,7 @@ $(() => {
 $(() => {
   $.ajax({
     method: "GET",
-    url: "/users/:id/maps"
+    url: "/users/:user_id/maps"
   }).done((maps) => {
     for(map of maps) {
       $("<div>").text(user.name).appendTo($("body"));
@@ -24,7 +24,7 @@ $(() => {
 $(() => {
   $.ajax({
     method: "GET",
-    url: "/users/:id/maps/:id/pins"
+    url: "/users/:user_id/maps/:map_id/pins"
   }).done((pins) => {
     for(pin of pins) {
       $("<div>").text(user.name).appendTo($("body"));
