@@ -1,6 +1,6 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('maps', function (table) {
-    table.increments('id').primary();
+    table.increments('map_id').primary();
     table.string('title');
     table.string('location');
     table.float('latitude');
