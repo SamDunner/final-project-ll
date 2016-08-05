@@ -20,3 +20,15 @@ $(() => {
     }
   });;
 });
+
+$(() => {
+  $.ajax({
+    method: "GET",
+    url: "/users/:id/maps/:id/pins"
+  }).done((pins) => {
+    for(pin of pins) {
+      $("<div>").text(user.name).appendTo($("body"));
+      console.log(pin);
+    }
+  });;
+});
