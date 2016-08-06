@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Signup from './signup/Signup.jsx';
+import Login from './login/Login.jsx';
 
 const App = React.createClass({
 
@@ -8,12 +10,28 @@ const App = React.createClass({
 
 	render: function() {
 		return (
-			
-			<h1>Hello React :)</h1>
+      <div>
+        <div>
+
+        </div>
+
+        <div>
+          <div>
+            <Signup
+              />
+          </div>
+          <br/>
+          <div>
+            <Login
+            />
+          </div>
+        </div>
+
+      </div>
 
     	);
 	}
-})
+});
 
 
 export default App;
