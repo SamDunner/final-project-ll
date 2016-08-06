@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import Signup from './signup/Signup.jsx';
-import Login from './login/Login.jsx';
+
 
 const Edit = React.createClass({
 
@@ -11,13 +10,13 @@ const Edit = React.createClass({
 	render: function() {
 		return (
 			      <div className="map-edit-page">
-			        
+
 			      	<nav className="nav-bar">
 
 			      	</nav>
 
 			        <div className="map-edit">
-			          
+
 			        </div>
 
 

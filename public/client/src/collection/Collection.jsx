@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import Signup from './signup/Signup.jsx';
-import Login from './login/Login.jsx';
 
 const Collection = React.createClass({
 
@@ -11,7 +9,7 @@ const Collection = React.createClass({
 	render: function() {
 		return (
 			      <div className="collection-page">
-			        
+
 			      	<nav className="nav-bar">
 
 			      	</nav>
