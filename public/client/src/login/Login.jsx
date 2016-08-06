@@ -7,9 +7,9 @@ const Login = React.createClass({
 	getInitialState: function() {
 
 		var formValue = createValue({
-			
-			username: "", 
-			password: "" 			
+
+			username: "",
+			password: ""
 		})
 
 		return formValue;
@@ -41,7 +41,13 @@ const Login = React.createClass({
 		  }).done((results) => {
 		  	console.log(results)
 		    console.log("user is logged in!")
-		  });;
+        $.cookie('test', 1, {
+          expires: 10,
+          path: '/login',
+          domain: 'http://localhost:8080/',
+          secure: true
+        });
+		  });
 		});
 
 
