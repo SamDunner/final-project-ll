@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Signup from './signup/Signup.jsx';
 import Login from './login/Login.jsx';
 
-const App = React.createClass({
+const Collection = React.createClass({
 
 	componentDidMount: function() {
 
@@ -10,21 +10,12 @@ const App = React.createClass({
 
 	render: function() {
 		return (
-			      <div className="home-page">
+			      <div className="collection-page">
 			        
 			      	<nav className="nav-bar">
 
 			      	</nav>
 
-			        <div className="registration">
-			          
-			            <Signup />
-			          
-			          <br/>
-			          
-			            <Login />
-			          
-			        </div>
 
 			        <div className="map-list">
 
@@ -47,4 +38,4 @@ const App = React.createClass({
 });
 
 
-export default App;
+export default Collection;

@@ -10,8 +10,8 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 import App from './App.jsx';
 import Signup from './signup/Signup.jsx';
 import Login from './login/Login.jsx';
-
-
+import Edit from './edit/Edit.jsx';
+import Collection from './collection/Collection.jsx';
 
 render((
   <Router history={browserHistory}>
@@ -20,6 +20,10 @@ render((
     <Route path="/signup" component={Signup}>
     </Route>
     <Route path="/login" component={Login}>
+    </Route>
+    <Route path="/edit" component={Edit}>
+    </Route>
+    <Route path="/collection" component={collection}>
     </Route>
   </Router>
 ), document.getElementById('react-root'))
