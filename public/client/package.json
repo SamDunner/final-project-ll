@@ -41,8 +41,10 @@
     "webpack-dev-server": "1.14.1"
   },
   "dependencies": {
+    "jquery": "^3.1.0",
     "react": "15.2.1",
     "react-dom": "15.2.1",
+    "react-forms": "^2.0.0-beta33",
     "react-router": "^2.6.1"
   }
 }
