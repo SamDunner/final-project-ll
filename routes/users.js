@@ -33,7 +33,10 @@ module.exports = (knex) => {
       'email': req.body.email,
       'password': req.body.password
     })
+    .returning('user_id')
     .then((results) => {
+      res.cookie("user_id", results[0])
+      console.log(results)
       console.log("user posted")
     });
   });

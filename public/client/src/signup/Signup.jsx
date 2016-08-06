@@ -45,9 +45,27 @@ const Signup = React.createClass({
 		event.preventDefault()
 		console.log('registered!:', this.state)
 		
-		$.post("http://localhost:8080/users").done(function(data) {
-			console.log("success!")
-		})
+
+		console.log({first_name: this.state.first_name,
+		    		last_name: this.state.last_name,
+		    		email: this.state.email,
+		    		username: this.state.username,
+		    		password: this.state.password})
+
+		$(() => {
+		  $.ajax({
+		    method: "POST",
+		    data: {first_name: this.state.first_name,
+		    		last_name: this.state.last_name,
+		    		email: this.state.email,
+		    		username: this.state.username,
+		    		password: this.state.password},
+		    url: "http://localhost:8080/users"
+		  }).done((results) => {
+		  	console.log(results)
+		    console.log("user updated!")
+		  });;
+		});
 
 
 	},
