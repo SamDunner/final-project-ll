@@ -6,8 +6,8 @@ exports.up = function(knex, Promise) {
     table.string('rating');
     table.float('latitude');
     table.float('longitude');
-    table.timestamp('created_at');
-    table.timestamp('updated_at');
+    table.timestamp('created_at').defaultTo(knex.fn.now());
+    table.timestamp('updated_at').defaultTo(knex.fn.now());
     table.integer('map_id');
     table.foreign('map_id').references('maps.map_id')
   });
