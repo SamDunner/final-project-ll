@@ -55,6 +55,23 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.post("/login", (req, res) => {
+  knex("users")
+  	.select('user_id')
+  	.where({username: req.body.username,
+  			password: req.body.password})
+  	.then((results) => {
+  		if(results.length === 1) {
+  			res.cookie("user_id", results[0].user_id)
+  			console.log("user found!")
+  		} else {
+  			//TO DO: create a response when user cannot be found in DB.
+  			console.log("no user!")
+  		}
+  	})
+});
+
+
 app.post("/logout", (req, res) => {
   res.clearCookie("user_id");
   //res.redirect("/login");
