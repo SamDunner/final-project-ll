@@ -2,6 +2,7 @@
 
 // Load up the application styles
 require("../styles/application.scss");
+require("../styles/navbar.scss");
 
 // Render the top-level React component
 import React from 'react';
@@ -12,6 +13,7 @@ import Signup from './signup/Signup.jsx';
 import Login from './login/Login.jsx';
 import Edit from './edit/Edit.jsx';
 import Collection from './collection/Collection.jsx';
+import NavBAr from './navbar/NavBar.jsx';
 
 render((
   <Router history={browserHistory}>

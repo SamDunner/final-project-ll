@@ -1,3 +1,39 @@
-h1 {
-  color: tomato;
+html, body {
+  max-width: 100vw;
+  font-family: 'Open Sans', sans-serif;
 }
+
+.nav-bar {
+  width: 100%;
+  height: 75px;
+  border-bottom: 1px solid black;
+  background-color: #00ff99;
+}
+
+.main-body {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.main-body .registration-form {
+  margin: 40px;
+  padding: 10px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  float: left;
+}
+
+.main-body .login-form {
+  margin: 40px;
+  padding: 10px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  float: right;
+}
+
+.main-body .fix-parent-collapser {
+  clear: both;
+}
+
+

@@ -56,15 +56,12 @@ const Login = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<nav className="nav-bar">
-
-				</nav>
 
 			<div id="login-form">
 				<form className="login">
-					<label> Username: <input type="text" name="username" onChange={this.handleUsernameChange} /> </label>
+					<label> <input type="text" name="username" placeholder="Username" onChange={this.handleUsernameChange} /> </label>
 					<br/>
-					<label> Password: <input type="text" name="password" onChange={this.handlePasswordChange} /> </label>
+					<label> <input type="text" name="password" placeholder="Password" onChange={this.handlePasswordChange} /> </label>
 					<br/>
 					<button className='btn-submit' onClick={this.submitLogin}>Login</button>
 				</form>

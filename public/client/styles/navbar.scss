@@ -1,0 +1,25 @@
+.standard-nav-bar {
+  height: 100px;
+  border: 1px solid black;
+}
+
+.standard-nav-bar .button-parent {
+  background: #78DADD;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+.button-parent .company-logo {
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+.button-parent .profile-info .my-profile {
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+.button-parent .profile-info .my-collection {
+  border: 1px solid black;
+  box-sizing: border-box;
+}
