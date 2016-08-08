@@ -42,7 +42,7 @@ const Login = React.createClass({
 		  	console.log(results)
 		    console.log("user is logged in!")
         $.cookie('test', 1, {
-          expires: 10,
+          expires: 2,
           path: '/login',
           domain: 'http://localhost:8080/',
           secure: true

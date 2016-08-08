@@ -21,6 +21,8 @@ const Collection = React.createClass({
               My Collection
             </a>
           </div>
+          <div className="fix-parent-collapser">
+          </div>
         </div>
       </div>
 

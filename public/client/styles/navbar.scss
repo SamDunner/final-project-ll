@@ -12,14 +12,24 @@
 .button-parent .company-logo {
   border: 1px solid black;
   box-sizing: border-box;
+  float: left;
+  margin: 10px
 }
 
 .button-parent .profile-info .my-profile {
   border: 1px solid black;
   box-sizing: border-box;
+  float: right;
+  margin: 10px;
 }
 
 .button-parent .profile-info .my-collection {
   border: 1px solid black;
   box-sizing: border-box;
+  float: right;
+  margin: 10px;
+}
+
+.standard-nav-bar .fix-parent-collapser {
+  clear: both;
 }

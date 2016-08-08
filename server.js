@@ -62,8 +62,9 @@ app.post("/login", (req, res) => {
   			password: req.body.password})
   	.then((results) => {
   		if(results.length === 1) {
-  			res.cookie("user_id", results[0].user_id)
-  			console.log("user found!")
+  			res.cookie("user_id", results[0].user_id);
+  			console.log("user found!");
+        res.redirct("/");
   		} else {
   			//TO DO: create a response when user cannot be found in DB.
   			console.log("no user!")
