@@ -9,9 +9,9 @@ const Login = React.createClass({
 		
 		return {
 			
-			username: this.props.userInfo.username,
-			password: this.props.userInfo.password,
-			user_id: this.props.user_id
+			username: this.props.loginInfo.username,
+			password: this.props.loginInfo.password,
+			user_id: this.props.loginInfo.user_id
 		}
 	},
 
@@ -33,12 +33,12 @@ const Login = React.createClass({
 		this.setState({user_id: id });
 		
        	cookie.save('user_id', id, { path: 'http://localhost:8080/login' });
-       	this.props.login_info(this.state)
+       	this.props.user_info(this.state)
 	},	
 
 	submitLogin: function(event) {
 		event.preventDefault()
-		console.log('registered!:', this.state)
+		
 
 		var id;
 

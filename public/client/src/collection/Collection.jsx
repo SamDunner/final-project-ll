@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 
 const Collection = React.createClass({
 
+	getInitialState: function() {
+		console.log(this.props.params)
+
+		return this.props.params
+	},
+
 	componentDidMount: function() {
 
 	},

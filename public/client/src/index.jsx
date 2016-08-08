@@ -21,10 +21,10 @@ render((
     </Route>
     <Route path="/login" component={Login}>
     </Route>
-  
+
     <Route path="/edit" component={Edit}>
     </Route>
-    <Route path="/collection" component={Collection}>
+    <Route path="/users/:user_id/collection" component={Collection}>
     </Route>
   </Router>
 ), document.getElementById('react-root'))

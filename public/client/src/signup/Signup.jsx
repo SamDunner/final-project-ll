@@ -58,7 +58,7 @@ const Signup = React.createClass({
 		this.setState({user_id: id });
 		
        	cookie.save('user_id', id, { path: 'http://localhost:8080/login' });
-       	this.props.registration_info(this.state)
+       	this.props.user_info(this.state)
 	},
 
 	submitRegistration: function(event) {
