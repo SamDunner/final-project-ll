@@ -49,17 +49,13 @@ const App = React.createClass({
 		return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
 	},
 
-
 	render: function() {
-
-
 
 		return (
 
-
       <div className="home-page-pre-login">
 
-        <div className="nav-bar">
+ {/*}        <div className="nav-bar">
           <nav>
           test tex
           </nav>
@@ -80,21 +76,13 @@ const App = React.createClass({
           <div className="fix-parent-collapser">
           </div>
             <br/>
-{/*
-Will put this code in once the home page is rendered (so there will be an if statement)
-          <div className="map-list">
-          test code here [will make this a map <br/> list colum later once we've figured out cookies in react]
-          </div>
-            <br/>
-          <div className="followers-list">
-          test code here [will make this a followers <br/> list column later once we've figured out cookies in react]
-          </div>
-            <br/>
-          <div className="saved-map-list">
-          test code here [will make this a saved-map <br/> list column later once we've figured out cookies in react]
-          </div>  */}
+
         </div>
-      </div>
+*/}
+
+
+
+
 
 			      	{ !document.cookie &&
 
@@ -135,7 +123,7 @@ Will put this code in once the home page is rendered (so there will be an if sta
 
 			        </div>
 
-			      </div>
+      </div>
 
     	);
 	}

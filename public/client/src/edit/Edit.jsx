@@ -28,31 +28,27 @@ const Edit = React.createClass({
     	}
 
 		return (
-			      <div className="map-edit-page">
+      <div className="map-edit-page">
+        <div className="nav-bar-wrapper">
+          <nav className="nav-bar">
+          </nav>
+        </div>
 
-			      	<nav className="nav-bar">
+        <div className="map-edit">
 
-			      	</nav>
+      	  <div style = {map_style}>
+          	<Map google={this.props.google} />
+          </div>
 
-			        <div className="map-edit">
+        <div className="pin-list">
+        </div>
 
+        <div className="panel-list">
+        </div>
 
-			      	<div style = {map_style}>
-			        	<Map google={this.props.google}
-			         	/>
-			        </div>
+      </div>
 
-			        <div className="pin-list">
-
-			        </div>
-
-
-			        <div className="panel-list">
-
-			        </div>
-
-
-			      </div>
+    </div>
 
     	);
 	}
