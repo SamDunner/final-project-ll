@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import {Fieldset, Field, createValue} from 'react-forms'
-import $ from 'jquery';
+import cookie from 'react-cookie'
+import $ from 'jquery'
 
 const Login = React.createClass({
 
 	getInitialState: function() {
 
-		var formValue = createValue({
+		return {
 
-			username: "",
-			password: ""
-		})
-
-		return formValue;
+			username: this.props.loginInfo.username,
+			password: this.props.loginInfo.password,
+			user_id: this.props.loginInfo.user_id
+		}
 	},
 
 	componentDidMount : function() {
@@ -28,9 +28,19 @@ const Login = React.createClass({
 		this.setState({password: event.target.value});
 	},
 
+	setCookie: function(id){
+
+		this.setState({user_id: id });
+
+       	cookie.save('user_id', id, { path: 'http://localhost:8080/login' });
+       	this.props.user_info(this.state)
+	},
+
 	submitLogin: function(event) {
 		event.preventDefault()
-		console.log('registered!:', this.state)
+
+
+		var id;
 
 		$(() => {
 		  $.ajax({
@@ -39,16 +49,11 @@ const Login = React.createClass({
 		    		password: this.state.password},
 		    url: "http://localhost:8080/login"
 		  }).done((results) => {
-		  	console.log(results)
 		    console.log("user is logged in!")
-        $.cookie('test', 1, {
-          expires: 2,
-          path: '/login',
-          domain: 'http://localhost:8080/',
-          secure: true
-        });
+        	id = results[0].user_id;
+        	this.setCookie(id);
 		  });
-		});
+		})
 
 
 	},
