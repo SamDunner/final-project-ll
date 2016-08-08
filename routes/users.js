@@ -35,8 +35,7 @@ module.exports = (knex) => {
     })
     .returning('user_id')
     .then((results) => {
-      res.cookie("user_id", results[0])
-      console.log(results)
+      res.json(results)
       console.log("user posted")
     });
   });

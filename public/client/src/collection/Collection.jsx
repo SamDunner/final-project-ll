@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import Signup from './signup/Signup.jsx';
-import Login from './login/Login.jsx';
 
 const Collection = React.createClass({
 

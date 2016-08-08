@@ -2,28 +2,40 @@ import React, {Component} from 'react';
 
 import GoogleMap from 'google-map-react';
 import Map, {GoogleApiWrapper} from 'google-maps-react';
-import MapOptions from './MapOptions.jsx'
 
 
-const Edit = React.createClass({
+function getCookie() {
+	$(() => {
+		  $.ajax({
+		    method: "GET",
+		    url: "http://localhost:8080/users/"
+
+		  }).done((results) => {
+		  	console.log(results)
+		    console.log("user is logged in!")
+	    	var id = results.user_id;
+	    	this.setState({ user_id: id });
+	    	cookie.save('id', id, { path: 'http://localhost:8080/login' });
+
+		  });
+		});
+
+}
+
+
+const Create = React.createClass({
 
 	getInitialState: function() {
-		console.log(params)
-		// return {map: null, marker: null, infowindow: null};
+		
 	},
 
 	componentDidMount: function() {
-
 		
 	},
 
 	render: function() {
 
-		if (!this.props.loaded) {
-		      return <div>Loading...</div>
-		}
-
-		const map_style = {
+		const style = {
       			width: '100vw',
       			height: '100vh'
     	}
@@ -36,7 +48,7 @@ const Edit = React.createClass({
 			      	</nav>
 
 			        
-			      	<div style = {map_style}>
+			      	<div style = {style}>
 			        	<Map google={this.props.google}
 			         	/>
 			        </div>
