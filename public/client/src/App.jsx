@@ -36,6 +36,7 @@ const App = React.createClass({
       						password: info.password,
       						user_id: info.user_id
 					       })
+    console.log(this.state)
 
 		cookie.save('user_id', info.user_id, { path: '/' });
 	},
@@ -66,7 +67,7 @@ const App = React.createClass({
         { document.cookie &&
           <div className="home-page-post-login">
             <div className="standard-nav-bar">
-              <NavBar cookie={this.getCookie()} />
+              <NavBar />
             </div>
 
             <div className="map-list">

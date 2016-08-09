@@ -8,16 +8,6 @@ const Signup = React.createClass({
 
 	getInitialState: function() {
 
-		// var formValue = createValue({
-		// 	first_name: "",
-		// 	last_name: "",
-		// 	email: "",
-		// 	username: "",
-		// 	password: ""
-		// })
-
-		// return formValue;
-
 		return {
 
 			first_name: this.props.registrationInfo.first_name,

@@ -1,37 +1,43 @@
 import React, {Component} from 'react';
-
-import GoogleMap from 'google-map-react';
-import Map, {GoogleApiWrapper} from 'google-maps-react';
-
-
-function getCookie() {
-	$(() => {
-		  $.ajax({
-		    method: "GET",
-		    url: "http://localhost:8080/users/"
-
-		  }).done((results) => {
-		  	console.log(results)
-		    console.log("user is logged in!")
-	    	var id = results.user_id;
-	    	this.setState({ user_id: id });
-	    	cookie.save('id', id, { path: 'http://localhost:8080/login' });
-
-		  });
-		});
-
-}
-
+import Map_form from './Map_form.jsx';
+import NavBar from '../navbar/NavBar.jsx';
 
 const Create = React.createClass({
 
 	getInitialState: function() {
+		return  { map_information: { title: "",
+							  location: "",
+							  latitude: "",
+							  longitude: "",
+							  privacy: "",
+							  published: false,
+							  user_id: this.props.params.user_id,
+							  map_id: ""
+							}
+				}
 		
 	},
 
 	componentDidMount: function() {
 		
 	},
+
+	map_info: function(info){
+		this.setState({title: info.title,
+					   location: info.location,
+					   latitude: info.latitude,
+					   longitude: info.longitude,
+					   privacy: info.privacy,
+					   published: info.published,
+					   user_id: info.user_id,
+					   map_id: info.map_id })
+
+		console.log(this.state)
+	},
+
+	getCookie: function(){
+    	return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
+  	},
 
 	render: function() {
 
@@ -43,15 +49,18 @@ const Create = React.createClass({
 		return (
 			      <div className="map-edit-page">
 			        
-			      	<nav className="nav-bar">
+			      	<div className="standard-nav-bar">
+              			<NavBar />
+            		</div>
 
-			      	</nav>
+            		<br/>
+            		{this.state.map_id == "" &&
+			        	<Map_form map_information={this.state.map_information} map_info={this.map_info} />
+			    	}
 
-			        
-			      	<div style = {style}>
-			        	<Map google={this.props.google}
-			         	/>
-			        </div>
+			    	{!this.state.map_id == "" &&
+			    		
+			    	}
 
 			        <div className="pin-list">
 
@@ -69,9 +78,5 @@ const Create = React.createClass({
 	}
 });
 
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyB0MRsGZWMHr07c_ttwaBSmcNcSqKxrPLA"
-})(Edit)
+export default Create;
 
-
-export default Edit;

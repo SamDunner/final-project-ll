@@ -18,6 +18,10 @@ const Collection = React.createClass({
 
   },
 
+  getCookie: function(){
+    return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
+  },
+
   render: function() {
     return (
       <div className="standard-nav-bar">
@@ -29,12 +33,18 @@ const Collection = React.createClass({
             <a className="my-profile" href="/user/:id/profile">
               My Profile
             </a>
-            <Link to={"users/" + this.props.cookie + "/collection"}>
+            <Link to={"/users/" + this.getCookie() + "/collection"}>
               My Collection
             </Link>
+
             <Link to="/" onClick={this.onLogout}>
               Log out
             </Link>
+
+            <Link to={"/users/" + this.getCookie() + "/create"}>
+              Create Map
+            </Link>
+
           </div>
           <div className="fix-parent-collapser">
           </div>

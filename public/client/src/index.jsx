@@ -13,6 +13,8 @@ import Login from './login/Login.jsx';
 import Edit from './edit/Edit.jsx';
 import Collection from './collection/Collection.jsx';
 import NavBar from './navbar/NavBar.jsx';
+import Create from './create/Create.jsx';
+
 
 render((
   <Router history={browserHistory}>
@@ -25,7 +27,7 @@ render((
 
     <Route path="/edit" component={Edit}>
     </Route>
-    <Route path="/users/:user_id/create" component={Collection}>
+    <Route path="/users/:user_id/create" component={Create}>
     </Route>
     <Route path="/users/:user_id/collection" component={Collection}>
     </Route>

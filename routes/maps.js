@@ -33,8 +33,9 @@ module.exports = (knex) => {
       'longitude': req.body.longitude,
       'privacy': req.body.privacy,
       'published': req.body.published
-    })
+    }).returning('map_id')
     .then((results) => {
+      res.json(results)
       console.log("map posted")
     });
   });
