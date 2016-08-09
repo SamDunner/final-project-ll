@@ -38,17 +38,17 @@ const ProfileNavBar = React.createClass({
               my collection
             </Link>
 
-            <a className="followers-list">
+            <Link to={"/users/" + this.getCookie() + "/followers"}>
               followers
-            </a>
+            </Link>
 
-            <a className="followers-list">
+            <Link to={"/users/" + this.getCookie() + "/following"}>
               following
-            </a>
+            </Link>
 
-            <a className="favorites-list">
+            <Link to={"/users/" + this.getCookie() + "/favorites"}>
               favorites
-            </a>
+            </Link>
           </ul>
 
         </div>

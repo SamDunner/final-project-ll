@@ -38,6 +38,15 @@ render((
       <Route path="/users/:user_id/collection" component={Collection}>
       </Route>
 
+      <Route path="/users/:user_id/followers" component={Followers}>
+      </Route>
+
+      <Route path="/users/:user_id/following" component={Following}>
+      </Route>
+
+      <Route path="/users/:user_id/favorites" component={Favorites}>
+      </Route>
+
     </Route>
 
 
