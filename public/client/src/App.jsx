@@ -50,7 +50,6 @@ const App = React.createClass({
 
   removeCookie: function() {
     cookie.remove('user_id', { path: 'http://localhost:8080/logout' });
-    //Object.keys(cookie.select(/^session.*/i)).forEach(name => cookie.remove(name, { path: '/' }))
   },
 
 	render: function() {
@@ -70,7 +69,7 @@ const App = React.createClass({
         { document.cookie &&
           <div className="home-page-post-login">
             <div className="standard-nav-bar">
-              <NavBar cookie={this.getCookie()} removeCookie={this.removeCookie}/>
+              <NavBar cookie={this.getCookie()} removeCookie={this.removeCookie} />
             </div>
 
             <div className="map-list">

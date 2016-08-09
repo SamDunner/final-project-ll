@@ -25,7 +25,7 @@ const Collection = React.createClass({
       <div className="collection-page">
 
       	<nav className="standard-nav-bar">
-          <NavBar cookie={this.getCookie()} />
+          <NavBar cookie={this.getCookie()} removeCookie={this.removeCookie}/>
       	</nav>
 
         <div className="map-list">
