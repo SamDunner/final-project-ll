@@ -48,10 +48,6 @@ const App = React.createClass({
 		return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
 	},
 
-  removeCookie: function() {
-    cookie.remove('user_id', { path: 'http://localhost:8080/logout' });
-  },
-
 	render: function() {
 
 		return (
@@ -69,7 +65,8 @@ const App = React.createClass({
         { document.cookie &&
           <div className="home-page-post-login">
             <div className="standard-nav-bar">
-              <NavBar cookie={this.getCookie()} removeCookie={this.removeCookie} />
+
+              <NavBar />
             </div>
 
             <div className="map-list">

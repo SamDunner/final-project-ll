@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router';
 import cookie from 'react-cookie';
 
-const Collection = React.createClass({
+const NavBar = React.createClass({
 
   getInitialState: function(){
     console.log(this.props)
@@ -13,8 +13,12 @@ const Collection = React.createClass({
 
   },
 
+  getCookie: function(){
+    return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
+  },
+
   onLogout: function() {
-    this.props.removeCookie()
+    cookie.remove('user_id', { path: 'http://localhost:8080/logout' });
 
   },
 
@@ -29,8 +33,8 @@ const Collection = React.createClass({
             <a className="my-profile" href="/user/:id/profile">
               My Profile
             </a>
-            <Link to={"users/" + this.props.cookie + "/collection"}>
-              My Collection
+            <Link to={"users/" + this.getCookie() }>
+              My Profile
             </Link>
             <Link to="/" onClick={this.onLogout}>
               Log out
@@ -46,4 +50,4 @@ const Collection = React.createClass({
 });
 
 
-export default Collection;
+export default NavBar;

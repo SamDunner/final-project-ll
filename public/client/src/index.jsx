@@ -13,20 +13,32 @@ import Login from './login/Login.jsx';
 import Edit from './edit/Edit.jsx';
 import Collection from './collection/Collection.jsx';
 import NavBar from './navbar/NavBar.jsx';
+import Profile from './profile/Profile.jsx';
 
 render((
   <Router history={browserHistory}>
+
     <Route path="/" component={App}>
     </Route>
+
     <Route path="/signup" component={Signup}>
     </Route>
+
     <Route path="/login" component={Login}>
     </Route>
 
     <Route path="/edit" component={Edit}>
     </Route>
+
+    <Route path="/users/:user_id" component={Profile}>
+    </Route>
+
+    <Route path="/users/:user_id/create" component={Collection}>
+    </Route>
+
     <Route path="/users/:user_id/collection" component={Collection}>
     </Route>
+
   </Router>
 ), document.getElementById('react-root'))
 

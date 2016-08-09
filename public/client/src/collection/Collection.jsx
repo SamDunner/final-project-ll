@@ -23,18 +23,7 @@ const Collection = React.createClass({
 	render: function() {
 		return (
       <div className="collection-page">
-
-      	<nav className="standard-nav-bar">
-          <NavBar cookie={this.getCookie()} removeCookie={this.removeCookie}/>
-      	</nav>
-
         <div className="map-list">
-        </div>
-
-        <div className="followers-list">
-        </div>
-
-        <div className="saved-map-list">
         </div>
 
       </div>
