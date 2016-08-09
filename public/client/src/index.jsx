@@ -13,7 +13,7 @@ import Signup from './signup/Signup.jsx';
 import Login from './login/Login.jsx';
 import Edit from './edit/Edit.jsx';
 import Collection from './collection/Collection.jsx';
-import NavBAr from './navbar/NavBar.jsx';
+import NavBar from './navbar/NavBar.jsx';
 
 render((
   <Router history={browserHistory}>
@@ -25,6 +25,8 @@ render((
     </Route>
 
     <Route path="/edit" component={Edit}>
+    </Route>
+    <Route path="/users/:user_id/create" component={Collection}>
     </Route>
     <Route path="/users/:user_id/collection" component={Collection}>
     </Route>
