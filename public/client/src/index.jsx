@@ -2,7 +2,6 @@
 
 // Load up the application styles
 require("../styles/application.scss");
-require("../styles/navbar.scss");
 
 // Render the top-level React component
 import React from 'react';
@@ -17,7 +16,7 @@ import NavBar from './navbar/NavBar.jsx';
 
 render((
   <Router history={browserHistory}>
-     <Route path="/" component={App}>
+    <Route path="/" component={App}>
     </Route>
     <Route path="/signup" component={Signup}>
     </Route>
