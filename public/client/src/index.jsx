@@ -31,13 +31,15 @@ render((
     </Route>
 
     <Route path="/users/:user_id" component={Profile}>
+
+      <Route path="/users/:user_id/create" component={Collection}>
+      </Route>
+
+      <Route path="/users/:user_id/collection" component={Collection}>
+      </Route>
+
     </Route>
 
-    <Route path="/users/:user_id/create" component={Collection}>
-    </Route>
-
-    <Route path="/users/:user_id/collection" component={Collection}>
-    </Route>
 
   </Router>
 ), document.getElementById('react-root'))

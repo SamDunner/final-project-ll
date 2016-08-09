@@ -2,34 +2,39 @@ import React, {Component} from 'react';
 import NavBar from '../navbar/NavBar.jsx';
 import cookie from 'react-cookie';
 import App from '../App.jsx';
+import { render } from 'react-dom';
+import { Router, Route, Link, browserHistory } from 'react-router';
+import ProfileNavBar from '../navbar/ProfileNavBar.jsx';
 
 
 const Collection = React.createClass({
 
-	getInitialState: function() {
-		console.log(this.props.params)
+  getInitialState: function() {
+    console.log(this.props.params)
 
-		return this.props.params
-	},
+    return this.props.params
+  },
 
-	componentDidMount: function() {
+  componentDidMount: function() {
 
-	},
+  },
 
   getCookie: function(){
     return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
   },
 
-	render: function() {
-		return (
-      <div className="collection-page">
-        <div className="map-list">
-        </div>
+  render: function() {
+    return (
+      <div className="profile-page">
+
+        <nav className="double-nav-bar">
+          <ProfileNavBar />
+        </nav>
 
       </div>
 
     );
-	}
+  }
 });
 
 

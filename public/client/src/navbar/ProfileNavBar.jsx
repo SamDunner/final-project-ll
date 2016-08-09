@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
 import cookie from 'react-cookie';
+import NavBar from './NavBar.jsx';
 
 const ProfileNavBar = React.createClass({
 
@@ -26,7 +27,7 @@ const ProfileNavBar = React.createClass({
     return (
       <div className="standard-nav-bar">
          <nav className="standard-nav-bar">
-          <NavBar cookie={this.getCookie()} />
+          <NavBar />
         </nav>
         <br/>
         <br/>
