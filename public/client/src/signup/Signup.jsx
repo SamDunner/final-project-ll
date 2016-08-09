@@ -94,11 +94,6 @@ const Signup = React.createClass({
 		return (
 			<div>
 
-      <nav>
-        <NavBar />
-      </nav>
-
-
 			<div id="registration-form">
 				<form className="register">
 					<label> <input type="text" name="firstname"  placeholder="First Name" onChange={this.handleFirstNameChange} /> </label>

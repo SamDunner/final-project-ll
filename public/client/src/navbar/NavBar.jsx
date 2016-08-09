@@ -1,8 +1,19 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router'
 
 const Collection = React.createClass({
 
+  getInitialState: function(){
+    console.log(this.props)
+    return this.props;
+  },
+
   componentDidMount: function() {
+
+  },
+
+  onLogout: function() {
+    this.props.removeCookie()
 
   },
 
@@ -17,9 +28,12 @@ const Collection = React.createClass({
             <a className="my-profile" href="/user/:id/profile">
               My Profile
             </a>
-            <a className="my-collection" href="user/:id/collection">
+            <Link to={"users/" + this.props.cookie + "/collection"}>
               My Collection
-            </a>
+            </Link>
+            <Link to="/" onClick={this.onLogout}>
+              Log out
+            </Link>
           </div>
           <div className="fix-parent-collapser">
           </div>

@@ -30,7 +30,7 @@ const Edit = React.createClass({
 		return (
       <div className="map-edit-page">
         <div className="nav-bar-wrapper">
-          <nav className="nav-bar">
+          <nav className="standard-nav-bar">
           </nav>
         </div>
 
