@@ -7,7 +7,7 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 import ProfileNavBar from '../navbar/ProfileNavBar.jsx';
 
 
-const Favorites = React.createClass({
+const Following = React.createClass({
 
   getInitialState: function() {
     console.log(this.props.params)
@@ -38,4 +38,4 @@ const Favorites = React.createClass({
 });
 
 
-export default Favorites;
+export default Following;
