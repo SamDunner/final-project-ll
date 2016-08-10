@@ -16,7 +16,7 @@ const Map_form = React.createClass({
 			longitude: this.props.map_information.longitude,
 			privacy: this.props.map_information.privacy,
 			published: this.props.map_information.published,
-			user_id: this.props.map_information.user_id
+			user_id: this.props.map_information.user_id,
 			map_id:this.props.map_information.map_id
 		}
 	},
@@ -47,7 +47,7 @@ const Map_form = React.createClass({
 	},
 
 	setMapId: function(id){
-		this.setState({user_id: id})
+		this.setState({map_id: id})
 		console.log(this.state);
 		this.props.map_info(this.state)
 	},

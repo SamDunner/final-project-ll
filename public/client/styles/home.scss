@@ -41,6 +41,27 @@ html, body {
   clear: both;
 }
 
-.map-edit {
+.map-edit-page {
   height: 100%;
+}
+
+.create-map {
+  height: 100%;
+}
+
+.create-map #create {
+  height: 100%;
+  width: 400px;
+  height: 300px;
+}
+
+.edit-map {
+  padding-left: 230px;
+}
+
+.edit-map #edit {
+  height: 100%;
+  width: 850px;
+  height: 600px;
+  border-radius: 10px;
 }
