@@ -19,19 +19,76 @@ export default class Map extends Component {
 
     this.state = {
       markers: []
+
     }
 
-
     this.onMapClick = this.onMapClick.bind(this)
+    this.handleMarkerClick = this.handleMarkerClick.bind(this)
+  
   }
 
+  renderInfoWindow(marker) {
 
-  
+    return (
+
+      <InfoWindow >
+
+            {<div className='marker-info'> 
+               
+                <h4> Title: </h4> 
+                  <input className='pin-title' name='title' /> 
+                <br/> 
+
+                <h4>Type: </h4> 
+
+                  <select id='select-type'> 
+                      <option >Restaurant</option> 
+                      <option >Bar</option> 
+                      <option >Shop</option> 
+                      <option >Other user</option> 
+                      <option >Home </option> 
+                      <option >Other </option> 
+                  </select> 
+              
+                <br/> 
+
+                <h4>Description: </h4> 
+                  <textarea className='pin-description' value='' name= 'description'> </textarea> 
+                <br/><br/> 
+                <button className='btn btn-info' type='submit'>Click here to create new pin</button>  
+               
+               <br/> 
+               <br/> 
+               <button className='btn btn-warning' type='submit'>Delete Pin</button>  
+            
+            </div>}
+
+
+      </InfoWindow>
+    )
+  }
+
+  handleMarkerClick(marker){
+    let InfoWindow = {
+      position: event.latLng,
+      key: Date.now(),
+      content: this.props.infoWindowContent
+    }
+
+    this.state.infoWindow = InfoWindow
+    console.log(this.state)
+
+    marker.showInfo = true;
+    this.setState(this.state)
+  }
+
 
   onMapClick(event){
     let marker = {
       position: event.latLng,
       key: Date.now(),
+      content: this.props.infoWindowContent,
+      showInfo: false,
       defaultAnimation: 2
     }
 
@@ -41,6 +98,8 @@ export default class Map extends Component {
     this.setState({markers});
 
     console.log('state:',this.state)
+
+    //this.props.toast('You have created a marker at'  marker.position.lat() + ", " + marker.position.lng())
 
   }
 
@@ -78,13 +137,20 @@ export default class Map extends Component {
               onClick={this.onMapClick}
               
             >
+            
             {this.state.markers &&
               this.state.markers.map((marker, index) => {
                 return (
 
-                  
-                    <Marker
-                    {...marker}  />
+                    
+                    <Marker 
+                    
+                    {...marker} 
+                      onClick={this.handleMarkerClick.bind(this, marker)}>
+
+                      {marker.showInfo ? this.renderInfoWindow(marker) : null}
+
+                    </Marker>
                     
 
                 )
@@ -92,6 +158,9 @@ export default class Map extends Component {
               })
               
             }
+
+          
+            
 
             </GoogleMap>
           }

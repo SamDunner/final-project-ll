@@ -72,6 +72,8 @@ const Create = React.createClass({
 		                 "<br>" +
 		                 "<button class='btn btn-warning' type='submit'>Delete Pin</button>" + 
 		                "</article>"
+
+		return content;
 	},
 
 
@@ -103,7 +105,7 @@ const Create = React.createClass({
 			        			<Map_form map_information={this.state.map_information} map_info={this.map_info} />
 			        		</div>
 			        		<div id="create">
-			        			<Map marker_information={this.state.marker_information} infoWindowContent={this.infoWindowContent}/>
+			        			<Map marker_information={this.state.marker_information} infoWindowContent={this.infoWindowContent()}/>
 			        		</div>
 			        	</div>
 			    	}
