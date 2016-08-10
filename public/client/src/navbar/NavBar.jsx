@@ -30,10 +30,7 @@ const NavBar = React.createClass({
             Logo/Home Link
           </a>
           <div className="profile-info">
-            <a className="my-profile" href="/user/:id/profile">
-              My Profile
-            </a>
-            <Link to={"users/" + this.getCookie() }>
+            <Link to={"/users/" + this.getCookie() }>
               My Profile
             </Link>
             <Link to="/" onClick={this.onLogout}>

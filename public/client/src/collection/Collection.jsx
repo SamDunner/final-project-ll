@@ -30,7 +30,7 @@ const Collection = React.createClass({
         <nav className="double-nav-bar">
           <ProfileNavBar />
         </nav>
-
+collection test
       </div>
 
     );

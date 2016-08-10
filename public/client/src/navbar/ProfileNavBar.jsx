@@ -31,7 +31,7 @@ const ProfileNavBar = React.createClass({
         </nav>
         <br/>
         <br/>
-        <div className="selection-nav-bar">
+        <nav className="selection-nav-bar">
 
           <ul>
             <Link to={"/users/" + this.getCookie() + "/collection"}>
@@ -51,7 +51,7 @@ const ProfileNavBar = React.createClass({
             </Link>
           </ul>
 
-        </div>
+        </nav>
       </div>
 
     );

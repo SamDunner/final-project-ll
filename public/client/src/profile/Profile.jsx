@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import NavBar from '../navbar/NavBar.jsx';
 import cookie from 'react-cookie';
 import App from '../App.jsx';
 import { render } from 'react-dom';

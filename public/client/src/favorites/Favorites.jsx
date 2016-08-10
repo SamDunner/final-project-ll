@@ -31,6 +31,8 @@ const Favorites = React.createClass({
           <ProfileNavBar />
         </nav>
 
+        <div> favorites test
+        </div>
       </div>
 
     );

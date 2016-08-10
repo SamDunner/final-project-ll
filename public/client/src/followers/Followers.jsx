@@ -30,7 +30,7 @@ const Followers = React.createClass({
         <nav className="double-nav-bar">
           <ProfileNavBar />
         </nav>
-
+followers test
       </div>
 
     );
