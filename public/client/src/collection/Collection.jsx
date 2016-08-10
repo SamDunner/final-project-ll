@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import NavBar from '../navbar/NavBar.jsx';
 import cookie from 'react-cookie';
 import App from '../App.jsx';
-
+import $ from 'jquery';
 
 const Collection = React.createClass({
 
@@ -16,9 +16,6 @@ const Collection = React.createClass({
 
 	},
 
-  getCookie: function(){
-    return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
-  },
 
 	render: function() {
 		return (

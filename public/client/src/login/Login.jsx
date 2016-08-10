@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Fieldset, Field, createValue} from 'react-forms'
-import cookie from 'react-cookie'
-import $ from 'jquery'
+import {Fieldset, Field, createValue} from 'react-forms';
+import cookie from 'react-cookie';
+import $ from 'jquery';
 
 const Login = React.createClass({
 
