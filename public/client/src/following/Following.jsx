@@ -26,11 +26,12 @@ const Following = React.createClass({
   render: function() {
     return (
       <div className="profile-page">
-
-        <nav className="double-nav-bar">
-          <ProfileNavBar />
-        </nav>
-following test
+        <div className="nav-bar">
+          <nav className="double-nav-bar">
+            <ProfileNavBar />
+          </nav>
+        </div>
+        following test
       </div>
 
     );

@@ -25,28 +25,28 @@ const ProfileNavBar = React.createClass({
 
   render: function() {
     return (
-      <div className="standard-nav-bar">
+      <div className="standard-nav-bar col-md-12 col-lg-12">
          <nav className="standard-nav-bar">
           <NavBar />
         </nav>
         <br/>
         <br/>
-        <nav className="selection-nav-bar">
+        <nav className="selection-nav-bar col-md-12 col-lg-12">
 
           <ul>
-            <Link to={"/users/" + this.getCookie() + "/collection"}>
+            <Link className="btn btn-danger  col-md-2 col-lg-2" to={"/users/" + this.getCookie() + "/collection"}>
               my collection
             </Link>
 
-            <Link to={"/users/" + this.getCookie() + "/followers"}>
+            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1" to={"/users/" + this.getCookie() + "/followers"}>
               followers
             </Link>
 
-            <Link to={"/users/" + this.getCookie() + "/following"}>
+            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1" to={"/users/" + this.getCookie() + "/following"}>
               following
             </Link>
 
-            <Link to={"/users/" + this.getCookie() + "/favorites"}>
+            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1" to={"/users/" + this.getCookie() + "/favorites"}>
               favorites
             </Link>
           </ul>
