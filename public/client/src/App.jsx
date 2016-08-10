@@ -44,10 +44,6 @@ const App = React.createClass({
 
 	},
 
-	getCookie: function(){
-		return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
-	},
-
 	render: function() {
 
 		return (

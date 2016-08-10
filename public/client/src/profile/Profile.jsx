@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import NavBar from '../navbar/NavBar.jsx';
 import cookie from 'react-cookie';
 import App from '../App.jsx';
 import { render } from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
+import ProfileNavBar from '../navbar/ProfileNavBar.jsx';
 
 
 const Profile = React.createClass({
@@ -26,32 +26,10 @@ const Profile = React.createClass({
     return (
       <div className="profile-page">
 
-        <nav className="standard-nav-bar">
-          <NavBar cookie={this.getCookie()} />
+        <nav className="double-nav-bar">
+          <ProfileNavBar />
         </nav>
-        <br/>
-        <br/>
-        <div className="selection-nav-bar">
 
-          <ul>
-            <Link to={"/users/" + this.getCookie() + "/collection"}>
-              my collection
-            </Link>
-
-            <a className="followers-list">
-              followers
-            </a>
-
-            <a className="followers-list">
-              following
-            </a>
-
-            <a className="favorites-list">
-              favorites
-            </a>
-          </ul>
-
-        </div>
       </div>
 
     );

@@ -14,6 +14,10 @@ import Edit from './edit/Edit.jsx';
 import Collection from './collection/Collection.jsx';
 import NavBar from './navbar/NavBar.jsx';
 import Profile from './profile/Profile.jsx';
+import Followers from './followers/Followers.jsx';
+import Following from './following/Following.jsx';
+import Favorites from './favorites/Favorites.jsx';
+
 
 render((
   <Router history={browserHistory}>
@@ -38,6 +42,16 @@ render((
 
     <Route path="/users/:user_id/collection" component={Collection}>
     </Route>
+
+    <Route path="/users/:user_id/followers" component={Followers}>
+    </Route>
+
+    <Route path="/users/:user_id/following" component={Following}>
+    </Route>
+
+    <Route path="/users/:user_id/favorites" component={Favorites}>
+    </Route>
+
 
   </Router>
 ), document.getElementById('react-root'))
