@@ -23,19 +23,27 @@ const ProfileNavBar = React.createClass({
   getCollection: function(event) {
     console.log("getCollection")
 
-    event.preventDefault();
+    const collectionURL = "http://localhost:8080/users/" + this.getCookie('user_id') + "/maps"
 
-    const url = "http://localhost:8080/users/" + this.getCookie('user_id') + "/maps"
-
-    // $(() => {
       $.ajax({
         method: "GET",
-        url: url
+        url: collectionURL
       }).then((results) => {
         console.log("map is being generated", results)
       })
-    // });
+  },
 
+  getFavorites: function(event) {
+    console.log("getFavorites")
+
+    const favoritesURL = "http://localhost:8080/users/" + this.getCookie('user_id') + "/favorites"
+
+      window.ajax = $.ajax({
+        method: "GET",
+        url: favoritesURL
+      }).then((results) => {
+        console.log("favorites are being generated", results)
+      })
   },
 
   onLogout: function() {
@@ -67,7 +75,8 @@ const ProfileNavBar = React.createClass({
               following
             </Link>
 
-            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1" to={"/users/" + this.getCookie() + "/favorites"}>
+            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1" to={"/users/" + this.getCookie() + "/favorites"}
+              onClick={this.getFavorites}>
               favorites
             </Link>
           </ul>
