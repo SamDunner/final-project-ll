@@ -14,11 +14,11 @@ module.exports = (knex) => {
     });
   });
 
-  router.get("/following", (req, res) => {
+  router.get("/:follow_id", (req, res) => {
     knex
       .select("*")
       .from("follows")
-      .where('following_user_id', req.params.following_user_id)
+      .where('follow_id', req.params.follow_id)
       .then((results) => {
         res.json(results);
         console.log(results);
@@ -35,8 +35,8 @@ module.exports = (knex) => {
     });
   });
 
-  router.delete("/following", (req, res) => {
-    knex("follows").where('following_user_id', req.params.following_user_id)
+  router.delete("/:follow_id", (req, res) => {
+    knex("follows").where('follow_id', req.params.follow_id)
     .del().then((results) => {
       console.log("stopped following user")
     });

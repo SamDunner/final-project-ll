@@ -14,24 +14,14 @@ module.exports = (knex) => {
     });
   });
 
-  router.get("/followers", (req, res) => {
+  router.get("/:follow_id", (req, res) => {
     knex
       .select("*")
       .from("follows")
-      .where('follower_user_id', req.params.follower_user_id)
+      .where('follow_id', req.params.follow_id)
       .then((results) => {
         res.json(results);
         console.log(results);
-    });
-  });
-
-  router.post("/", (req, res) => {
-    knex("follows").insert({
-      'following_user_id': req.body.following_user_id,
-      'follower_user_id': req.body.follower_user_id
-    })
-    .then((results) => {
-      console.log("follow posted")
     });
   });
 

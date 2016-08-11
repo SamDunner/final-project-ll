@@ -14,11 +14,11 @@ module.exports = (knex) => {
     });
   });
 
-  router.get("/favorites", (req, res) => {
+  router.get("/:favorite_id", (req, res) => {
     knex
       .select("*")
       .from("favorites")
-      .where('map_id', req.params.map_id)
+      .where('favorite_id', req.params.favorite_id)
       .then((results) => {
         res.json(results);
         console.log(results);
@@ -35,8 +35,8 @@ module.exports = (knex) => {
     });
   });
 
-  router.delete("/favorites", (req, res) => {
-    knex("favorites").where('map_id', req.params.map_id)
+  router.delete("/:favorite_id", (req, res) => {
+    knex("favorites").where('favorite_id', req.params.favorite_id)
     .del().then((results) => {
       console.log("un-favorited map")
     });
