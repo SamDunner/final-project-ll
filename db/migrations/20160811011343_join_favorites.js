@@ -1,6 +1,7 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('favorites', function(table) {
+    table.increments('favorite_id').primary();
     table.integer('user_id');
     table.foreign('user_id').references('users.user_id')
     table.integer('map_id');

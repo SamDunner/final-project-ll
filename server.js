@@ -24,12 +24,17 @@ const LocalStrategy  = require('passport-local');
 // const config         = require('./config.js'), //config file contains all tokens and other private info
 // const funct          = require('./functions.js'); //funct file contains our helper functions for our Passport and database work
 
-const app            = express();
+const app               = express();
 
 // Seperated Routes for each Resource
-const usersRoutes = require("./routes/users");
-const mapsRoutes  = require("./routes/maps");
-const pinsRoutes  = require("./routes/pins");
+const usersRoutes       = require("./routes/users");
+const mapsRoutes        = require("./routes/maps");
+const pinsRoutes        = require("./routes/pins");
+const pinContentRoutes  = require("./routes/pin_content");
+const followingRoutes   = require("./routes/following");
+const followerRoutes    = require("./routes/follower")
+const favoritesRoutes   = require("./routes/favorites");
+const commentsRoutes    = require("./routes/comments");
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -86,8 +91,15 @@ app.use(express.static("public"));
 
 // Mount all resource routes
 app.use("/users", usersRoutes(knex));
+app.use("/users/:user_id/following", followingRoutes(knex));
+app.use("/users/:user_id/followers", followerRoutes(knex));
 app.use("/users/:user_id/maps", mapsRoutes(knex));
+app.use("/users/:user_id/favorites", favoritesRoutes(knex));
+app.use("/users/:user_id/maps/:map_id/comments", commentsRoutes(knex));
 app.use("/users/:user_id/maps/:map_id/pins", pinsRoutes(knex));
+app.use("/users/:user_id/maps/:map_id/pins/:pin_id/content", pinContentRoutes(knex));
+
+
 
 // Home page
 app.get("/", (req, res) => {
