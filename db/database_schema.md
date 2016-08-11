@@ -1,22 +1,26 @@
 
 
-Users
+<!-- Users
 - first_name 
 - last_name   
 - username         
 - email         
 - password 
 - created_at     
-- updated_at   
+- updated_at   --> 
 
 
-Users_Maps
+<!-- Users_Maps
 
 - FK user_id
+- FK map_id -->
+<!-- 
+Favorites
+- FK user_id
 - FK map_id
+ -->
 
-
-Maps
+<!-- Maps
 - title
 - location
 - latitude
@@ -24,9 +28,9 @@ Maps
 - privacy
 - published 
 - created_at 
-- updated_at  
+- updated_at   -->
 
-
+<!-- 
 Pins
 - title
 - rating
@@ -37,20 +41,33 @@ Pins
 - updated_at 
 
 - FK map_id
+- FK author_id (users) -->
 
-Pin_Content
+<!-- Pin_Content
 - text
 - images (link)
+- FK pin_id -->
 
 
-Comments
+<!-- Comments
 
 - FK map_id
 - FK user_id
 - description
 - rating
+- created_at 
+- updated_at  -->
 
 
-Following
+Followings
 - FK following_user_id
 - FK follower_user_id
+
+
+
+
+
+
+
+
+
