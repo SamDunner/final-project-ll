@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { Link } from 'react-router';
 import cookie from 'react-cookie';
 import NavBar from './NavBar.jsx';
+import Collection from '../collection/Collection.jsx';
+import $ from 'jquery';
 
 const ProfileNavBar = React.createClass({
 
@@ -16,6 +18,24 @@ const ProfileNavBar = React.createClass({
 
   getCookie: function(){
     return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
+  },
+
+  getCollection: function(event) {
+    console.log("getCollection")
+
+    event.preventDefault();
+
+    const url = "http://localhost:8080/users/" + this.getCookie('user_id') + "/maps"
+
+    // $(() => {
+      $.ajax({
+        method: "GET",
+        url: url
+      }).then((results) => {
+        console.log("map is being generated", results)
+      })
+    // });
+
   },
 
   onLogout: function() {
@@ -34,7 +54,8 @@ const ProfileNavBar = React.createClass({
         <nav className="selection-nav-bar col-md-12 col-lg-12">
 
           <ul>
-            <Link className="btn btn-danger  col-md-2 col-lg-2" to={"/users/" + this.getCookie() + "/collection"}>
+            <Link className="btn btn-danger  col-md-2 col-lg-2"
+                  to={"/users/" + this.getCookie() + "/collection"} onClick={this.getCollection}>
               my collection
             </Link>
 

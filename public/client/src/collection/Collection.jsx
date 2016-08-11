@@ -3,6 +3,7 @@ import NavBar from '../navbar/NavBar.jsx';
 import cookie from 'react-cookie';
 import App from '../App.jsx';
 
+
 import { render } from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import ProfileNavBar from '../navbar/ProfileNavBar.jsx';
@@ -20,7 +21,6 @@ const Collection = React.createClass({
   componentDidMount: function() {
 
   },
-
 
   render: function() {
     return (
