@@ -33,6 +33,32 @@ const ProfileNavBar = React.createClass({
       })
   },
 
+  getFollowers: function(event) {
+    console.log("getFollowers")
+
+    const followerURL = "http://localhost:8080/users/" + this.getCookie('user_id') + "/followers"
+
+      $.ajax({
+        method: "GET",
+        url: followerURL
+      }).then((results) => {
+        console.log("followers are being generated", results)
+      })
+  },
+
+  getFollowing: function(event) {
+    console.log("getFollowing")
+
+    const followingURL = "http://localhost:8080/users/" + this.getCookie('user_id') + "/following"
+
+      $.ajax({
+        method: "GET",
+        url: followingURL
+      }).then((results) => {
+        console.log("following is being generated", results)
+      })
+  },
+
   getFavorites: function(event) {
     console.log("getFavorites")
 
@@ -67,16 +93,18 @@ const ProfileNavBar = React.createClass({
               my collection
             </Link>
 
-            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1" to={"/users/" + this.getCookie() + "/followers"}>
+            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1" to={"/users/" + this.getCookie() + "/followers"}
+                  onClick={this.getFollowers}>
               followers
             </Link>
 
-            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1" to={"/users/" + this.getCookie() + "/following"}>
+            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1" to={"/users/" + this.getCookie() + "/following"}
+                  onClick={this.getFollowing}>
               following
             </Link>
 
             <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1" to={"/users/" + this.getCookie() + "/favorites"}
-              onClick={this.getFavorites}>
+                  onClick={this.getFavorites}>
               favorites
             </Link>
           </ul>
