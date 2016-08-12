@@ -6,6 +6,7 @@ import React, { Component} from 'react';
 
 import {GoogleMapLoader, GoogleMap, Marker, InfoWindow, SearchBox} from "react-google-maps";
 //import MarkerContent from './MarkerContent.jsx'
+import $ from 'jquery';
 
 export default class Map extends Component {
 
@@ -27,12 +28,20 @@ export default class Map extends Component {
   
   }
 
+  handleMarkerClose(marker) {
+    marker.showInfo = false;
+    this.setState(this.state);
+  }
+  
+
   renderInfoWindow(marker) {
+
+
 
     return (
 
-      <InfoWindow >
-
+      <InfoWindow 
+          onCloseClick={this.handleMarkerClose.bind(this, marker)} >
             {<div className='marker-info'> 
                
                 <h4> Title: </h4> 
@@ -55,7 +64,7 @@ export default class Map extends Component {
                 <h4>Description: </h4> 
                   <textarea className='pin-description' value='' name= 'description'> </textarea> 
                 <br/><br/> 
-                <button className='btn btn-info' type='submit'>Click here to create new pin</button>  
+                <button className='submit-marker' type='submit'>Click here to create new pin</button>  
                
                <br/> 
                <br/> 
@@ -66,6 +75,13 @@ export default class Map extends Component {
 
       </InfoWindow>
     )
+  }
+
+  onInfoWindowButtonClick(){
+    $('.create-map').on('click','.btn.btn-info', (event) => {
+        console.log(this.state)
+
+    })
   }
 
   handleMarkerClick(marker){
