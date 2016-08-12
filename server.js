@@ -9,20 +9,20 @@ const bodyParser     = require("body-parser");
 const cookieParser   = require('cookie-parser');
 const cors           = require('cors');
 const express        = require("express");
-const exphbs         = require('express-handlebars');
+// const exphbs         = require('express-handlebars');
 const knexConfig     = require("./knexfile");
 const knex           = require("knex")(knexConfig[ENV]);
-const knexLogger     = require('knex-logger');
+// const knexLogger     = require('knex-logger');
 const logger         = require('morgan');
 const methodOverride = require('method-override');
 const morgan         = require('morgan');
 const passport       = require('passport');
-const sass           = require("node-sass-middleware");
+//const sass           = require("node-sass-middleware");
 const session        = require('express-session');
 const LocalStrategy  = require('passport-local');
 
-// const config         = require('./config.js'), //config file contains all tokens and other private info
-// const funct          = require('./functions.js'); //funct file contains our helper functions for our Passport and database work
+// // const config         = require('./config.js'), //config file contains all tokens and other private info
+// // const funct          = require('./functions.js'); //funct file contains our helper functions for our Passport and database work
 
 const app               = express();
 
@@ -43,7 +43,7 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(methodOverride('_method'));
 // Log knex SQL queries to STDOUT as well
-app.use(knexLogger(knex));
+// app.use(knexLogger(knex));
 app.use(cookieParser());
 
 
@@ -70,22 +70,22 @@ app.use(function(req, res, next){
   next();
 });
 
-// Configure express to use handlebars templates
-var hbs = exphbs.create({
-    defaultLayout: 'main', //we will be creating this layout shortly
-});
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+// // Configure express to use handlebars templates
+// var hbs = exphbs.create({
+//     defaultLayout: 'main', //we will be creating this layout shortly
+// });
+// app.engine('handlebars', hbs.engine);
+// app.set('view engine', 'handlebars');
 
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/styles", sass({
-  src: __dirname + "/styles",
-  dest: __dirname + "/public/styles",
-  debug: true,
-  outputStyle: 'expanded'
-}));
+// app.use("/styles", sass({
+//   src: __dirname + "/styles",
+//   dest: __dirname + "/public/styles",
+//   debug: true,
+//   outputStyle: 'expanded'
+// }));
 
 app.use(express.static("public"));
 

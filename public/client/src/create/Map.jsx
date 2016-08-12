@@ -25,6 +25,7 @@ export default class Map extends Component {
 
     this.onMapClick = this.onMapClick.bind(this)
     this.handleMarkerClick = this.handleMarkerClick.bind(this)
+    this.onInfoWindowButtonClick = this.onInfoWindowButtonClick.bind(this)
   
   }
 
@@ -34,14 +35,13 @@ export default class Map extends Component {
   }
   
 
-  renderInfoWindow(marker) {
-
-
+  renderInfoWindow(ref, marker) {
 
     return (
 
-      <InfoWindow 
-          onCloseClick={this.handleMarkerClose.bind(this, marker)} >
+      <InfoWindow
+          key={`${ref}_info_window`} 
+          onCloseclick={this.handleMarkerClose.bind(this, marker)} >
             {<div className='marker-info'> 
                
                 <h4> Title: </h4> 
@@ -68,7 +68,7 @@ export default class Map extends Component {
                
                <br/> 
                <br/> 
-               <button className='btn btn-warning' type='submit'>Delete Pin</button>  
+               <button onClick={this.onInfoWindowButtonClick} className='btn btn-warning' type='submit'>Delete Pin</button>  
             
             </div>}
 
@@ -129,7 +129,6 @@ export default class Map extends Component {
 
     console.log(latLng)}
 
-    // console.log(this.state.position)
 
     return (
 
@@ -156,15 +155,18 @@ export default class Map extends Component {
             
             {this.state.markers &&
               this.state.markers.map((marker, index) => {
-                return (
 
-                    
+                const ref=`marker_${index}`
+                
+                return (
+    
                     <Marker 
-                    
+                    key={index}
+                    ref={ref}
                     {...marker} 
                       onClick={this.handleMarkerClick.bind(this, marker)}>
 
-                      {marker.showInfo ? this.renderInfoWindow(marker) : null}
+                      {marker.showInfo ? this.renderInfoWindow(ref, marker) : null}
 
                     </Marker>
                     
@@ -175,6 +177,11 @@ export default class Map extends Component {
               
             }
 
+
+            <SearchBox 
+              controlPosition={google.maps.ControlPosition.TOP_LEFT}
+              style={Map.inputStyle}
+            />
           
             
 

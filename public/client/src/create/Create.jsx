@@ -16,11 +16,12 @@ const Create = React.createClass({
 								     user_id: this.props.params.user_id,
 								     map_id: "" },
 				  marker_information: { title: "",
-				  				  	 description: "",
-				  				  	 rating: "",
-				  				  	 latitude: "",
-				  				  	 longitude: "",
-				  				  	 position: ""}
+					  				  	description: "",
+					  				  	rating: "",
+					  				  	latitude: "",
+					  				  	longitude: "",
+					  				  	position: ""
+				  				  	}
 				}
 		
 	},
