@@ -137,5 +137,8 @@ const Create = React.createClass({
 	}
 });
 
+
+//Pin code to be used later to add a new marker: <i class="fa fa-map-marker" aria-hidden="true"></i>
+
 export default Create;
 
