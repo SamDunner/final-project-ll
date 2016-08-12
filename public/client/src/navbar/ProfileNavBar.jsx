@@ -89,21 +89,25 @@ const ProfileNavBar = React.createClass({
 
           <ul>
             <Link className="btn btn-danger  col-md-2 col-lg-2"
-                  to={"/users/" + this.getCookie() + "/collection"} onClick={this.getCollection}>
+                  to={"/users/" + this.getCookie() + "/collection"}
+                  onClick={this.getCollection}>
               my collection
             </Link>
 
-            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1" to={"/users/" + this.getCookie() + "/followers"}
+            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1"
+                  to={"/users/" + this.getCookie() + "/followers"}
                   onClick={this.getFollowers}>
               followers
             </Link>
 
-            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1" to={"/users/" + this.getCookie() + "/following"}
+            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1"
+                  to={"/users/" + this.getCookie() + "/following"}
                   onClick={this.getFollowing}>
               following
             </Link>
 
-            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1" to={"/users/" + this.getCookie() + "/favorites"}
+            <Link className="btn btn-danger  col-md-2 col-lg-2 col-md-offset-1"
+                  to={"/users/" + this.getCookie() + "/favorites"}
                   onClick={this.getFavorites}>
               favorites
             </Link>

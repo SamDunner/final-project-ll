@@ -22,11 +22,11 @@ const Create = React.createClass({
 				  				  	 longitude: "",
 				  				  	 position: ""}
 				}
-		
+
 	},
 
 	componentDidMount: function() {
-		
+
 	},
 
 	map_info: function(info){
@@ -50,8 +50,8 @@ const Create = React.createClass({
 		                  "<br>" +
 
 		                  //"<h4>Type</h4>" +
-		            
-		                  
+
+
 		                          // "<select id='select-type'>" +
 		                          //     "<option >Restaurant</option>" +
 		                          //     "<option >Bar</option>" +
@@ -60,7 +60,7 @@ const Create = React.createClass({
 		                          //     "<option >Home </option>" +
 		                          //     "<option >Other </option>" +
 		                          // "</select>" +
-		                      
+
 		                  //"<br>" +
 
 		                "<h4> Description </h4>" +
@@ -70,7 +70,7 @@ const Create = React.createClass({
 		                 "</form>" +
 		                 "<br>" +
 		                 "<br>" +
-		                 "<button class='btn btn-warning' type='submit'>Delete Pin</button>" + 
+		                 "<button class='btn btn-warning' type='submit'>Delete Pin</button>" +
 		                "</article>"
 
 		return content;
@@ -90,14 +90,16 @@ const Create = React.createClass({
 
 		return (
 			      <div className="map-edit-page">
-			        
+
 			      	<div className="standard-nav-bar">
               			<NavBar />
             		</div>
-
+                <br/>
+                <br/>
+                <br/>
             		<br/>
-            		
-            	
+
+
             		{!this.state.map_id &&
 
             			<div className="create-map" >
@@ -127,7 +129,7 @@ const Create = React.createClass({
 			        <div className="panel-list">
 
 			        </div>
-			        
+
 
 			      </div>
 
