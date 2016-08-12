@@ -30,13 +30,21 @@ const NavBar = React.createClass({
     return (
 
       <div className="standard-nav-bar col-md-12 col-lg-12">
-        <a className="company-logo col-md-offset-1 col-md-2 col-lg-2 btn btn-danger" href="/">
-          Home(future logo)
+        <a className="company-logo col-md-offset-1 col-md-2 col-lg-2 btn btn-danger"
+           href="/">
+             Home(future logo)
         </a>
-        <Link className="btn btn-danger col-md-2 col-lg-2 col-md-offset-4" to={"/users/" + this.getCookie() }>
-          My Profile
+        <Link className="btn btn-danger col-md-2 col-lg-2 col-md-offset-2"
+              to={"/users/" + this.getCookie() }>
+                 My Profile
         </Link>
-        <Link className="btn btn-danger col-md-2 col-lg-2" to="/" onClick={this.onLogout}>
+        <Link className="fa fa-plus-square-o fa-3x col-md-1 col-lg-1 col-md-offset-1"
+              aria-hidden="true"
+              to={"/users/" + this.getCookie() + "/create"}>
+        </Link>
+        <Link className="btn btn-danger col-md-2 col-lg-2"
+              to="/"
+              onClick={this.onLogout}>
           Log out
         </Link>
 
