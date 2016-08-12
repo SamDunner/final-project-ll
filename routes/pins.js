@@ -28,11 +28,12 @@ module.exports = (knex) => {
   router.post("/", (req, res) => {
     knex("pins").insert({
       'title': req.body.title,
-      'description': req.body.description,
+      'sort_id': req.body.sort_id,
       'latitude': req.body.latitude,
       'longitude': req.body.longitude,
       'rating': req.body.rating,
-      'map_id': req.params.map_id
+      'map_id': req.params.map_id,
+      'author_id': req.params.author_id
     })
     .then((results) => {
       console.log("pin posted")
@@ -43,11 +44,12 @@ module.exports = (knex) => {
     knex("pins").where('pin_id', req.params.pin_id)
     .update({
       'title': req.body.title,
-      'description': req.body.description,
+      'sort_id': req.body.sort_id,
       'latitude': req.body.latitude,
       'longitude': req.body.longitude,
       'rating': req.body.rating,
-      'map_id': req.params.map_id
+      'map_id': req.params.map_id,
+      'author_id': req.params.author_id
     })
     .then((results) => {
       console.log("pin updated")

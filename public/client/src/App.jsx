@@ -45,11 +45,6 @@ const App = React.createClass({
 
 	},
 
-	getCookie: function(){
-		return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
-	},
-
-
 	render: function() {
 
 		return (
@@ -67,6 +62,7 @@ const App = React.createClass({
         { document.cookie &&
           <div className="home-page-post-login">
             <div className="standard-nav-bar">
+
               <NavBar />
             </div>
 

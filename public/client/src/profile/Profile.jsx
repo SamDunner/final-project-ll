@@ -1,16 +1,12 @@
 import React, {Component} from 'react';
-import NavBar from '../navbar/NavBar.jsx';
 import cookie from 'react-cookie';
 import App from '../App.jsx';
-
-
 import { render } from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import ProfileNavBar from '../navbar/ProfileNavBar.jsx';
 
 
-
-const Collection = React.createClass({
+const Profile = React.createClass({
 
   getInitialState: function() {
     console.log(this.props.params)
@@ -22,20 +18,22 @@ const Collection = React.createClass({
 
   },
 
+  getCookie: function(){
+    return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
+  },
+
   render: function() {
     return (
       <div className="profile-page">
-        <div className="nav-bar">
-          <nav className="double-nav-bar">
-            <ProfileNavBar />
-          </nav>
-        </div>
-collection test
+
+        <nav className="double-nav-bar">
+          <ProfileNavBar />
+        </nav>
+
       </div>
 
     );
   }
 });
 
-
-export default Collection;
+export default Profile;

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router';
 import cookie from 'react-cookie';
 
-const Collection = React.createClass({
+const NavBar = React.createClass({
 
   getInitialState: function(){
     console.log(this.props)
@@ -11,6 +11,10 @@ const Collection = React.createClass({
 
   componentDidMount: function() {
 
+  },
+
+  getCookie: function(){
+    return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
   },
 
   onLogout: function() {
@@ -24,31 +28,18 @@ const Collection = React.createClass({
 
   render: function() {
     return (
-      <div className="standard-nav-bar">
-        <div className="button-parent">
-          <a className="company-logo" href="/">
-            Logo/Home Link
-          </a>
-          <div className="profile-info">
-            <a className="my-profile" href="/user/:id/profile">
-              My Profile
-            </a>
-            <Link to={"/users/" + this.getCookie() + "/collection"}>
-              My Collection
-            </Link>
 
-            <Link to="/" onClick={this.onLogout}>
-              Log out
-            </Link>
+      <div className="standard-nav-bar col-md-12 col-lg-12">
+        <a className="company-logo col-md-offset-1 col-md-2 col-lg-2 btn btn-danger" href="/">
+          Home(future logo)
+        </a>
+        <Link className="btn btn-danger col-md-2 col-lg-2 col-md-offset-4" to={"/users/" + this.getCookie() }>
+          My Profile
+        </Link>
+        <Link className="btn btn-danger col-md-2 col-lg-2" to="/" onClick={this.onLogout}>
+          Log out
+        </Link>
 
-            <Link to={"/users/" + this.getCookie() + "/create"}>
-              Create Map
-            </Link>
-
-          </div>
-          <div className="fix-parent-collapser">
-          </div>
-        </div>
       </div>
 
     );
@@ -56,4 +47,4 @@ const Collection = React.createClass({
 });
 
 
-export default Collection;
+export default NavBar;

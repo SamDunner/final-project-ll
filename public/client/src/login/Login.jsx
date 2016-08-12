@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Fieldset, Field, createValue} from 'react-forms'
-import cookie from 'react-cookie'
-import $ from 'jquery'
+import {Fieldset, Field, createValue} from 'react-forms';
+import cookie from 'react-cookie';
+import $ from 'jquery';
 
 const Login = React.createClass({
 
@@ -54,8 +54,6 @@ const Login = React.createClass({
         	this.setCookie(id);
 		  });
 		})
-
-
 	},
 
 	render: function() {
@@ -64,7 +62,12 @@ const Login = React.createClass({
 
 			<div id="login-form">
 				<form className="login">
-					<label> <input type="text" name="username" placeholder="Username" onChange={this.handleUsernameChange} /> </label>
+					<label>
+            <input  type="text"
+                    name="username"
+                    placeholder="Username"
+                    onChange={this.handleUsernameChange} />
+          </label>
 					<br/>
 					<label> <input type="text" name="password" placeholder="Password" onChange={this.handlePasswordChange} /> </label>
 					<br/>
