@@ -20,7 +20,6 @@ export default class Map extends Component {
 
     this.state = {
       markers: []
-
     }
 
     this.onMapClick = this.onMapClick.bind(this)
@@ -34,6 +33,13 @@ export default class Map extends Component {
     this.setState(this.state);
   }
   
+  onInfoWindowButtonClick(){
+    console.log(this.state)
+    $('.create-map').on('click','.btn.btn-info', (event) => {
+        console.log(this.state)
+
+    })
+  }
 
   renderInfoWindow(ref, marker) {
 
@@ -64,11 +70,11 @@ export default class Map extends Component {
                 <h4>Description: </h4> 
                   <textarea className='pin-description' value='' name= 'description'> </textarea> 
                 <br/><br/> 
-                <button className='submit-marker' type='submit'>Click here to create new pin</button>  
+                <button onClick={this.onInfoWindowButtonClick} className='submit-marker' type='submit'>Click here to create new pin</button>  
                
                <br/> 
                <br/> 
-               <button onClick={this.onInfoWindowButtonClick} className='btn btn-warning' type='submit'>Delete Pin</button>  
+               <button className='btn btn-warning' type='submit'>Delete Pin</button>  
             
             </div>}
 
@@ -77,12 +83,7 @@ export default class Map extends Component {
     )
   }
 
-  onInfoWindowButtonClick(){
-    $('.create-map').on('click','.btn.btn-info', (event) => {
-        console.log(this.state)
-
-    })
-  }
+  
 
   handleMarkerClick(marker){
     let InfoWindow = {
@@ -119,6 +120,15 @@ export default class Map extends Component {
 
   }
 
+  handleMapCentreChanged(){
+    this.setState({centre: {lat: this.props.map_location.latitude, lng: this.props.map_location.longitude }})
+  }
+
+  componentDidMount() {
+
+
+  }
+
   render() {
 
     
@@ -127,7 +137,7 @@ export default class Map extends Component {
 
                  };
 
-    console.log(latLng)}
+    console.log(this.props)}
 
 
     return (
@@ -148,7 +158,8 @@ export default class Map extends Component {
             <GoogleMap
               ref={(map) => console.log(map)}
               defaultZoom={3}
-              defaultCenter={{ lat: -25.363882, lng: 131.044922 }}
+              center={{lat: this.props.map_location.centre.latitude, lng: this.props.map_location.centre.longitude}}
+              
               onClick={this.onMapClick}
               
             >
