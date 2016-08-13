@@ -33,27 +33,55 @@ const Map_form = React.createClass({
 
 		//this.props.centreMapLocation(event.target.value)
 
+		
+		
+		
+
+		//autocomplete = new google.maps.places.Autocomplete(
+		//	(document.getElementById('create-autocomplete')), {types: ['(regions)']}, bounds)
+
+		// autocomplete.addListener('place_changed', () => {
+		// 	console.log(autocomplete.getPlace())
+		// 	if(autocomplete.getPlace()){
+		// 		var place = autocomplete.getPlace();
+		// 		console.log(place.geometry.location.lat(), place.geometry.location.lng() )
+
+		// 		this.props.centreMapLocation(place.geometry.location)	
+		// 	}
+				
+		// })
+
+
 		this.setState({location: event.target.value,
 					   latitude: -74.0059,
 					   longitude: 40.7128,
 					   privacy: privacy,
 					   published: false });
+
+		/*
+		autocomplete = new google.maps.places.Autocomplete((document.getElementById('create-autocomplete')), {types: ['(regions)']});
+
 		
-		
+	    setInterval(() => {
+	        var place = autocomplete.getPlace();
+	        while(place !== undefined){
+	        	console.log(place)
+	        	this.props.centreMapLocation(place.geometry.location)
+	        	break;
+	        	place == undefined
+	        }
 
-		autocomplete = new google.maps.places.Autocomplete(
-			(document.getElementById('create-autocomplete')), {types: ['geocode']})
 
-		autocomplete.addListener('place_changed', () => {
-			
-			if(autocomplete.getPlace()){
-				var place = autocomplete.getPlace();
-				console.log(place.geometry.location.lat(), place.geometry.location.lng() )
 
-				this.props.centreMapLocation(place.geometry.location)	
-			}
-				
-		})
+	    }, 5000);
+
+	    console.log(this.state.location)
+
+	   
+	    */
+
+	    
+
 
 	},
 
@@ -61,6 +89,8 @@ const Map_form = React.createClass({
 
 	submitMap: function(event) {
 		event.preventDefault()
+
+		this.setState({location})
 
 		if(this.state.title !== "" && this.state.location !== ""){
 			this.props.map_info(this.state)	

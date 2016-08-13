@@ -25,7 +25,7 @@ const Create = React.createClass({
 					  				  	position: ""
 				  				  	},
 
-				  create_map: { centre: {latitude: 0.1278, longitude: 51.5074}}
+				  create_map: { centre: {latitude: 51.5074, longitude: -0.1278}}
 
 
 				}
@@ -66,6 +66,19 @@ const Create = React.createClass({
 		
 	},
 
+	handleChangeLoc: function(event){
+
+		//var map = new google.maps.Map(this.refs.mapCanvas)
+	    var latLng = new google.maps.LatLng(this.state.create_map.centre.latitude, this.state.create_map.centre.longitude);
+
+	    var service = new google.maps.places.PlacesService(document.createElement('div'));
+	    service.textSearch({location: latLng, query: event.target.value }, (results, status) => {
+	      for(var i = 0; i < results.length; i++){
+	        console.log(results[i])
+	      }
+	    })
+ 
+	},
 
 	centreMapLocation: function(location){
 		this.setState({create_map: 
@@ -106,6 +119,11 @@ const Create = React.createClass({
             			<div className="create-map" >
             				<div className="map-form">
 			        			<Map_form centreMapLocation={this.centreMapLocation} map_information={this.state.map_information} map_info={this.map_info} />
+
+			        			<label> to find? <input type="text" name="title" onChange={this.handleChangeLoc} />
+								</label>
+
+
 			        		</div>
 			        		<div id="create">
 			        			<Map map_location={this.state.create_map} marker_information={this.state.marker_information} />
@@ -117,7 +135,8 @@ const Create = React.createClass({
 
             			<div className="edit-map" >
 			        		<div id="edit">
-			        			<Map  />
+			        			<Map map_location={this.state.create_map} marker_information={this.state.marker_information} />
+			        			
 			        		</div>
 			        	</div>
 			    	}

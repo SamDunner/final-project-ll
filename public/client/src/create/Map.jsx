@@ -124,10 +124,26 @@ export default class Map extends Component {
     this.setState({centre: {lat: this.props.map_location.latitude, lng: this.props.map_location.longitude }})
   }
 
-  componentDidMount() {
+  getPlaces(){
+    /*
+    var map = new google.maps.Map(document.getElementById('create'))
+    var latLng = new google.maps.LatLng(this.props.map_location.centre.latitude, this.props.map_location.centre.longitude);
 
+
+    var service = new google.maps.places.PlacesService(map);
+    service.textSearch({location: latLng, query: 'Hilton'}, (results, status) => {
+      for(var i = 0; i < results.length; i++){
+        console.log(results[i])
+      }
+    })
+    */
+  }
+
+  componentDidMount() {
+    //this.getPlaces()
 
   }
+  
 
   render() {
 
@@ -141,9 +157,7 @@ export default class Map extends Component {
 
 
     return (
-
-
-      <section style={{height: "100%"}}>
+        <div style={{height: "100%"}} >
         <GoogleMapLoader
           query={{ libraries: "geometry,drawing,places,visualization" }}
           containerElement={
@@ -156,8 +170,9 @@ export default class Map extends Component {
           }
           googleMapElement={
             <GoogleMap
-              ref={(map) => console.log(map)}
-              defaultZoom={3}
+
+              ref="mapCanvas"
+              defaultZoom={10}
               center={{lat: this.props.map_location.centre.latitude, lng: this.props.map_location.centre.longitude}}
               
               onClick={this.onMapClick}
@@ -199,7 +214,8 @@ export default class Map extends Component {
             </GoogleMap>
           }
         />
-      </section>
+        </div>
+      
     );
 
   }
