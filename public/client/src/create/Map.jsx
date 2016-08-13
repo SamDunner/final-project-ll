@@ -19,12 +19,13 @@ export default class Map extends Component {
     console.log(this.props)
 
     this.state = {
-      markers: []
-
+      new_markers: [],
+      search_markers: this.props.map_places
     }
 
     this.onMapClick = this.onMapClick.bind(this)
     this.handleMarkerClick = this.handleMarkerClick.bind(this)
+    this.onInfoWindowButtonClick = this.onInfoWindowButtonClick.bind(this)
   
   }
 
@@ -33,15 +34,21 @@ export default class Map extends Component {
     this.setState(this.state);
   }
   
+  onInfoWindowButtonClick(){
+    console.log(this.state)
+    $('.create-map').on('click','.btn.btn-info', (event) => {
+        console.log(this.state)
 
-  renderInfoWindow(marker) {
+    })
+  }
 
-
+  renderInfoWindow(ref, marker) {
 
     return (
 
-      <InfoWindow 
-          onCloseClick={this.handleMarkerClose.bind(this, marker)} >
+      <InfoWindow
+          key={`${ref}_info_window`} 
+          onCloseclick={this.handleMarkerClose.bind(this, marker)} >
             {<div className='marker-info'> 
                
                 <h4> Title: </h4> 
@@ -64,7 +71,7 @@ export default class Map extends Component {
                 <h4>Description: </h4> 
                   <textarea className='pin-description' value='' name= 'description'> </textarea> 
                 <br/><br/> 
-                <button className='submit-marker' type='submit'>Click here to create new pin</button>  
+                <button onClick={this.onInfoWindowButtonClick} className='submit-marker' type='submit'>Click here to create new pin</button>  
                
                <br/> 
                <br/> 
@@ -77,12 +84,7 @@ export default class Map extends Component {
     )
   }
 
-  onInfoWindowButtonClick(){
-    $('.create-map').on('click','.btn.btn-info', (event) => {
-        console.log(this.state)
-
-    })
-  }
+  
 
   handleMarkerClick(marker){
     let InfoWindow = {
@@ -108,10 +110,10 @@ export default class Map extends Component {
       defaultAnimation: 2
     }
 
-    let markers = [...this.state.markers]
-    markers.push(marker)
+    let new_markers = [...this.state.new_markers]
+    new_markers.push(marker)
 
-    this.setState({markers});
+    this.setState({new_markers});
 
     console.log('state:',this.state)
 
@@ -119,22 +121,46 @@ export default class Map extends Component {
 
   }
 
+  handleMapCentreChanged(){
+    this.setState({centre: {lat: this.props.map_location.latitude, lng: this.props.map_location.longitude }})
+  }
+
+  getPlaces(){
+    /*
+    var map = new google.maps.Map(document.getElementById('create'))
+    var latLng = new google.maps.LatLng(this.props.map_location.centre.latitude, this.props.map_location.centre.longitude);
+
+
+    var service = new google.maps.places.PlacesService(map);
+    service.textSearch({location: latLng, query: 'Hilton'}, (results, status) => {
+      for(var i = 0; i < results.length; i++){
+        console.log(results[i])
+      }
+    })
+    */
+  }
+
+  componentDidMount() {
+    //this.getPlaces()
+
+  }
+  
+
   render() {
 
     
-    {let latLng = {latitude: -27.527758206861897,
-                  longitude: 136.58203125
+    { var search_markers_show = []
+      var marker_show = {};
 
-                 };
+      if(this.state.search_markers){
+      for(var i = 0; i < this.state.search_markers.length; i++){
+        
+      }
+    }}
 
-    console.log(latLng)}
-
-    // console.log(this.state.position)
 
     return (
-
-
-      <section style={{height: "100%"}}>
+        <div style={{height: "100%"}} >
         <GoogleMapLoader
           query={{ libraries: "geometry,drawing,places,visualization" }}
           containerElement={
@@ -147,24 +173,29 @@ export default class Map extends Component {
           }
           googleMapElement={
             <GoogleMap
-              ref={(map) => console.log(map)}
-              defaultZoom={3}
-              defaultCenter={{ lat: -25.363882, lng: 131.044922 }}
+
+              ref="mapCanvas"
+              defaultZoom={10}
+              center={{lat: this.props.map_location.centre.latitude, lng: this.props.map_location.centre.longitude}}
+              
               onClick={this.onMapClick}
               
             >
             
-            {this.state.markers &&
-              this.state.markers.map((marker, index) => {
-                return (
+            {this.state.search_markers &&
+              this.state.search_markers.map((marker, index) => {
 
-                    
+                const ref=`marker_${index}`
+                
+                return (
+    
                     <Marker 
-                    
+                    key={index}
+                    ref={ref}
                     {...marker} 
                       onClick={this.handleMarkerClick.bind(this, marker)}>
 
-                      {marker.showInfo ? this.renderInfoWindow(marker) : null}
+                      {marker.showInfo ? this.renderInfoWindow(ref, marker) : null}
 
                     </Marker>
                     
@@ -175,13 +206,41 @@ export default class Map extends Component {
               
             }
 
+            {this.state.new_markers &&
+              this.state.new_markers.map((marker, index) => {
+
+                const ref=`marker_${index}`
+                
+                return (
+    
+                    <Marker 
+                    key={index}
+                    ref={ref}
+                    position={{lat: marker.geometry.location.lat(), lng: marker.geometry.location.lng()}} 
+                    >
+
+                    </Marker>
+                    
+
+                )
+
+              })
+              
+            }
+
+
+            <SearchBox 
+              controlPosition={google.maps.ControlPosition.TOP_LEFT}
+              style={Map.inputStyle}
+            />
           
             
 
             </GoogleMap>
           }
         />
-      </section>
+        </div>
+      
     );
 
   }

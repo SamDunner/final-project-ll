@@ -2,141 +2,168 @@ import React, {Component} from 'react';
 import Map_form from './Map_form.jsx';
 import NavBar from '../navbar/NavBar.jsx';
 import Map from './Map.jsx';
+import MapEdit_form from './MapEdit_form.jsx';
 import Marker from './Map.jsx';
+import $ from 'jquery';
 
 const Create = React.createClass({
 
-	getInitialState: function() {
-		return  { map_information: { title: "",
-								     location: "",
-								     latitude: "",
-								     longitude: "",
-								     privacy: "",
-								     published: false,
-								     user_id: this.props.params.user_id,
-								     map_id: "" },
-				  marker_information: { title: "",
-				  				  	 description: "",
-				  				  	 rating: "",
-				  				  	 latitude: "",
-				  				  	 longitude: "",
-				  				  	 position: ""}
-				}
+  getInitialState: function() {
+    return  { map_information: { title: "",
+                     location: "",
+                     latitude: "",
+                     longitude: "",
+                     privacy: "",
+                     published: false,
+                     user_id: this.props.params.user_id,
+                     map_id: "" },
 
-	},
+          marker_information: { title: "",
+                        description: "",
+                        rating: "",
+                        latitude: "",
+                        longitude: "",
+                        position: ""
+                      },
 
-	componentDidMount: function() {
-
-	},
-
-	map_info: function(info){
-		this.setState({title: info.title,
-					   location: info.location,
-					   latitude: info.latitude,
-					   longitude: info.longitude,
-					   privacy: info.privacy,
-					   published: info.published,
-					   user_id: info.user_id,
-					   map_id: info.map_id })
-
-		console.log(this.state)
-	},
-
-	infoWindowContent: function(){
-		let content = "<article class='pin-info'>" +
-		                  "<form method='POST' action='http://localhost:8080/users/" + this.state.user_id + "/maps/" + this.state.map_id + "'>" +
-		                  "<h4> Title </h4>" +
-		                  "<input class='pin-title' value='' name='title'></input>" +
-		                  "<br>" +
-
-		                  //"<h4>Type</h4>" +
+          create_map: { centre: {latitude: 51.5074, longitude: -0.1278}},
+          map_places: []
+        }
+  },
 
 
-		                          // "<select id='select-type'>" +
-		                          //     "<option >Restaurant</option>" +
-		                          //     "<option >Bar</option>" +
-		                          //     "<option >Shop</option>" +
-		                          //     "<option >Other user</option>" +
-		                          //     "<option >Home </option>" +
-		                          //     "<option >Other </option>" +
-		                          // "</select>" +
+  // function called when state is passed up from map_form upon form
+  // being submitted:
+  map_info: function(info){
 
-		                  //"<br>" +
+      $.ajax({
+        method: "POST",
+        data: {title: info.title,
+            location: info.location,
+            latitude: info.latitude,
+            longitude: info.longitude,
+            privacy: info.privacy,
+            published: this.state.map_information.published},
+        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps"
+      }).done((results) => {
 
-		                "<h4> Description </h4>" +
-		                "<textarea class='pin-description' value='' name= description> </textarea>" +
-		                "<br><br>" +
-		              "<button class='btn btn-info' type='submit'>Click here to create new pin</button> " +
-		                 "</form>" +
-		                 "<br>" +
-		                 "<br>" +
-		                 "<button class='btn btn-warning' type='submit'>Delete Pin</button>" +
-		                "</article>"
+        console.log("map updated!");
+        console.log(results);
 
-		return content;
-	},
+          this.setState({ map_information: {title: results[0].title,
+                          location: results[0].location,
+                          latitude: results[0].latitude,
+                          longitude: results[0].longitude,
+                          privacy: results[0].privacy,
+                          published: results[0].published,
+                          user_id: results[0].user_id,
+                          map_id: results[0].map_id }
+      })
 
-
-	getCookie: function(){
-    	return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
-  	},
-
-	render: function() {
-
-		const style = {
-      			width: '100vw',
-      			height: '100vh'
-    	}
-
-		return (
-			      <div className="map-edit-page">
-
-			      	<div className="standard-nav-bar">
-              			<NavBar />
-            		</div>
-                <br/>
-                <br/>
-                <br/>
-            		<br/>
+      });
 
 
-            		{!this.state.map_id &&
+  },
 
-            			<div className="create-map" >
-            				<div className="map-form">
-			        			<Map_form map_information={this.state.map_information} map_info={this.map_info} />
-			        		</div>
-			        		<div id="create">
-			        			<Map marker_information={this.state.marker_information} infoWindowContent={this.infoWindowContent()}/>
-			        		</div>
-			        	</div>
-			    	}
+  handleChangeLoc: function(event){
 
-			    	{this.state.map_id &&
+    //var map = new google.maps.Map(this.refs.mapCanvas)
+      var latLng = new google.maps.LatLng(this.state.create_map.centre.latitude, this.state.create_map.centre.longitude);
 
-            			<div className="edit-map" >
-			        		<div id="edit">
-			        			<Map  />
-			        		</div>
-			        	</div>
-			    	}
+      var service = new google.maps.places.PlacesService(document.createElement('div'));
+      service.textSearch({location: latLng, query: event.target.value }, (results, status) => {
+        for(var i = 0; i < results.length; i++){
+          console.log(results[i])
+        }
+      })
 
-			        <div className="pin-list">
+  },
 
-			        </div>
+  mapSearchLocations: function(locations) {
+    this.state.map_places = locations;
+  },
+
+  centreMapLocation: function(location){
+    this.setState({create_map:
+            {centre: {latitude: location.lat(), longitude: location.lng()}}})
+  },
+
+  componentDidMount: function() {
+
+  },
 
 
-			        <div className="panel-list">
-
-			        </div>
 
 
-			      </div>
+  getCookie: function(){
+      return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
+    },
 
-    	);
-	}
+  render: function() {
+
+    const style = {
+            width: '100vw',
+            height: '100vh'
+      }
+
+    return (
+            <div className="map-edit-page">
+
+              <div className="standard-nav-bar">
+                    <NavBar />
+                </div>
+
+
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+
+                {!this.state.map_information.map_id &&
+
+                  <div className="create-map" >
+                    <div className="map-form">
+                    <Map_form centreMapLocation={this.centreMapLocation} map_information={this.state.map_information} map_info={this.map_info} />
+
+                  </div>
+                  <div id="create">
+                    <Map map_location={this.state.create_map} marker_information={this.state.marker_information} />
+                  </div>
+                </div>
+            }
+
+            {this.state.map_information.map_id &&
+
+                  <div className="edit-map" >
+                  <div id="edit">
+                    <Map map_location={this.state.create_map}
+                       map_places={this.state.map_places}
+                    />
+
+                  </div>
+                  <div id="edit-map-form">
+                    <MapEdit_form  map_location={this.state.create_map}
+                             mapSearchLocations={this.mapSearchLocations}
+                    />
+                  </div>
+                </div>
+            }
+
+              <div className="pin-list">
+
+              </div>
+
+
+              <div className="panel-list">
+
+              </div>
+
+
+            </div>
+
+      );
+  }
 });
-
 
 //Pin code to be used later to add a new marker: <i class="fa fa-map-marker" aria-hidden="true"></i>
 
