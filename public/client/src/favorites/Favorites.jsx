@@ -25,18 +25,28 @@ const Favorites = React.createClass({
 
   render: function() {
     return (
-      <div className="profile-page">
-        <div className="nav-bar">
-          <nav className="double-nav-bar">
-            <ProfileNavBar />
-          </nav>
+      <div>
+        <div className="profile-page">
+          <div className="nav-bar">
+            <nav className="double-nav-bar">
+              <ProfileNavBar />
+            </nav>
+          </div>
+          favorites test
         </div>
-        favorites test
-      </div>
 
+        <div>
+          <label className="custom-file">
+            <input type="file" id="file" className="custom-file-input" />
+            <span className="custom-file-control"></span>
+          </label>
+        </div>
+      </div>
     );
   }
 });
 
 
 export default Favorites;
+
+
