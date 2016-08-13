@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Map_form from './Map_form.jsx';
 import NavBar from '../navbar/NavBar.jsx';
 import Map from './Map.jsx';
+import MapEdit_form from './MapEdit_form.jsx';
 import Marker from './Map.jsx';
 import $ from 'jquery';
 
@@ -25,7 +26,8 @@ const Create = React.createClass({
 					  				  	position: ""
 				  				  	},
 
-				  create_map: { centre: {latitude: 51.5074, longitude: -0.1278}}
+				  create_map: { centre: {latitude: 51.5074, longitude: -0.1278}},
+				  map_places: []
 
 
 				}
@@ -80,6 +82,10 @@ const Create = React.createClass({
  
 	},
 
+	mapSearchLocations: function(locations) {	
+		this.state.map_places = locations;
+	},
+
 	centreMapLocation: function(location){
 		this.setState({create_map: 
 						{centre: {latitude: location.lat(), longitude: location.lng()}}})
@@ -88,6 +94,8 @@ const Create = React.createClass({
 	componentDidMount: function() {	
 
 	},
+
+	
 
 
 	getCookie: function(){
@@ -120,10 +128,6 @@ const Create = React.createClass({
             				<div className="map-form">
 			        			<Map_form centreMapLocation={this.centreMapLocation} map_information={this.state.map_information} map_info={this.map_info} />
 
-			        			<label> to find? <input type="text" name="title" onChange={this.handleChangeLoc} />
-								</label>
-
-
 			        		</div>
 			        		<div id="create">
 			        			<Map map_location={this.state.create_map} marker_information={this.state.marker_information} />
@@ -135,8 +139,15 @@ const Create = React.createClass({
 
             			<div className="edit-map" >
 			        		<div id="edit">
-			        			<Map map_location={this.state.create_map} marker_information={this.state.marker_information} />
-			        			
+			        			<Map map_location={this.state.create_map} 
+			        				 map_places={this.state.map_places}
+			        			/>
+
+			        		</div>
+			        		<div id="edit-map-form">
+			        			<MapEdit_form  map_location={this.state.create_map}
+			        						   mapSearchLocations={this.mapSearchLocations} 
+			        			/>
 			        		</div>
 			        	</div>
 			    	}

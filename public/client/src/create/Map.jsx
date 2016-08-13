@@ -19,7 +19,8 @@ export default class Map extends Component {
     console.log(this.props)
 
     this.state = {
-      markers: []
+      new_markers: [],
+      search_markers: this.props.map_places
     }
 
     this.onMapClick = this.onMapClick.bind(this)
@@ -109,10 +110,10 @@ export default class Map extends Component {
       defaultAnimation: 2
     }
 
-    let markers = [...this.state.markers]
-    markers.push(marker)
+    let new_markers = [...this.state.new_markers]
+    new_markers.push(marker)
 
-    this.setState({markers});
+    this.setState({new_markers});
 
     console.log('state:',this.state)
 
@@ -148,12 +149,14 @@ export default class Map extends Component {
   render() {
 
     
-    {let latLng = {latitude: -27.527758206861897,
-                  longitude: 136.58203125
+    { var search_markers_show = []
+      var marker_show = {};
 
-                 };
-
-    console.log(this.props)}
+      if(this.state.search_markers){
+      for(var i = 0; i < this.state.search_markers.length; i++){
+        
+      }
+    }}
 
 
     return (
@@ -179,8 +182,8 @@ export default class Map extends Component {
               
             >
             
-            {this.state.markers &&
-              this.state.markers.map((marker, index) => {
+            {this.state.search_markers &&
+              this.state.search_markers.map((marker, index) => {
 
                 const ref=`marker_${index}`
                 
@@ -193,6 +196,28 @@ export default class Map extends Component {
                       onClick={this.handleMarkerClick.bind(this, marker)}>
 
                       {marker.showInfo ? this.renderInfoWindow(ref, marker) : null}
+
+                    </Marker>
+                    
+
+                )
+
+              })
+              
+            }
+
+            {this.state.new_markers &&
+              this.state.new_markers.map((marker, index) => {
+
+                const ref=`marker_${index}`
+                
+                return (
+    
+                    <Marker 
+                    key={index}
+                    ref={ref}
+                    position={{lat: marker.geometry.location.lat(), lng: marker.geometry.location.lng()}} 
+                    >
 
                     </Marker>
                     

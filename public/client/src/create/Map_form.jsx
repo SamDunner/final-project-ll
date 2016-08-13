@@ -80,7 +80,7 @@ const Map_form = React.createClass({
 	   
 	    */
 
-	    
+
 
 
 	},
@@ -90,7 +90,7 @@ const Map_form = React.createClass({
 	submitMap: function(event) {
 		event.preventDefault()
 
-		this.setState({location})
+		
 
 		if(this.state.title !== "" && this.state.location !== ""){
 			this.props.map_info(this.state)	
@@ -100,6 +100,10 @@ const Map_form = React.createClass({
 	},
 
 	render: function() {
+
+
+		
+
 		return (
 			<div>
 
