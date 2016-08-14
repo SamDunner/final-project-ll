@@ -21,6 +21,9 @@ const passport       = require('passport');
 const session        = require('express-session');
 const LocalStrategy  = require('passport-local');
 
+const multer  = require('multer')
+const upload = multer({ dest: 'public/images/' })
+
 // // const config         = require('./config.js'), //config file contains all tokens and other private info
 // // const funct          = require('./functions.js'); //funct file contains our helper functions for our Passport and database work
 
@@ -35,6 +38,7 @@ const followingRoutes   = require("./routes/following");
 const followerRoutes    = require("./routes/follower")
 const favoritesRoutes   = require("./routes/favorites");
 const commentsRoutes    = require("./routes/comments");
+
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -127,6 +131,15 @@ app.post("/logout", (req, res) => {
   res.clearCookie("user_id");
   res.redirect("/");
 });
+
+app.post('/users/:user_id/favorites/upload', upload.any(), (req, res, next) => {
+  res.send(req.files);
+})
+
+app.get('/image.png', (req, res) => {
+    res.sendfile(path.resolve('./images/image.png'));
+});
+
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

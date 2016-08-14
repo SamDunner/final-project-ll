@@ -5,7 +5,6 @@ import cookie from 'react-cookie';
 const NavBar = React.createClass({
 
   getInitialState: function(){
-    console.log(this.props)
     return this.props;
   },
 
