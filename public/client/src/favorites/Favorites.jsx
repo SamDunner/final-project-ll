@@ -5,6 +5,8 @@ import App from '../App.jsx';
 import { render } from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import ProfileNavBar from '../navbar/ProfileNavBar.jsx';
+import $ from 'jquery';
+import ImageUpload from '../image_upload/ImageUpload.jsx';
 
 
 const Favorites = React.createClass({
@@ -25,18 +27,19 @@ const Favorites = React.createClass({
 
   render: function() {
     return (
-      <div className="profile-page">
-        <div className="nav-bar">
-          <nav className="double-nav-bar">
-            <ProfileNavBar />
-          </nav>
+        <div className="profile-page">
+          <div className="nav-bar">
+            <nav className="double-nav-bar">
+              <ProfileNavBar />
+            </nav>
+          </div>
+          favorites test
         </div>
-        favorites test
-      </div>
-
     );
   }
 });
 
 
 export default Favorites;
+
+
