@@ -24,15 +24,14 @@ const Collection = React.createClass({
 
   render: function() {
     return (
-      <div className="profile-page">
-        <div className="nav-bar">
-          <nav className="double-nav-bar">
-            <ProfileNavBar />
-          </nav>
+        <div className="profile-page">
+          <div className="nav-bar">
+            <nav className="double-nav-bar">
+              <ProfileNavBar />
+            </nav>
+          </div>
+  collection test
         </div>
-collection test
-      </div>
-
     );
   }
 });

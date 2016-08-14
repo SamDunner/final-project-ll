@@ -24,12 +24,9 @@ const Profile = React.createClass({
 
   render: function() {
     return (
+
       <div className="profile-page">
-
-        <nav className="double-nav-bar">
           <ProfileNavBar />
-        </nav>
-
       </div>
 
     );
