@@ -26,15 +26,18 @@ module.exports = (knex) => {
   });
 
   router.post("/", (req, res) => {
+
+    console.log(req.body)
+
     knex("pins").insert({
       'title': req.body.title,
-      'sort_id': req.body.sort_id,
+      'sort_order': req.body.sort_id,
       'latitude': req.body.latitude,
       'longitude': req.body.longitude,
       'rating': req.body.rating,
-      'map_id': req.params.map_id,
-      'author_id': req.params.author_id
-    })
+      'map_id': req.body.map_id,
+      'author_id': req.body.author_id
+    }).returning('pin_id')
     .then((results) => {
       console.log("pin posted")
     });

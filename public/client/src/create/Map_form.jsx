@@ -77,8 +77,8 @@ const Map_form = React.createClass({
 
 	    console.log(this.state.location)
 
-	   
-	    */
+	   	*/
+	    
 
 
 

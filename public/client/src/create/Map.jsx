@@ -16,17 +16,19 @@ export default class Map extends Component {
   constructor(props) {
     super(props);
 
-    console.log(this.props)
+    console.log(props)
 
     this.state = {
-      new_markers: [],
-      search_markers: this.props.map_places
+      new_markers: []
     }
 
-    this.onMapClick = this.onMapClick.bind(this)
-    this.handleMarkerClick = this.handleMarkerClick.bind(this)
-    this.onInfoWindowButtonClick = this.onInfoWindowButtonClick.bind(this)
-  
+    this.onMapClick = this.onMapClick.bind(this);
+    this.handleMarkerClick = this.handleMarkerClick.bind(this);
+    this.handleMarkerRightclick = this.handleMarkerRightclick.bind(this);
+    this.handlePinTitle = this.handlePinTitle.bind(this);
+    this.handlePinDescription = this.handlePinDescription.bind(this);
+    this.onInfoWindowButtonSubmit = this.onInfoWindowButtonSubmit.bind(this);
+
   }
 
   handleMarkerClose(marker) {
@@ -34,12 +36,22 @@ export default class Map extends Component {
     this.setState(this.state);
   }
   
-  onInfoWindowButtonClick(){
-    console.log(this.state)
-    $('.create-map').on('click','.btn.btn-info', (event) => {
-        console.log(this.state)
+  onInfoWindowButtonSubmit(){
+    console.log(this.props.marker_information)
+    this.props.createPin();
+  }
 
-    })
+  
+  handlePinTitle(event){
+    
+    //this.setState({pinContent : {title: event.target.value}});
+    this.props.marker_information.title = event.target.value
+  }
+
+  handlePinDescription(event){
+    
+    //this.setState({pinContent : {description: event.target.value}});
+    this.props.marker_information.description = event.target.value;
   }
 
   renderInfoWindow(ref, marker) {
@@ -52,29 +64,30 @@ export default class Map extends Component {
             {<div className='marker-info'> 
                
                 <h4> Title: </h4> 
-                  <input className='pin-title' name='title' /> 
+                  <input type="text" onChange={this.handlePinTitle} className='pin-title' /> 
                 <br/> 
 
                 <h4>Type: </h4> 
 
                   <select id='select-type'> 
-                      <option >Restaurant</option> 
-                      <option >Bar</option> 
-                      <option >Shop</option> 
-                      <option >Other user</option> 
-                      <option >Home </option> 
-                      <option >Other </option> 
+                      <option>Restaurant</option> 
+                      <option>Bar</option> 
+                      <option>Shop</option> 
+                      <option>Home</option>
+                      <option>Place of worship</option> 
                   </select> 
               
                 <br/> 
 
                 <h4>Description: </h4> 
-                  <textarea className='pin-description' value='' name= 'description'> </textarea> 
-                <br/><br/> 
-                <button onClick={this.onInfoWindowButtonClick} className='submit-marker' type='submit'>Click here to create new pin</button>  
+                  <textarea type="text" onChange={this.handlePinDescription} className='pin-description'></textarea> 
+                <br/>
+                <br/> 
+                
+                <button onClick={this.onInfoWindowButtonSubmit} className='submit-marker' >Click here to create new pin</button>
+                <br/> 
+                <br/> 
                
-               <br/> 
-               <br/> 
                <button className='btn btn-warning' type='submit'>Delete Pin</button>  
             
             </div>}
@@ -84,9 +97,9 @@ export default class Map extends Component {
     )
   }
 
-  
+  handleMarkerRightclick(marker, other){
 
-  handleMarkerClick(marker){
+    console.log('from handleSearchMarkerClick', marker, other)
     let InfoWindow = {
       position: event.latLng,
       key: Date.now(),
@@ -94,6 +107,34 @@ export default class Map extends Component {
     }
 
     this.state.infoWindow = InfoWindow
+    console.log(this.state)
+
+    marker.showInfo = true;
+    this.setState(this.state)
+  }
+
+  handleMarkerClick(marker, event){
+
+    console.log('from handleMarkerClick', marker, event)
+
+    // let InfoWindow = {
+    //   position: event.latLng,
+    //   key: Date.now(),
+    //   content: this.props.infoWindowContent
+    // }
+
+    // this.setState({
+    //   pinContent: {
+    //     location: {lat: marker.position.lat(), 
+    //                lng: marker.position.lng() }
+    //   }
+    // })
+
+    this.props.marker_information.latitude = marker.position.lat()
+    this.props.marker_information.longitude = marker.position.lng()
+    this.props.marker_information.rating = marker.position.rating;
+
+  //this.state.infoWindow = InfoWindow
     console.log(this.state)
 
     marker.showInfo = true;
@@ -110,10 +151,10 @@ export default class Map extends Component {
       defaultAnimation: 2
     }
 
-    let new_markers = [...this.state.new_markers]
-    new_markers.push(marker)
+    let markers = [...this.state.new_markers]
+    markers.push(marker)
 
-    this.setState({new_markers});
+    this.setState({new_markers: markers});
 
     console.log('state:',this.state)
 
@@ -125,23 +166,9 @@ export default class Map extends Component {
     this.setState({centre: {lat: this.props.map_location.latitude, lng: this.props.map_location.longitude }})
   }
 
-  getPlaces(){
-    /*
-    var map = new google.maps.Map(document.getElementById('create'))
-    var latLng = new google.maps.LatLng(this.props.map_location.centre.latitude, this.props.map_location.centre.longitude);
-
-
-    var service = new google.maps.places.PlacesService(map);
-    service.textSearch({location: latLng, query: 'Hilton'}, (results, status) => {
-      for(var i = 0; i < results.length; i++){
-        console.log(results[i])
-      }
-    })
-    */
-  }
 
   componentDidMount() {
-    //this.getPlaces()
+
 
   }
   
@@ -149,13 +176,29 @@ export default class Map extends Component {
   render() {
 
     
-    { var search_markers_show = []
-      var marker_show = {};
+    { console.log("from render method Map.js", this.props)
 
-      if(this.state.search_markers){
-      for(var i = 0; i < this.state.search_markers.length; i++){
+      var search_markers_show = []
+      
+
+      if(this.props.map_places){
+      for(var i = 0; i < this.props.map_places.length; i++){
         
+        let marker = {
+          name: this.props.map_places[i].name,
+          rating: this.props.map_places[i].rating,
+          address: this.props.map_places[i].formatted_address || this.props.map_places[i].address,
+          position: this.props.map_places[i].geometry.location,
+          key: this.props.map_places[i].id,
+          content: this.props.infoWindowContent,
+          showInfo: false,
+          defaultAnimation: 2
+        }
+
+        search_markers_show.push(marker);
+
       }
+      console.log(search_markers_show)
     }}
 
 
@@ -182,8 +225,8 @@ export default class Map extends Component {
               
             >
             
-            {this.state.search_markers &&
-              this.state.search_markers.map((marker, index) => {
+            {this.state.new_markers &&
+              this.state.new_markers.map((marker, index) => {
 
                 const ref=`marker_${index}`
                 
@@ -206,22 +249,23 @@ export default class Map extends Component {
               
             }
 
-            {this.state.new_markers &&
-              this.state.new_markers.map((marker, index) => {
+            {search_markers_show &&
+              search_markers_show.map((marker, index) => {
 
                 const ref=`marker_${index}`
                 
                 return (
-    
-                    <Marker 
-                    key={index}
-                    ref={ref}
-                    position={{lat: marker.geometry.location.lat(), lng: marker.geometry.location.lng()}} 
-                    >
+                    
+                     <Marker
+                      key={index+100}
+                      ref={ref}
+                      {...marker} 
+                        onClick={this.handleMarkerRightclick.bind(this, marker)}>
+
+                        {marker.showInfo ? this.renderInfoWindow(ref, marker) : null}
 
                     </Marker>
                     
-
                 )
 
               })
@@ -229,10 +273,6 @@ export default class Map extends Component {
             }
 
 
-            <SearchBox 
-              controlPosition={google.maps.ControlPosition.TOP_LEFT}
-              style={Map.inputStyle}
-            />
           
             
 

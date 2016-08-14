@@ -23,9 +23,10 @@ const Create = React.createClass({
                         rating: "",
                         latitude: "",
                         longitude: "",
-                        position: ""
+                        position: "",
+                        pin_id: ""
                       },
-
+          pins: [],
           create_map: { centre: {latitude: 51.5074, longitude: -0.1278}},
           map_places: []
         }
@@ -65,6 +66,30 @@ const Create = React.createClass({
 
   },
 
+  //function called when a pin is created in child map component.
+  createPin: function(){
+  	console.log("from create pin" , this.state.marker_information);
+  	debugger;
+  	if(this.state.marker_information.rating == undefined){ this.state.marker_information.rating = 0}
+
+  	$.ajax({
+        method: "POST",
+        data: {title: this.state.marker_information.title,
+               latitude: this.state.marker_information.latitude,
+               longitude: this.state.marker_information.longitude,
+               rating: this.state.marker_information.rating,
+               map_id: this.state.map_information.map_id,
+               sort_order: 4,
+               author_id: 1 },
+        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id + '/pins' 
+      }).done((results) => {
+      	console.log(results);
+      	//this.setState({marker_information: {pin_id: }})
+
+      })
+
+  },
+
   handleChangeLoc: function(event){
 
     //var map = new google.maps.Map(this.refs.mapCanvas)
@@ -80,26 +105,46 @@ const Create = React.createClass({
   },
 
   mapSearchLocations: function(locations) {
+  	console.log("arrived at mapSearchLocations", locations)
     this.state.map_places = locations;
+    console.log("updated  state at mapSearchLocations", this.state)
+    this.forceUpdate()
   },
 
+  //updates the state of the map central location:
   centreMapLocation: function(location){
     this.setState({create_map:
             {centre: {latitude: location.lat(), longitude: location.lng()}}})
   },
 
-  componentDidMount: function() {
-
-  },
-
-
-
-
   getCookie: function(){
       return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
-    },
+  },
+
+  //gets all pins from database up receiving map_id being updated in state.
+  getAllPins: function(){
+  	$.ajax({
+  		method: "GET",
+  		url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id + '/pins'
+  	}).done((results) => {
+  		console.log(results);
+  		for(var res in results){
+  			this.state.pins.push(results[res]);
+  		}
+  	})
+  },
+
+  componentDidMount: function() {
+  	
+  },
+  
 
   render: function() {
+
+  	{if(this.state.map_information.map_id){
+  		this.getAllPins()
+  	}}
+
 
     const style = {
             width: '100vw',
@@ -136,14 +181,18 @@ const Create = React.createClass({
 
                   <div className="edit-map" >
                   <div id="edit">
-                    <Map map_location={this.state.create_map}
-                       map_places={this.state.map_places}
+                    <Map
+                    	marker_information={this.state.marker_information} 
+                    	map_location={this.state.create_map}
+                        map_places={this.state.map_places}
+                        createPin={this.createPin} 
                     />
 
                   </div>
                   <div id="edit-map-form">
-                    <MapEdit_form  map_location={this.state.create_map}
-                             mapSearchLocations={this.mapSearchLocations}
+                    <MapEdit_form marker_information={this.state.marker_information} 
+                    			  map_location={this.state.create_map}
+                             	  mapSearchLocations={this.mapSearchLocations}
                     />
                   </div>
                 </div>

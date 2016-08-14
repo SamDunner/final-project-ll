@@ -8,6 +8,12 @@ import cookie from 'react-cookie'
 
 const MapEdit_form = React.createClass({
 
+	getInitialState: function(){
+		return {
+			search: "",
+			locs: []
+		}
+	},
 
 	componentDidMount : function() {
 
@@ -16,12 +22,14 @@ const MapEdit_form = React.createClass({
 	handleSearchField: function(event) {
 
 		this.setState({search: event.target.value});
+		//console.log('from search field, MapEdit_form.jsx:', this.state)
 
 	},
 
 
 	submitSearch: function(event) {
 		event.preventDefault()
+		console.log('arrived at submit search')
 
 
 		var latLng = new google.maps.LatLng(this.props.map_location.centre.latitude, this.props.map_location.centre.longitude);
@@ -32,6 +40,7 @@ const MapEdit_form = React.createClass({
 	    service.textSearch({location: latLng, query: this.state.search }, (results, status) => {
 	      for(var i = 0; i < results.length; i++){
 	        placeLocs.push(results[i])
+	        this.state.locs.push(results[i])
 	      }
 
 	      this.props.mapSearchLocations(placeLocs)
