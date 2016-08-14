@@ -54,6 +54,9 @@ render((
     <Route path="/users/:user_id/favorites" component={Favorites}>
     </Route>
 
+{/*    <Route path="/users/:user_id/maps/:map_id/pins/:pin_id/content" component={PinContent}>
+    </Route>
+*/}
 
   </Router>
 ), document.getElementById('react-root'))
