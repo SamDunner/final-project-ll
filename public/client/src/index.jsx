@@ -13,7 +13,7 @@ import Login from './login/Login.jsx';
 import Edit from './edit/Edit.jsx';
 import Collection from './collection/Collection.jsx';
 import NavBar from './navbar/NavBar.jsx';
-
+import Show from './show/Show.jsx';
 import Create from './create/Create.jsx';
 import Profile from './profile/Profile.jsx';
 import Followers from './followers/Followers.jsx';
@@ -54,6 +54,8 @@ render((
     <Route path="/users/:user_id/favorites" component={Favorites}>
     </Route>
 
+    <Route path="/users/:user_id/maps/:map_id" component={Show}>
+    </Route>
 
   </Router>
 ), document.getElementById('react-root'))

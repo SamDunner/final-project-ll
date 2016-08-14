@@ -4,6 +4,7 @@ import NavBar from '../navbar/NavBar.jsx';
 import Map from './Map.jsx';
 import MapEdit_form from './MapEdit_form.jsx';
 import Marker from './Map.jsx';
+import PinTable from './PinTable.jsx';
 import $ from 'jquery';
 
 const Create = React.createClass({
@@ -33,8 +34,14 @@ const Create = React.createClass({
   },
 
 
-  // function called when state is passed up from map_form upon form
-  // being submitted:
+  getCookie: function(){
+      return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
+  },
+
+ /* 
+  * function called when state is passed up from map_form upon form
+  * being submitted:
+  */ 
   map_info: function(info){
 
       $.ajax({
@@ -57,9 +64,9 @@ const Create = React.createClass({
                           longitude: results[0].longitude,
                           privacy: results[0].privacy,
                           published: results[0].published,
-                          user_id: results[0].user_id,
+                          user_id: results[0].this.props.params.user_id,
                           map_id: results[0].map_id }
-      })
+      	})
 
       });
 
@@ -69,7 +76,7 @@ const Create = React.createClass({
   //function called when a pin is created in child map component.
   createPin: function(){
   	console.log("from create pin" , this.state.marker_information);
-  	debugger;
+  	
   	if(this.state.marker_information.rating == undefined){ this.state.marker_information.rating = 0}
 
   	$.ajax({
@@ -80,10 +87,25 @@ const Create = React.createClass({
                rating: this.state.marker_information.rating,
                map_id: this.state.map_information.map_id,
                sort_order: 4,
-               author_id: 1 },
+               author_id: this.props.params.user_id },
         url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id + '/pins' 
       }).done((results) => {
-      	console.log(results);
+      	
+
+      	let marker = {
+	          title: results[0].title,
+	          rating: results[0].rating,
+	          address: results[0].formatted_address || results[0].address,
+	          position: {lat: results[0].latitude, lng: results[0].longitude},
+	          pin_id: results[0].pin_id,
+	          description: results[0].description,
+	          showInfo: false,
+	          defaultAnimation: 1
+	        }
+
+	    this.state.pins.push(marker);
+
+	    console.log("state from creating new pin", this.state);
       	//this.setState({marker_information: {pin_id: }})
 
       })
@@ -117,14 +139,14 @@ const Create = React.createClass({
             {centre: {latitude: location.lat(), longitude: location.lng()}}})
   },
 
-  getCookie: function(){
-      return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
-  },
+  
 
   //gets all pins from database up receiving map_id being updated in state.
   getAllPins: function(){
   	$.ajax({
   		method: "GET",
+  		data: {map_id: this.state.map_information.map_id,
+  			   user_id: this.props.params.user_id},
   		url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id + '/pins'
   	}).done((results) => {
   		console.log(results);
@@ -164,17 +186,17 @@ const Create = React.createClass({
           <br/>
           <br/>
 
-                {!this.state.map_information.map_id &&
+            {!this.state.map_information.map_id &&
 
-                  <div className="create-map" >
-                    <div className="map-form">
-                    <Map_form centreMapLocation={this.centreMapLocation} map_information={this.state.map_information} map_info={this.map_info} />
+              <div className="create-map" >
+                <div className="map-form">
+                <Map_form centreMapLocation={this.centreMapLocation} map_information={this.state.map_information} map_info={this.map_info} />
 
-                  </div>
-                  <div id="create">
-                    <Map map_location={this.state.create_map} marker_information={this.state.marker_information} />
-                  </div>
-                </div>
+              </div>
+              <div id="create">
+                <Map map_location={this.state.create_map} marker_information={this.state.marker_information} />
+              </div>
+            </div>
             }
 
             {this.state.map_information.map_id &&
@@ -184,6 +206,7 @@ const Create = React.createClass({
                     <Map
                     	marker_information={this.state.marker_information} 
                     	map_location={this.state.create_map}
+                    	pins = {this.state.pins}
                         map_places={this.state.map_places}
                         createPin={this.createPin} 
                     />
@@ -199,6 +222,7 @@ const Create = React.createClass({
             }
 
               <div className="pin-list">
+              	
 
               </div>
 

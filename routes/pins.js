@@ -6,12 +6,16 @@ const router  = express.Router();
 module.exports = (knex) => {
 
   router.get("/", (req, res) => {
+
     knex
       .select("*")
       .from("pins")
+      .where('map_id', req.query.map_id)
       .then((results) => {
+        console.log('successful!')
         res.json(results);
     });
+  
   });
 
   router.get("/:pin_id", (req, res) => {
@@ -37,9 +41,10 @@ module.exports = (knex) => {
       'rating': req.body.rating,
       'map_id': req.body.map_id,
       'author_id': req.body.author_id
-    }).returning('pin_id')
+    }).returning('*')
     .then((results) => {
       console.log("pin posted")
+      res.json(results);
     });
   });
 
