@@ -5,6 +5,7 @@ import App from '../App.jsx';
 import { render } from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import ProfileNavBar from '../navbar/ProfileNavBar.jsx';
+import $ from 'jquery';
 
 
 const Favorites = React.createClass({
@@ -25,7 +26,15 @@ const Favorites = React.createClass({
 
   render: function() {
     return (
-      <div>
+         <div>
+      <script>
+      $(document).ready(function(){
+          $(":file")
+      });
+      </script>
+
+
+
         <div className="profile-page">
           <div className="nav-bar">
             <nav className="double-nav-bar">
@@ -35,7 +44,22 @@ const Favorites = React.createClass({
           favorites test
         </div>
 
+
         <div>
+
+          <div>
+          <form action="">
+            Content: <input type="text" className="user" />
+            <br/>
+            Image: <input type="file" className="myfile" />
+            <br/>
+            Preview: <input type="image" src="" width="60" height="60" />
+          </form>
+          </div>
+
+          <br/>
+          <br/>
+
           <label className="custom-file">
             <input type="file" id="file" className="custom-file-input" />
             <span className="custom-file-control"></span>
