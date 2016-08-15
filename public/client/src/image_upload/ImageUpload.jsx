@@ -14,19 +14,19 @@ const ImageUpload = React.createClass({
   },
 
   uploadImage: function(event) {
-    event.preventDefault()
+    event.preventDefault();
 
-      const imageURL = "http://localhost:8080/users/" + this.getCookie('user_id') + "/favorites/upload"
+    const imageURL = "http://localhost:8080/users/" + this.getCookie('user_id') + "/favorites/upload"
 
-      $.ajax({
-        method: "POST",
-        data: {
-          image_url: this.state.image_url
-        }, //not sure what is passed in here"
-        url: imageURL
-      }).done((results) => {
-        console.log("image uploaded!")
-      });
+    $.ajax({
+      method: "POST",
+      data: {
+        image_url: this.state.image_url
+      }, //not sure what is passed in here"
+      url: imageURL
+    }).done((results) => {
+      console.log("image uploaded!")
+    });
   },
 
   render: function() {
@@ -41,7 +41,7 @@ const ImageUpload = React.createClass({
 
 
           <div>
-          <form method="post" encType="multipart/form-data" >
+          <form method="post" encType="multipart/form-data" action="/testImage" >
              <input type="file" className="myfile" />
             <br/>
             <input type="submit" value="Save" />
