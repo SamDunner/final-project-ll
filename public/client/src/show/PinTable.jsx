@@ -30,7 +30,6 @@ const PinTable = React.createClass({
   
     return (
         <div>
-          
           <table className="table table-sm">
             <thead>
               <tr>
@@ -41,6 +40,7 @@ const PinTable = React.createClass({
             <tbody>
               {this.props.pins.map((pin, index) => {
                             return(
+                            
                                 <tr>
                                   <td>
                                       <MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -48,18 +48,14 @@ const PinTable = React.createClass({
                                       </MuiThemeProvider>
                                    </td>
                                 </tr>
-                                );
+                                
+                            );
                      })
                 }
               
               
             </tbody>
           </table>
-             
-
-              
-
-          
         </div>
     )
 

@@ -132,8 +132,26 @@ const Create = React.createClass({
 
   mapSearchLocations: function(locations) {
   	console.log("arrived at mapSearchLocations", locations)
-    
-    this.setState({map_places: locations});
+    var searchLocations = this.state.map_places;
+
+  	for(var i = 0; i < locations.length; i++){
+        
+        let marker = {
+          name: locations[i].name,
+          rating: locations[i].rating,
+          address: locations[i].formatted_address || locations[i].address,
+          position: locations[i].geometry.location,
+          key: locations[i].id,
+          content: this.props.infoWindowContent,
+          showInfo: false,
+          defaultAnimation: 2
+        }
+
+        searchLocations.push(marker);
+
+    }
+
+    this.setState({map_places: searchLocations});
 
     console.log("updated  state at mapSearchLocations", this.state)
     this.forceUpdate()
@@ -142,7 +160,9 @@ const Create = React.createClass({
   //updates the state of the map central location:
   centreMapLocation: function(location){
     this.setState({create_map:
-            {centre: {latitude: location.lat(), longitude: location.lng()}}})
+            			{centre: {latitude: location.lat(), 
+            					  longitude: location.lng()}
+         		  }})
   },
 
   
@@ -206,7 +226,7 @@ const Create = React.createClass({
 
             {this.state.map_information.map_id &&
 
-                  <div className="edit-map" >
+                <div className="edit-map" >
                   <div id="edit">
                     <Map
                     	marker_information={this.state.marker_information} 
@@ -219,21 +239,28 @@ const Create = React.createClass({
                   </div>
                   <div id="edit-map-form">
                     <MapSearch_form marker_information={this.state.marker_information} 
-                    			  map_location={this.state.create_map}
-                             	  mapSearchLocations={this.mapSearchLocations}
+                    			    map_location={this.state.create_map}
+                             	    mapSearchLocations={this.mapSearchLocations}
                     />
                   </div>
+
+                  <div className="pin-list">
+              			<PinTable centreMapLocation={this.centreMapLocation}
+                        		  map_location={this.state.create_map}
+                        		  pins={this.state.pins}/>
+              	  </div>
+
+              	  <div className="panel-list">
+
+              	  </div>
+                
                 </div>
             }
 
-              <div className="pin-list">
-              	<PinTable pins={this.state.pins} />
-              </div>
+             
 
 
-              <div className="panel-list">
-
-              </div>
+             
 
 
             </div>

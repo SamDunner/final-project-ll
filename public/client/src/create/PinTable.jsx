@@ -11,18 +11,16 @@ import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColu
 
 
 
-const Tables = React.createClass({
+
+const PinTable = React.createClass({
 
 
-    _onRowSelection: function(key){
-      
-      this.props.onUserClicked(this.props.users[key[0]]._id);
-      
+    handleClick: function(pin){
+      console.log("click", pin)
+      this.props.centreMapLocation({lat: pin.latitude, lng: pin.longitude})
     },
 
-    
-
-  	render: function(){
+    render: function(){
     
 
     const style = {
@@ -32,40 +30,39 @@ const Tables = React.createClass({
   
     return (
         <div>
-          
-
-             
-
-              <MuiThemeProvider muiTheme={getMuiTheme()}> 
-              <div>
-                 <Table selectable={true} onRowSelection={this._onRowSelection}>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHeaderColumn >Pins</TableHeaderColumn>
-                      
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-
-                    {this.props.pins.map((pin, index) => {
-                        return(
-                        <TableRow >
-                          <TableRowColumn key={pin._id}>
-                          
-                          <RaisedButton label={pin.name} onClick={this.handleClick} secondary={true} style={style} />
-                          
-                          </TableRowColumn>                     
-                        </TableRow>
-                        );
-                      })
-                    }
-                  </TableBody>
-                </Table>               
-                </div>
-              </MuiThemeProvider>
+          <table className="table table-sm">
+            <thead>
+              <tr>
+                <th>#</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.pins.map((pin, index) => {
+                            return(
+                            
+                                <tr>
+                                  <td>
+                                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          Action <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                          <li><a href="#">Action</a></li>
+                                          <li><a href="#">Another action</a></li>
+                                          <li><a href="#">Something else here</a></li>
+                                          <li role="separator" class="divider"></li>
+                                          <li><a href="#">Separated link</a></li>
+                                        </ul>
+                                   </td>
+                                </tr>
+                                
+                            );
+                     })
+                }
               
-
-          
+              
+            </tbody>
+          </table>
         </div>
     )
 
@@ -73,4 +70,4 @@ const Tables = React.createClass({
 
 })
 
-export default Tables;
+export default PinTable;

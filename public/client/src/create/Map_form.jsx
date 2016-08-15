@@ -42,10 +42,8 @@ const Map_form = React.createClass({
 	},
 
 	handleMapLocationLatLongAndPrivacy: function(event) {
-
-		
+	
 		var privacy;
-
 
 		if(document.getElementById('selectBox').value == 'Yes'){
 			privacy = true;
@@ -53,35 +51,10 @@ const Map_form = React.createClass({
 			privacy = false;
 		}
 
-		//this.props.centreMapLocation(event.target.value)
-
-		
-
-
 		this.setState({location: event.target.value,				   
 					   privacy: privacy,
 					   published: false });
 
-		/*
-		autocomplete = new google.maps.places.Autocomplete((document.getElementById('create-autocomplete')), {types: ['(regions)']});
-
-		
-	    setInterval(() => {
-	        var place = autocomplete.getPlace();
-	        while(place !== undefined){
-	        	console.log(place)
-	        	this.props.centreMapLocation(place.geometry.location)
-	        	break;
-	        	place == undefined
-	        }
-
-
-
-	    }, 5000);
-
-	    console.log(this.state.location)
-
-	   	*/
 	},
 
 

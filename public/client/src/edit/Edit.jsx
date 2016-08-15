@@ -42,6 +42,8 @@ const Edit = React.createClass({
     
     var allPins = this.state.pins;
 
+    console.log("from create pin , find current state ", this.state.pins )
+
     if(this.state.marker_information.rating == undefined){ this.state.marker_information.rating = 0}
 
     $.ajax({
@@ -71,7 +73,9 @@ const Edit = React.createClass({
 
       allPins.push(marker)
 
-      this.setState({pins: allPins})
+      this.setState({pins: allPins}, () => {
+        console.log("finding if pin has been created:", this.state)
+      })
 
       //console.log("state from creating new pin", this.state);
         //this.setState({marker_information: {pin_id: }})

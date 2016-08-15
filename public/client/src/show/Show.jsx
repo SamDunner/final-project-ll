@@ -37,8 +37,7 @@ const Show = React.createClass({
 	
   mapSearchLocations: function() {
  	console.log("arrived at mapSearchLocations", this.state)
-    
-    //console.log("updated  state at mapSearchLocations", this.state)
+  
     this.forceUpdate()
   },
 
