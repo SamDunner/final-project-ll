@@ -10,6 +10,9 @@ import $ from 'jquery';
 
 export default class Map extends Component {
 
+
+
+
   constructor(props) {
     super(props);
 
@@ -114,23 +117,27 @@ export default class Map extends Component {
 
     console.log('from handleMarkerClick', marker, event)
 
-    this.props.marker_information.latitude  = marker.position.lat()
+    // let InfoWindow = {
+    //   position: event.latLng,
+    //   key: Date.now(),
+    //   content: this.props.infoWindowContent
+    // }
+
+    // this.setState({
+    //   pinContent: {
+    //     location: {lat: marker.position.lat(), 
+    //                lng: marker.position.lng() }
+    //   }
+    // })
+
+    this.props.marker_information.latitude = marker.position.lat()
     this.props.marker_information.longitude = marker.position.lng()
-    this.props.marker_information.rating    = marker.position.rating;
+    this.props.marker_information.rating = marker.position.rating;
 
   //this.state.infoWindow = InfoWindow
-
-    //hide all info boxes other than the one we just clicked
-    // this.props.map_places.forEach((place) => {
-    //   place.showInfo = false;
-    // });
-
-    //debugger;
+    console.log(this.state)
 
     marker.showInfo = true;
-
-    console.log("Handle Marker Click state: ", this.state);
-    
     this.setState(this.state)
   }
 
@@ -168,6 +175,32 @@ export default class Map extends Component {
 
   render() {
 
+    { console.log("from render method Map.js, getting pins from DB", this.props)
+
+        var markers = []
+        
+
+        if(this.props.pins){
+        for(var i = 0; i < this.props.pins.length; i++){
+          
+          console.log("render mapshow.jsx", this.props.pins[i])
+                 let marker = {
+            title: this.props.pins[i].title,
+            rating: this.props.pins[i].rating,
+            address: this.props.pins[i].formatted_address || this.props.pins[i].address,
+            position: {lat: this.props.pins[i].latitude, lng: this.props.pins[i].longitude},
+            pin_id: this.props.pins[i].pin_id,
+            description: this.props.pins[i].description,
+            showInfo: false,
+            defaultAnimation: 2
+          }
+
+          markers.push(marker);
+
+        }
+        console.log(markers)
+    }}
+
     
     { console.log("from render method Map.js", this.props)
 
@@ -184,7 +217,7 @@ export default class Map extends Component {
           position: this.props.map_places[i].geometry.location,
           key: this.props.map_places[i].id,
           content: this.props.infoWindowContent,
-          // showInfo: this.props.map_places[i].showInfo,
+          showInfo: false,
           defaultAnimation: 2
         }
 
@@ -213,16 +246,16 @@ export default class Map extends Component {
               ref="mapCanvas"
               defaultZoom={10}
               center={{lat: this.props.map_location.centre.latitude, lng: this.props.map_location.centre.longitude}}
+              
               onClick={this.onMapClick}
+              
             >
             
-            {this.state.new_markers &&
-              this.state.new_markers.map((marker, index) => {
+            {markers &&
+              markers.map((marker, index) => {
 
                 const ref=`marker_${index}`
                 
-                //debugger;
-
                 return (
     
                     <Marker 
@@ -230,10 +263,36 @@ export default class Map extends Component {
                     ref={ref}
                     {...marker} 
                       onClick={this.handleMarkerClick.bind(this, marker)}>
+
                       {marker.showInfo ? this.renderInfoWindow(ref, marker) : null}
 
                     </Marker>
                     
+
+                )
+
+              })
+              
+            }
+
+            {this.state.new_markers &&
+              this.state.new_markers.map((marker, index) => {
+
+                const ref=`marker_${index}`
+                
+                return (
+    
+                    <Marker 
+                    key={index}
+                    ref={ref}
+                    {...marker} 
+                      onClick={this.handleMarkerClick.bind(this, marker)}>
+
+                      {marker.showInfo ? this.renderInfoWindow(ref, marker) : null}
+
+                    </Marker>
+                    
+
                 )
 
               })
@@ -245,16 +304,16 @@ export default class Map extends Component {
 
                 const ref=`marker_${index}`
                 
-                //debugger;//brken
-
                 return (
                     
                      <Marker
                       key={index+100}
                       ref={ref}
                       {...marker} 
-                        onClick={this.handleMarkerClick.bind(this, marker)}>
+                        onClick={this.handleMarkerRightclick.bind(this, marker)}>
+
                         {marker.showInfo ? this.renderInfoWindow(ref, marker) : null}
+
                     </Marker>
                     
                 )

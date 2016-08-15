@@ -8,9 +8,31 @@ var autocomplete;
 
 const Map_form = React.createClass({
 
+	getMapCentre: function(){
 
-	componentDidMount : function() {
+		autocomplete = new google.maps.places.Autocomplete(
+			(document.getElementById('create-autocomplete')), {types: ['(regions)']});
 
+		autocomplete.addListener('place_changed', () => {
+			console.log("place_changed map form ", autocomplete.getPlace());
+			
+			var place = autocomplete.getPlace();
+
+			if(place){
+				console.log(place.geometry.location.lat(), place.geometry.location.lng() );
+				this.props.centreMapLocation(place.geometry.location);
+				
+				this.setState({latitude: place.geometry.location.lat(),
+					   		   longitude: place.geometry.location.lng() })	
+			}
+				
+		});
+	},
+
+	componentDidMount: function() {
+		
+		this.getMapCentre();
+	
 	},
 
 	handleMapTitle: function(event) {
@@ -34,27 +56,9 @@ const Map_form = React.createClass({
 		//this.props.centreMapLocation(event.target.value)
 
 		
-		
-		
-
-		//autocomplete = new google.maps.places.Autocomplete(
-		//	(document.getElementById('create-autocomplete')), {types: ['(regions)']}, bounds)
-
-		// autocomplete.addListener('place_changed', () => {
-		// 	console.log(autocomplete.getPlace())
-		// 	if(autocomplete.getPlace()){
-		// 		var place = autocomplete.getPlace();
-		// 		console.log(place.geometry.location.lat(), place.geometry.location.lng() )
-
-		// 		this.props.centreMapLocation(place.geometry.location)	
-		// 	}
-				
-		// })
 
 
-		this.setState({location: event.target.value,
-					   latitude: -74.0059,
-					   longitude: 40.7128,
+		this.setState({location: event.target.value,				   
 					   privacy: privacy,
 					   published: false });
 
@@ -78,11 +82,6 @@ const Map_form = React.createClass({
 	    console.log(this.state.location)
 
 	   	*/
-	    
-
-
-
-
 	},
 
 
@@ -90,10 +89,9 @@ const Map_form = React.createClass({
 	submitMap: function(event) {
 		event.preventDefault()
 
-		
-
 		if(this.state.title !== "" && this.state.location !== ""){
-			this.props.map_info(this.state)	
+			this.props.map_info(this.state)
+			console.log(this.state)	
 		}
 
 		

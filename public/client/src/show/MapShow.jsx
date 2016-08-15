@@ -42,7 +42,7 @@ export default class Map extends Component {
 	      for(var i = 0; i < this.props.pins.length; i++){
 	        
 	        console.log("render mapshow.jsx", this.props.pins[i])
-	        let marker = {
+	               let marker = {
 	          title: this.props.pins[i].title,
 	          rating: this.props.pins[i].rating,
 	          address: this.props.pins[i].formatted_address || this.props.pins[i].address,

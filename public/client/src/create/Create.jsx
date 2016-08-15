@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Map_form from './Map_form.jsx';
 import NavBar from '../navbar/NavBar.jsx';
 import Map from './Map.jsx';
-import MapEdit_form from './MapEdit_form.jsx';
+import MapSearch_form from './MapSearch_form.jsx';
 import Marker from './Map.jsx';
 import PinTable from './PinTable.jsx';
 import $ from 'jquery';
@@ -64,7 +64,7 @@ const Create = React.createClass({
                           longitude: results[0].longitude,
                           privacy: results[0].privacy,
                           published: results[0].published,
-                          user_id: results[0].this.props.params.user_id,
+                          user_id: this.props.params.user_id,
                           map_id: results[0].map_id }
       	})
 
@@ -77,6 +77,8 @@ const Create = React.createClass({
   createPin: function(){
   	console.log("from create pin" , this.state.marker_information);
   	
+  	var allPins = this.state.pins;
+
   	if(this.state.marker_information.rating == undefined){ this.state.marker_information.rating = 0}
 
   	$.ajax({
@@ -103,9 +105,11 @@ const Create = React.createClass({
 	          defaultAnimation: 1
 	        }
 
-	    this.state.pins.push(marker);
+	    allPins.push(marker)
 
-	    console.log("state from creating new pin", this.state);
+	    this.setState({pins: allPins})
+
+	    //console.log("state from creating new pin", this.state);
       	//this.setState({marker_information: {pin_id: }})
 
       })
@@ -128,7 +132,9 @@ const Create = React.createClass({
 
   mapSearchLocations: function(locations) {
   	console.log("arrived at mapSearchLocations", locations)
-    this.state.map_places = locations;
+    
+    this.setState({map_places: locations});
+
     console.log("updated  state at mapSearchLocations", this.state)
     this.forceUpdate()
   },
@@ -150,9 +156,8 @@ const Create = React.createClass({
   		url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id + '/pins'
   	}).done((results) => {
   		console.log(results);
-  		for(var res in results){
-  			this.state.pins.push(results[res]);
-  		}
+  		this.setState({pins: results})
+
   	})
   },
 
@@ -163,9 +168,9 @@ const Create = React.createClass({
 
   render: function() {
 
-  	{if(this.state.map_information.map_id){
-  		this.getAllPins()
-  	}}
+  	// {if(this.state.map_information.map_id){
+  	// 	this.getAllPins()
+  	// }}
 
 
     const style = {
@@ -213,7 +218,7 @@ const Create = React.createClass({
 
                   </div>
                   <div id="edit-map-form">
-                    <MapEdit_form marker_information={this.state.marker_information} 
+                    <MapSearch_form marker_information={this.state.marker_information} 
                     			  map_location={this.state.create_map}
                              	  mapSearchLocations={this.mapSearchLocations}
                     />

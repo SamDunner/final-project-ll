@@ -6,7 +6,7 @@ import cookie from 'react-cookie'
 
 
 
-const MapEdit_form = React.createClass({
+const MapSearch_form = React.createClass({
 
 	getInitialState: function(){
 		return {
@@ -72,4 +72,4 @@ const MapEdit_form = React.createClass({
 
 })
 
-export default MapEdit_form;
+export default MapSearch_form;

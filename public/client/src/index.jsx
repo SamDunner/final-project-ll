@@ -33,7 +33,7 @@ render((
     <Route path="/login" component={Login}>
     </Route>
 
-    <Route path="/edit" component={Edit}>
+    <Route path="/users/:user_id/maps/:map_id/edit" component={Edit}>
     </Route>
 
     <Route path="/users/:user_id/create" component={Create}></Route>
@@ -54,8 +54,10 @@ render((
     <Route path="/users/:user_id/favorites" component={Favorites}>
     </Route>
 
-
     <Route path="/users/:user_id/maps/:map_id" component={Show}>
+    </Route>
+
+    <Route path="/users/:user_id/maps/:map_id/edit" component={Edit}>
     </Route>
 
 {/*    <Route path="/users/:user_id/maps/:map_id/pins/:pin_id/content" component={PinContent}>

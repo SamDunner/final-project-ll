@@ -41,6 +41,31 @@ const Show = React.createClass({
     this.forceUpdate()
   },
 
+  getMap: function(){
+
+    $.ajax({
+      method: "GET",
+      data: {map_id: this.props.params.map_id,
+           user_id: this.props.params.user_id},
+      url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id
+    }).done((results) => {
+      
+       this.setState({ map_information: {title: results[0].title,
+                                         location: results[0].location,
+                                         latitude: results[0].latitude,
+                                         longitude: results[0].longitude,
+                                         privacy: results[0].privacy,
+                                         published: results[0].published,
+                                         user_id: this.props.params.user_id,
+                                         map_id: results[0].map_id },
+
+                            create_map: {centre: {latitude: results[0].latitude, longitude: results[0].longitude }}
+                    })
+
+     
+    })
+
+  },
 
  /*
   * gets all pins from database up receiving map_id being updated in state.
@@ -52,12 +77,15 @@ const Show = React.createClass({
   		method: "GET",
   		data: {map_id: this.props.params.map_id,
   			   user_id: this.props.params.user_id},
-  		url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map + '/pins'
+  		url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + '/pins'
   	}).done((results) => {
   		
-  		for(var res in results){
-  			this.state.pins.push(results[res]);
-  		}
+  		// for(var res in results){
+  		// 	this.state.pins.push(results[res]);
+  		// }
+
+      this.setState({pins: results})
+
   		console.log(this.state);
   		this.forceUpdate();
   	})
@@ -70,6 +98,7 @@ const Show = React.createClass({
 
   componentDidMount: function() {
   	this.getAllPins();
+    this.getMap();
   },
 
   render: function() {
