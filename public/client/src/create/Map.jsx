@@ -125,10 +125,12 @@ export default class Map extends Component {
     //   place.showInfo = false;
     // });
 
-    //debugger;
+    debugger;
 
     marker.showInfo = true;
 
+    debugger;
+    
     console.log("Handle Marker Click state: ", this.state);
     
     this.setState(this.state)
@@ -221,7 +223,7 @@ export default class Map extends Component {
 
                 const ref=`marker_${index}`
                 
-                //debugger;
+                debugger;
 
                 return (
     
@@ -234,6 +236,7 @@ export default class Map extends Component {
 
                     </Marker>
                     
+
                 )
 
               })
@@ -245,7 +248,7 @@ export default class Map extends Component {
 
                 const ref=`marker_${index}`
                 
-                //debugger;//brken
+                debugger;//brken
 
                 return (
                     

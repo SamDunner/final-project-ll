@@ -58,7 +58,7 @@ const Create = React.createClass({
         console.log("map updated!");
         console.log(results);
 
-          this.setState({ map_information: {title: results[0].title,
+        this.setState({ map_information: {title: results[0].title,
                           location: results[0].location,
                           latitude: results[0].latitude,
                           longitude: results[0].longitude,
@@ -227,8 +227,7 @@ const Create = React.createClass({
             }
 
               <div className="pin-list">
-              	
-
+              	<PinTable pins={this.state.pins} />
               </div>
 
 

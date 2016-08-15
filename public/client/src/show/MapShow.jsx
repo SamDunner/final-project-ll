@@ -41,7 +41,7 @@ export default class Map extends Component {
 	      if(this.props.pins){
 	      for(var i = 0; i < this.props.pins.length; i++){
 	        
-	        console.log("render mapshow.jsx", this.props.pins[i])
+	        //console.log("render mapshow.jsx", this.props.pins[i])
 	               let marker = {
 	          title: this.props.pins[i].title,
 	          rating: this.props.pins[i].rating,

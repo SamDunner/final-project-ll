@@ -3,6 +3,7 @@ import NavBar from '../navbar/NavBar.jsx';
 import Map from './MapShow.jsx';
 import MapShow_form from './MapShow_form.jsx';
 import $ from 'jquery';
+import PinTable from './PinTable.jsx'
 
 const Show = React.createClass({
 
@@ -41,6 +42,12 @@ const Show = React.createClass({
     this.forceUpdate()
   },
 
+  //updates the state of the map central location:
+  centreMapLocation: function(location){
+    this.setState({create_map:
+                   {centre: {latitude: location.lat, longitude: location.lng}}})
+  },
+
   getMap: function(){
 
     $.ajax({
@@ -61,8 +68,6 @@ const Show = React.createClass({
 
                             create_map: {centre: {latitude: results[0].latitude, longitude: results[0].longitude }}
                     })
-
-     
     })
 
   },
@@ -142,7 +147,9 @@ const Show = React.createClass({
             
 
             <div className="pin-list">
-
+              <PinTable centreMapLocation={this.centreMapLocation}
+                        map_location={this.state.create_map}
+                        pins={this.state.pins} />
             </div>
 
 
