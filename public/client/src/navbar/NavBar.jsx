@@ -29,7 +29,6 @@ const NavBar = React.createClass({
     return (
 
       <div className="row">
-        <img src={require('../../../images/nic-cage.jpg')} />
         <a className="company-logo col-md-offset-1 col-md-2 col-lg-2"
            href="/">
           {/*<img src={require('./../../../images/Plotline.png')} />

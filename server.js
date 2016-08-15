@@ -93,6 +93,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
+// app.use(express.static("public"));
+// app.use("/", express.static(__dirname + "/public/"));
+// app.use("/images", express.static(__dirname + "/public/images"));
+
 // Mount all resource routes
 app.use("/users", usersRoutes(knex));
 app.use("/users/:user_id/following", followingRoutes(knex));
@@ -112,18 +116,18 @@ app.get("/", (req, res) => {
 
 app.post("/login", (req, res) => {
   knex("users")
-  	.select('user_id')
-  	.where({username: req.body.username,
-  			password: req.body.password})
-  	.then((results) => {
-  		if(results.length === 1) {
-  			res.json(results)
-  			console.log("user found!", results )
-  		} else {
-  			//TO DO: create a response when user cannot be found in DB.
-  			console.log("no user!")
-  		}
-  	})
+    .select('user_id')
+    .where({username: req.body.username,
+        password: req.body.password})
+    .then((results) => {
+      if(results.length === 1) {
+        res.json(results)
+        console.log("user found!", results )
+      } else {
+        //TO DO: create a response when user cannot be found in DB.
+        console.log("no user!")
+      }
+    })
 });
 
 
