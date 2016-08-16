@@ -73,13 +73,48 @@ const Create = React.createClass({
 
   },
 
+
+  removeMapLocation: function(marker, locs){
+
+    console.log("from before removeMapLocation", marker, locs)
+
+    for(var i = 0; i < locs.length; i++){
+        
+        if(marker.key == locs[i].key){
+          locs.splice(i, 1)
+          
+          this.setState({map_places: locs}, () => {
+            console.log("from removeMapLocation", this.state)            
+            this.forceUpdate()
+          })
+          
+        }
+    }
+
+    console.log("from removeMapLocation", this.state)
+  },
+
+  deletePin: function(marker){
+    var all_pins = this.state.pins;
+
+    for(var i = 0; i < all_pins.length; i++){
+      if(marker.key == all_pins[i].key){
+        all_pins.splice(i, 1)
+        this.setState({pins: all_pins})
+      }
+    }
+
+  },
+
+
   //function called when a pin is created in child map component.
   createPin: function(){
   	console.log("from create pin" , this.state.marker_information);
   	
   	var allPins = this.state.pins;
 
-  	if(this.state.marker_information.rating == undefined){ this.state.marker_information.rating = 0}
+  	if(this.state.marker_information.rating == undefined || this.state.marker_information.rating == ""){ this.state.marker_information.rating = 0
+    }
 
   	$.ajax({
         method: "POST",
@@ -100,9 +135,10 @@ const Create = React.createClass({
 	          address: results[0].formatted_address || results[0].address,
 	          position: {lat: results[0].latitude, lng: results[0].longitude},
 	          pin_id: results[0].pin_id,
+            info: false,
 	          description: results[0].description,
 	          showInfo: false,
-	          defaultAnimation: 1
+	          defaultAnimation: 2
 	        }
 
 	    allPins.push(marker)
@@ -113,6 +149,8 @@ const Create = React.createClass({
       	//this.setState({marker_information: {pin_id: }})
 
       })
+
+
 
   },
 
@@ -143,6 +181,8 @@ const Create = React.createClass({
           position: locations[i].geometry.location,
           key: locations[i].id,
           content: this.props.infoWindowContent,
+          map_type: "search",
+          showSearchInfo: false,
           showInfo: false,
           defaultAnimation: 2
         }
@@ -158,11 +198,18 @@ const Create = React.createClass({
   },
 
   //updates the state of the map central location:
-  centreMapLocation: function(location){
-    this.setState({create_map:
-            			{centre: {latitude: location.lat(), 
-            					  longitude: location.lng()}
-         		  }})
+  centreMapLocation: function(location, type){
+
+    if(type === "table"){
+      this.setState({create_map:
+                      {centre: {latitude: location.lat, longitude: location.lng}
+                  }})      
+    } else {
+
+      this.setState({create_map:
+            			     {centre: {latitude: location.lat(), longitude: location.lng()}
+             		  }})
+    }
   },
 
   
@@ -232,15 +279,17 @@ const Create = React.createClass({
                     	marker_information={this.state.marker_information} 
                     	map_location={this.state.create_map}
                     	pins = {this.state.pins}
-                        map_places={this.state.map_places}
-                        createPin={this.createPin} 
+                      map_places={this.state.map_places}
+                      deletePin={this.deletePin}
+                      createPin={this.createPin}
+                      removeMapLocation={this.removeMapLocation} 
                     />
 
                   </div>
                   <div id="edit-map-form">
                     <MapSearch_form marker_information={this.state.marker_information} 
-                    			    map_location={this.state.create_map}
-                             	    mapSearchLocations={this.mapSearchLocations}
+                    	      		    map_location={this.state.create_map}
+                              	    mapSearchLocations={this.mapSearchLocations}
                     />
                   </div>
 

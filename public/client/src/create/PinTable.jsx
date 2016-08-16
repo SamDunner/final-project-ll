@@ -17,7 +17,7 @@ const PinTable = React.createClass({
 
     handleClick: function(pin){
       console.log("click", pin)
-      this.props.centreMapLocation({lat: pin.latitude, lng: pin.longitude})
+      this.props.centreMapLocation({lat: pin.position.lat, lng: pin.position.lng}, "table");
     },
 
     render: function(){
@@ -33,7 +33,7 @@ const PinTable = React.createClass({
           <table className="table table-sm">
             <thead>
               <tr>
-                <th>#</th>
+                <th>Pins:</th>
                 
               </tr>
             </thead>
@@ -43,14 +43,16 @@ const PinTable = React.createClass({
                             
                                 <tr>
                                   <td>
-                                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          Action <span class="caret"></span>
+                                        <button onClick={this.handleClick.bind(this, pin)} type="button" className="btn btn-info">{pin.title}</button>
+                                        <button type="button" className="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          <span className="caret"></span>
+                                          <span className="sr-only">Toggle Dropdown</span>
                                         </button>
-                                        <ul class="dropdown-menu">
+                                        <ul className="dropdown-menu">
                                           <li><a href="#">Action</a></li>
                                           <li><a href="#">Another action</a></li>
                                           <li><a href="#">Something else here</a></li>
-                                          <li role="separator" class="divider"></li>
+                                          <li role="separator" className="divider"></li>
                                           <li><a href="#">Separated link</a></li>
                                         </ul>
                                    </td>
