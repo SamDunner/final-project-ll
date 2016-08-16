@@ -41,7 +41,7 @@ const Edit = React.createClass({
   removeMapLocation: function(marker, locs){
 
     console.log("from before removeMapLocation", marker, locs)
-
+    
     for(var i = 0; i < locs.length; i++){
         
         if(marker.key == locs[i].key){
@@ -62,7 +62,7 @@ const Edit = React.createClass({
     var all_pins = this.state.pins;
 
     for(var i = 0; i < all_pins.length; i++){
-      if(marker.key == all_pins[i].key){
+      if(marker.pin_id == all_pins[i].pin_id){
         all_pins.splice(i, 1)
         this.setState({pins: all_pins})
       }
