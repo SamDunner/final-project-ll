@@ -6,7 +6,7 @@ import { render } from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import ProfileNavBar from '../navbar/ProfileNavBar.jsx';
 import $ from 'jquery';
-import ImageUpload from '../image_upload/ImageUpload.jsx';
+
 
 
 const Favorites = React.createClass({

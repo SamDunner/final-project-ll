@@ -5,6 +5,7 @@ import App from '../App.jsx';
 import { render } from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import ProfileNavBar from '../navbar/ProfileNavBar.jsx';
+import ImageUpload from '../image_upload/ImageUpload.jsx';
 
 
 const Following = React.createClass({
@@ -32,6 +33,13 @@ const Following = React.createClass({
           </nav>
         </div>
         following test
+
+        <br/>
+        <br/>
+        <br/>
+
+        <ImageUpload />
+
       </div>
 
     );

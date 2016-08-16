@@ -20,18 +20,18 @@ const ProfileNavBar = React.createClass({
     return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
   },
 
-  getCollection: function(event) {
-    console.log("getCollection")
+  // getCollection: function(event) {
+  //   console.log("getCollection")
 
-    const collectionURL = "http://localhost:8080/users/" + this.getCookie('user_id') + "/maps"
+  //   const collectionURL = "http://localhost:8080/users/" + this.getCookie('user_id') + "/maps"
 
-      $.ajax({
-        method: "GET",
-        url: collectionURL
-      }).then((results) => {
-        console.log("map is being generated", results)
-      })
-  },
+  //     $.ajax({
+  //       method: "GET",
+  //       url: collectionURL
+  //     }).then((results) => {
+  //       console.log("map is being generated", results)
+  //     })
+  // },
 
   getFollowers: function(event) {
     console.log("getFollowers")

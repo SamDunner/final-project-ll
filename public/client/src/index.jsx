@@ -6,7 +6,7 @@ require("../styles/application.scss");
 // Render the top-level React component
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, Link, browserHistory } from 'react-router';
+import { Router, Route, Link, hashHistory } from 'react-router';
 import App from './App.jsx';
 import Signup from './signup/Signup.jsx';
 import Login from './login/Login.jsx';
@@ -19,10 +19,11 @@ import Profile from './profile/Profile.jsx';
 import Followers from './followers/Followers.jsx';
 import Following from './following/Following.jsx';
 import Favorites from './favorites/Favorites.jsx';
+import ImageUpload from './image_upload/ImageUpload.jsx';
 
 
 render((
-  <Router history={browserHistory}>
+  <Router history={hashHistory}>
 
     <Route path="/" component={App}>
     </Route>
@@ -57,8 +58,13 @@ render((
     <Route path="/users/:user_id/maps/:map_id" component={Show}>
     </Route>
 
+
     <Route path="/users/:user_id/maps/:map_id/edit" component={Edit}>
     </Route>
+
+    <Route path="/users/:user_id/maps/:map_id/pins/:pin_id/content" component={ImageUpload}>
+    </Route>
+
 
 {/*    <Route path="/users/:user_id/maps/:map_id/pins/:pin_id/content" component={PinContent}>
     </Route>
