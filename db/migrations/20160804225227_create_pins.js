@@ -2,8 +2,11 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable('pins', function (table) {
     table.increments('pin_id').primary();
     table.string('title');
-    table.integer('sort_order');
+    table.text('description');
     table.string('rating');
+    table.string('type');
+    table.string('address');
+    table.string('date');
     table.float('latitude');
     table.float('longitude');
     table.timestamp('created_at').defaultTo(knex.fn.now());

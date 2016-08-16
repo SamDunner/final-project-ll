@@ -10,7 +10,7 @@ module.exports = (knex) => {
   router.get("/", (req, res) => {
     knex
       .select("*")
-      .from("pin_content")
+      .from("images")
       .then((results) => {
         res.json(results);
     });
@@ -19,7 +19,7 @@ module.exports = (knex) => {
   router.get("/:content_id", (req, res) => {
     knex
       .select("*")
-      .from("pin_content")
+      .from("images")
       .where('content_id', req.params.content_id)
       .then((results) => {
         res.json(results);
@@ -28,7 +28,7 @@ module.exports = (knex) => {
   });
 
   router.post("/", (req, res) => {
-    knex("pin_content").insert({
+    knex("images").insert({
       'content': req.body.content,
       'image_url': req.body.image_url,
       'pin_id': req.params.pin_id
@@ -39,7 +39,7 @@ module.exports = (knex) => {
   });
 
   router.put("/:content_id", (req, res) => {
-    knex("pin_content").where('content_id', req.params.pin_id)
+    knex("images").where('content_id', req.params.pin_id)
     .update({
       'content': req.body.content,
       'image_url': req.body.image_url,
@@ -51,7 +51,7 @@ module.exports = (knex) => {
   });
 
   router.post('/upload', upload.single('file'), (req, res, next) => {
-    knex("pin_content")
+    knex("images")
       .insert({
         'pin_id': req.params.pin_id,
         'image_url': req.file.filename
@@ -67,7 +67,7 @@ module.exports = (knex) => {
 
 
   router.delete("/:content_id", (req, res) => {
-    knex("pin_content").where('content_id', req.params.content_id)
+    knex("images").where('content_id', req.params.content_id)
     .del().then((results) => {
       console.log("pin deleted")
 // Might be issue with deleting maps that have pins
