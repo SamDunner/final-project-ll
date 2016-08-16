@@ -20,7 +20,7 @@ import Followers from './followers/Followers.jsx';
 import Following from './following/Following.jsx';
 import Favorites from './favorites/Favorites.jsx';
 import ImageUpload from './image_upload/ImageUpload.jsx';
-
+import PinContent from './pincontent/PinContent.jsx';
 
 render((
   <Router history={hashHistory}>
@@ -62,9 +62,11 @@ render((
     <Route path="/users/:user_id/maps/:map_id/edit" component={Edit}>
     </Route>
 
-    <Route path="/users/:user_id/maps/:map_id/pins/:pin_id/content" component={ImageUpload}>
+    <Route path="/users/:user_id/maps/:map_id/pins/:pin_id/edit" component={PinContent}>
     </Route>
 
+    {<Route path="/users/:user_id/maps/:map_id/pins/:pin_id/content" component={ImageUpload}>
+    </Route>}
 
 {/*    <Route path="/users/:user_id/maps/:map_id/pins/:pin_id/content" component={PinContent}>
     </Route>
