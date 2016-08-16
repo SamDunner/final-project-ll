@@ -278,7 +278,7 @@ const Create = React.createClass({
                     <Map
                     	marker_information={this.state.marker_information} 
                     	map_location={this.state.create_map}
-                    	pins = {this.state.pins}
+                    	pins={this.state.pins}
                       map_places={this.state.map_places}
                       deletePin={this.deletePin}
                       createPin={this.createPin}

@@ -128,7 +128,7 @@ export default class Map extends Component {
           onCloseclick={this.handleClose.bind(this, marker)} >
             {<div className='marker-info-search'> 
                
-                <h4> Title: {marker.name}</h4> 
+                <h4> Title: {marker.title}</h4> 
                   
                 <br/>  
 

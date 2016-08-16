@@ -22,7 +22,7 @@ const MapSearch_form = React.createClass({
 	handleSearchField: function(event) {
 
 		this.setState({search: event.target.value});
-		//console.log('from search field, MapSearch_form.jsx:', this.state)
+		//console.log('from search field, MapEdit_form.jsx:', this.state)
 
 	},
 

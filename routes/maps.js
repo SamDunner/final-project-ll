@@ -15,10 +15,12 @@ module.exports = (knex) => {
   });
 
   router.get("/:map_id", (req, res) => {
+
+    
     knex
       .select("*")
       .from("maps")
-      .where('map_id', req.params.map_id)
+      .where('map_id', req.query.map_id)
       .then((results) => {
         res.json(results);
         console.log(results);
