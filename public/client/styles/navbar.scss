@@ -1,0 +1,90 @@
+
+.standard-nav-bar {
+  height: 60px;
+  position: fixed;
+  background-color: yellow;
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+}
+
+.btn-outline-primary {
+  border-style: solid;
+  border-width: 3px;
+  border-color: #006bb3;
+  color: #006bb3;
+  font-weight: bold;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.btn-outline-primary:hover {
+  background-color: #006bb3;
+  color: white;
+}
+
+.btn-outline-primary-logout {
+  border-style: solid;
+  border-width: 3px;
+  border-color: #006bb3;
+  color: #006bb3;
+  font-weight: bold;
+  // margin-left: 10%;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.btn-outline-primary-logout:hover {
+  background-color: #006bb3;
+  color: white;
+}
+
+.get-started {
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.thumbnail {
+  width: 60px;
+  height: 60px;
+  border: none;
+}
+
+.thumbnail:hover {
+  opacity: 0.5;
+}
+
+.site-name {
+  font-size: 220%;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.site-name:visited {
+  color: #006bb3;
+}
+
+.site-name:hover {
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+
+.fa-plus-square-o {
+  color: #006bb3;
+  top: 50%;
+  transform: translate(-40%, -45%);
+}
+
+.fa-plus-square-o:visited {
+  color: #006bb3;
+}
+
+.fa-plus-square-o:hover {
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+
+
+//link:active
+//text-decoration: underline;

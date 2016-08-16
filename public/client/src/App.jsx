@@ -48,7 +48,7 @@ const App = React.createClass({
 	render: function() {
 
 		return (
-      <div className="home-page-general">
+      <div className="row col-md-12 col-lg-12">
         { !document.cookie &&
           <div className="home-page-pre-login">
             <div className="registration">
@@ -60,26 +60,13 @@ const App = React.createClass({
         }
 
         { document.cookie &&
-          <div className="home-page-post-login">
-            <div className="standard-nav-bar">
-              <NavBar />
-            </div>
-
-            <div className="map-list">
-            </div>
-
-            <div className="followers-list">
-            </div>
-
-            <div className="saved-map-list">
-            </div>
-
-            <br/>
-            <div className="fix-parent-collapser">
-            </div>
+          <div className="standard-nav-bar col-md-12 col-lg-12">
+            <nav className="row col-md-12 col-lg-12">
+                <NavBar />
+            </nav>
           </div>
-        }
-      </div>
+          }
+        </div>
     );
 	}
 });

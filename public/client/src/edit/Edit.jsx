@@ -41,17 +41,17 @@ const Edit = React.createClass({
   removeMapLocation: function(marker, locs){
 
     console.log("from before removeMapLocation", marker, locs)
-    
+
     for(var i = 0; i < locs.length; i++){
-        
+
         if(marker.key == locs[i].key){
           locs.splice(i, 1)
-          
+
           this.setState({map_places: locs}, () => {
-            console.log("from removeMapLocation", this.state)            
+            console.log("from removeMapLocation", this.state)
             this.forceUpdate()
           })
-          
+
         }
     }
 
@@ -74,7 +74,7 @@ const Edit = React.createClass({
   //function called when a pin is created in child map component.
   createPin: function(){
     console.log("from create pin" , this.state.marker_information);
-    
+
     var allPins = this.state.pins;
 
     if(this.state.marker_information.rating == undefined || this.state.marker_information.rating == ""){ this.state.marker_information.rating = 0
@@ -87,11 +87,10 @@ const Edit = React.createClass({
                longitude: this.state.marker_information.longitude,
                rating: this.state.marker_information.rating,
                map_id: this.state.map_information.map_id,
-               sort_order: 4,
                author_id: this.props.params.user_id },
-        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id + '/pins' 
+        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id + '/pins'
       }).done((results) => {
-        
+
 
         let marker = {
             title: results[0].title,
@@ -137,7 +136,7 @@ const Edit = React.createClass({
     var searchLocations = this.state.map_places;
 
     for(var i = 0; i < locations.length; i++){
-        
+
         let marker = {
           name: locations[i].name,
           rating: locations[i].rating,
@@ -167,7 +166,7 @@ const Edit = React.createClass({
     if(type === "table"){
       this.setState({create_map:
                       {centre: {latitude: location.lat, longitude: location.lng}
-                  }})      
+                  }})
     } else {
 
       this.setState({create_map:
@@ -184,7 +183,7 @@ const Edit = React.createClass({
               user_id: this.props.params.user_id},
       url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id
     }).done((results) => {
-      
+
        this.setState({ map_information: {title: results[0].title,
                                          location: results[0].location,
                                          latitude: results[0].latitude,
@@ -197,7 +196,7 @@ const Edit = React.createClass({
                             create_map: {centre: {latitude: results[0].latitude, longitude: results[0].longitude }}
                     })
 
-     
+
     })
 
   },
@@ -237,10 +236,10 @@ const Edit = React.createClass({
   componentDidMount: function() {
     this.getAllPins();
     this.getMap();
-   
-    
+
+
   },
-  
+
 
   render: function() {
 
@@ -267,24 +266,24 @@ const Edit = React.createClass({
           <br/>
           <br/>
 
-           
-            
+
+
 
                 <div className="edit-map" >
                   <div id="edit">
                     <Map
-                      marker_information={this.state.marker_information} 
+                      marker_information={this.state.marker_information}
                       map_location={this.state.create_map}
                       pins={this.state.pins}
                       map_places={this.state.map_places}
                       deletePin={this.deletePin}
                       createPin={this.createPin}
-                      removeMapLocation={this.removeMapLocation} 
+                      removeMapLocation={this.removeMapLocation}
                     />
 
                   </div>
                   <div id="edit-map-form">
-                    <MapSearch_form marker_information={this.state.marker_information} 
+                    <MapSearch_form marker_information={this.state.marker_information}
                                     map_location={this.state.create_map}
                                     mapSearchLocations={this.mapSearchLocations}
                     />
@@ -299,14 +298,14 @@ const Edit = React.createClass({
                   <div className="panel-list">
 
                   </div>
-                
+
                 </div>
-            
-
-             
 
 
-             
+
+
+
+
 
 
             </div>

@@ -28,19 +28,13 @@ const NavBar = React.createClass({
   render: function() {
     return (
 
-      <div className="row">
-        <a className="company-logo col-md-offset-1 col-md-2 col-lg-2"
-           href="/">
-         {/* <img src="/images/plotline.png" />
-          <img src="http://allcartooncharacters.com/wp-content/uploads/2014/10/Garfield.jpg" /> */}
-        </a>
+      <div className="standard-nav-bar col-md-12 col-lg-12" >
 
-        <Link className="btn btn-outline-primary col-md-2 col-lg-2 col-md-offset-2"
-              to={"/users/" + this.getCookie() }>
-                 My Profile
+        <Link className="get-started col-md-1 col-lg-1" to={"/users/" + this.getCookie() + "/create"}>
+          new project:
         </Link>
 
-        <Link className="fa fa-plus-square-o fa-3x col-md-1 col-lg-1 col-md-offset-1"
+        <Link className="fa fa-plus-square-o fa-4x col-md-1 col-lg-1"
               aria-hidden="true"
               to={"/users/" + this.getCookie() + "/create"}
               data-toggle="tooltip"
@@ -49,10 +43,25 @@ const NavBar = React.createClass({
               id="example">
         </Link>
 
-        <Link className="btn btn-outline-primary col-md-2 col-lg-2"
+        <a className="thumbnail col-md-offset-2 col-md-1 col-lg-1"
+           href="/">
+        <img src="/images/plotline.png" />
+        </a>
+
+        <a className="site-name col-md-2 col-lg-2"
+           href="/">
+           PLOTLINE
+        </a>
+
+        <Link className="btn btn-outline-primary col-md-1 col-lg-1 col-md-offset-2"
+              to={"/users/" + this.getCookie() }>
+              profile
+        </Link>
+
+        <Link className="btn btn-outline-primary-logout col-md-1 col-lg-1 col-md-offset-1"
               to="/"
               onClick={this.onLogout}>
-          Log out
+          log out
         </Link>
 
       </div>

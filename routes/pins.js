@@ -15,7 +15,7 @@ module.exports = (knex) => {
         console.log('successful!')
         res.json(results);
     });
-  
+
   });
 
   router.get("/:pin_id", (req, res) => {
@@ -35,7 +35,6 @@ module.exports = (knex) => {
 
     knex("pins").insert({
       'title': req.body.title,
-      'sort_order': req.body.sort_id,
       'latitude': req.body.latitude,
       'longitude': req.body.longitude,
       'rating': req.body.rating,
@@ -52,7 +51,6 @@ module.exports = (knex) => {
     knex("pins").where('pin_id', req.params.pin_id)
     .update({
       'title': req.body.title,
-      'sort_id': req.body.sort_id,
       'latitude': req.body.latitude,
       'longitude': req.body.longitude,
       'rating': req.body.rating,

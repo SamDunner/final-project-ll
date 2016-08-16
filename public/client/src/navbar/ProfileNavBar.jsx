@@ -80,9 +80,12 @@ const ProfileNavBar = React.createClass({
   render: function() {
     return (
       <div className="standard-nav-bar col-md-12 col-lg-12">
-        <div className="row">
           <NavBar />
-        </div>
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <br/>
         <br/>
         <div className="row">
