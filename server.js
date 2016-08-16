@@ -22,7 +22,7 @@ const session        = require('express-session');
 const LocalStrategy  = require('passport-local');
 
 const multer  = require('multer')
-const upload = multer({ dest: 'public/images/' })
+const upload = multer({ dest: 'public/uploads/' })
 
 // // const config         = require('./config.js'), //config file contains all tokens and other private info
 // // const funct          = require('./functions.js'); //funct file contains our helper functions for our Passport and database work
@@ -134,14 +134,6 @@ app.post("/login", (req, res) => {
 app.post("/logout", (req, res) => {
   res.clearCookie("user_id");
   res.redirect("/");
-});
-
-app.post('/users/:user_id/favorites/upload', upload.any(), (req, res, next) => {
-  res.send(req.files);
-})
-
-app.get('/image.png', (req, res) => {
-    res.sendfile(path.resolve('./images/image.png'));
 });
 
 

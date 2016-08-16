@@ -26,11 +26,14 @@ module.exports = (knex) => {
   });
 
   router.post("/", (req, res) => {
+    console.log('reached follows post', req.body)
     knex("follows").insert({
       'following_user_id': req.body.following_user_id,
       'follower_user_id': req.body.follower_user_id
-    })
+    }).returning('*')
     .then((results) => {
+      console.log(results);
+      res.json(results);
       console.log("follow posted")
     });
   });
@@ -41,7 +44,6 @@ module.exports = (knex) => {
       console.log("stopped following user")
     });
   });
-
 
   return router;
 }

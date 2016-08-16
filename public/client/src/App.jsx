@@ -62,7 +62,6 @@ const App = React.createClass({
         { document.cookie &&
           <div className="home-page-post-login">
             <div className="standard-nav-bar">
-
               <NavBar />
             </div>
 

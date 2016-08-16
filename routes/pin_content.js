@@ -2,6 +2,8 @@
 
 const express = require('express');
 const router  = express.Router();
+const multer  = require('multer')
+const upload = multer({ dest: 'public/uploads/' })
 
 module.exports = (knex) => {
 
@@ -47,6 +49,22 @@ module.exports = (knex) => {
       console.log("pin updated")
     });
   });
+
+  router.post('/upload', upload.single('file'), (req, res, next) => {
+    knex("pin_content")
+      .insert({
+        'pin_id': req.params.pin_id,
+        'image_url': req.file.filename
+      })
+      .then((results) => {
+        console.log("pin updated", results)
+      });
+    console.log("testing for where it's going", req.file.path);
+    req.file.path
+    res.status(201).end();
+  });
+
+
 
   router.delete("/:content_id", (req, res) => {
     knex("pin_content").where('content_id', req.params.content_id)

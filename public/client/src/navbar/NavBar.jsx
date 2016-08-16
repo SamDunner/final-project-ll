@@ -31,8 +31,8 @@ const NavBar = React.createClass({
       <div className="row">
         <a className="company-logo col-md-offset-1 col-md-2 col-lg-2"
            href="/">
-          {/*<img src={require('./../../../images/Plotline.png')} />
-           <img src="http://allcartooncharacters.com/wp-content/uploads/2014/10/Garfield.jpg" />*/}
+         {/* <img src="/images/plotline.png" />
+          <img src="http://allcartooncharacters.com/wp-content/uploads/2014/10/Garfield.jpg" /> */}
         </a>
 
         <Link className="btn btn-outline-primary col-md-2 col-lg-2 col-md-offset-2"
