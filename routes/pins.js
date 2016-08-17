@@ -35,7 +35,10 @@ module.exports = (knex) => {
 
     knex("pins").insert({
       'title': req.body.title,
-      'sort_order': req.body.sort_id,
+      'description': req.body.description,
+      'type': req.body.type,
+      'address': req.body.address,
+      'date': req.body.date,
       'latitude': req.body.latitude,
       'longitude': req.body.longitude,
       'rating': req.body.rating,
@@ -52,14 +55,18 @@ module.exports = (knex) => {
     knex("pins").where('pin_id', req.params.pin_id)
     .update({
       'title': req.body.title,
-      'sort_id': req.body.sort_id,
+      'description': req.body.description,
+      'type': req.body.type,
+      'address': req.body.address,
+      'date': req.body.date,
       'latitude': req.body.latitude,
       'longitude': req.body.longitude,
       'rating': req.body.rating,
-      'map_id': req.params.map_id,
-      'author_id': req.params.author_id
-    })
+      'map_id': req.body.map_id,
+      'author_id': req.body.author_id
+    }).returning('*')
     .then((results) => {
+      res.json(results);
       console.log("pin updated")
     });
   });

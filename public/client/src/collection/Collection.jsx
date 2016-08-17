@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import NavBar from '../navbar/NavBar.jsx';
 import cookie from 'react-cookie';
 import App from '../App.jsx';
+import Map from './MapShow.jsx';
 import $ from 'jquery';
-
-
 import { render } from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import ProfileNavBar from '../navbar/ProfileNavBar.jsx';
@@ -45,6 +44,21 @@ const Collection = React.createClass({
     });
   },
 
+
+  getPins: function(id){
+
+    $.ajax({
+      method: "GET",
+      url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + id + "/pins",
+    }).then((results) => {
+
+      //this.setState({maps: results});
+
+      //console.log(this.state)
+    });
+
+  },
+
   componentDidMount: function() {
     this.getCollection()
   },
@@ -68,8 +82,16 @@ const Collection = React.createClass({
         { this.state.maps &&
           this.state.maps.map((map, index) => {
             return (
-              <Link to={"/users/" + this.props.params.user_id  + "/maps/" + map.map_id}> {map.title}
-              </Link>
+              <div className="map-object">
+                
+                
+                <Map key={map.map_id}
+                    map_location={{centre: {latitude: map.latitude, longitude: map.longitude}}} 
+                />
+                
+              </div>
+
+
               )
           })
         }

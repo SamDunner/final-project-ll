@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Map from './MapShow.jsx';
 import NavBar from '../navbar/NavBar.jsx';
-import BlogContent from './BlogContent.jsx';
+import BlogContent from './BlogContent_show.jsx';
 import MapSearch_form from './MapSearch_form.jsx';
 //import Marker from './Map.jsx';
 //import PinTable from './PinTable.jsx';
@@ -11,7 +11,7 @@ const PinContent = React.createClass({
 	
 	getInitialState: function(){
 
-		return { map_information: { title: "",
+		return {map_information: { title: "",
                      location: "",
                      latitude: "",
                      longitude: "",
@@ -68,29 +68,7 @@ const PinContent = React.createClass({
     this.forceUpdate()
   },
 
-  	changeDescription: function(info){
 
-  		console.log(info, this.state)
-
-  		$.ajax({
-	      method: "PUT",
-	      data: { 'title': this.state.marker_information.title,
-			      'description': info.description,
-			      'type': this.state.marker_information.type,
-			      'address': this.state.marker_information.address,
-			      'date': this.state.marker_information.date,
-			      'latitude': this.state.marker_information.latitude,
-			      'longitude': this.state.marker_information.longitude,
-			      'rating': this.state.marker_information.rating,
-			      'map_id': this.state.marker_information.map_id,
-			      'author_id': this.props.params.user_id },
-	      url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id
-	    }).done((results) => {
-	    	
-
-	    });
-
-  	},
 
 
 	getPin: function(){

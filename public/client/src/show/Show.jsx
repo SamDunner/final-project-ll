@@ -137,9 +137,9 @@ const Show = React.createClass({
 		            </div>
 		            <div id="show-map-form">
 		                <MapShow_form marker_information={this.state.marker_information} 
-		                			  map_location={this.state.create_map}
-		                         	  mapSearchLocations={this.mapSearchLocations}
-		                         	  map_places={this.state.map_places}
+		                			        map_location={this.state.create_map}
+		                         	    mapSearchLocations={this.mapSearchLocations}
+		                         	    map_places={this.state.map_places}
 		                />
 		            </div>
 	            </div>

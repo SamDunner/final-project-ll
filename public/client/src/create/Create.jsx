@@ -11,6 +11,7 @@ const Create = React.createClass({
 
   getInitialState: function() {
     return  { map_information: { title: "",
+
                      location: "",
                      latitude: "",
                      longitude: "",
@@ -22,6 +23,9 @@ const Create = React.createClass({
           marker_information: { title: "",
                         description: "",
                         rating: "",
+                        address: "",
+                        date: "",
+                        type: "",
                         latitude: "",
                         longitude: "",
                         position: "",
@@ -118,37 +122,46 @@ const Create = React.createClass({
   	if(this.state.marker_information.rating == undefined || this.state.marker_information.rating == ""){ this.state.marker_information.rating = 0
     }
 
+    if(this.state.marker_information.type == undefined || this.state.marker_information.type == ""){ this.state.marker_information.type = "Restaurant"
+    }
+
   	$.ajax({
         method: "POST",
         data: {title: this.state.marker_information.title,
+               description: this.state.marker_information.description,
+               address: this.state.marker_information.address,
+               date: this.state.marker_information.date,
+               type: this.state.marker_information.type,
                latitude: this.state.marker_information.latitude,
                longitude: this.state.marker_information.longitude,
                rating: this.state.marker_information.rating,
                map_id: this.state.map_information.map_id,
-               sort_order: 4,
                author_id: this.props.params.user_id },
+
         url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id + '/pins' 
       }).done((results) => {
       	
+        console.log('receiving saved pin from db',results)
 
       	let marker = {
 	          title: results[0].title,
 	          rating: results[0].rating,
+            date: results[0].date,
+            type: results[0].type,
 	          address: results[0].formatted_address || results[0].address,
 	          position: {lat: results[0].latitude, lng: results[0].longitude},
+            map_id: results[0].map_id,
+            user_id: results[0].user_id,
 	          pin_id: results[0].pin_id,
             info: false,
 	          description: results[0].description,
 	          showInfo: false,
 	          defaultAnimation: 2
-	        }
+	      }
 
-	    allPins.push(marker)
+  	    allPins.push(marker)
 
-	    this.setState({pins: allPins})
-
-	    //console.log("state from creating new pin", this.state);
-      	//this.setState({marker_information: {pin_id: }})
+  	    this.setState({pins: allPins})
 
       })
 
@@ -252,7 +265,7 @@ const Create = React.createClass({
 
               <div className="standard-nav-bar">
                     <NavBar />
-                </div>
+              </div>
 
 
           <br/>
@@ -278,6 +291,8 @@ const Create = React.createClass({
                 <div className="edit-map" >
                   <div id="edit">
                     <Map
+                      user_id={this.props.params.user_id}
+                      map_id={this.props.params.map_id}
                     	marker_information={this.state.marker_information} 
                     	map_location={this.state.create_map}
                     	pins={this.state.pins}
