@@ -60,7 +60,7 @@ export default class Map extends Component {
 
     marker.showInfo = true;
     this.setState(this.state);
-    //this.renderInfoWindow(marker.key, marker);
+    
   }
 
   onDeletePin(marker, event){
@@ -105,7 +105,11 @@ export default class Map extends Component {
 
   onInfoWindowButtonDelete(marker, event){
 
+<<<<<<< 9bb85d6851a35aaa0a02bb590644da7d4ec4d92c
 
+=======
+    
+>>>>>>> added complete functionality between create , edit , show and collection pages.
     console.log("on new/search pin delete" , marker)
     //if(marker.type == "new"){
       var markers = this.state.new_markers;
@@ -114,9 +118,13 @@ export default class Map extends Component {
           markers.splice(i, 1)
           this.setState({new_markers: markers})
         }
+<<<<<<< 9bb85d6851a35aaa0a02bb590644da7d4ec4d92c
 
       }
     //}
+=======
+      }
+>>>>>>> added complete functionality between create , edit , show and collection pages.
   }
 
   handlePinTitle(event){
@@ -160,11 +168,19 @@ export default class Map extends Component {
           key={`${ref}_info_window`}
           onCloseclick={this.handleClose.bind(this, marker)} >
 
+<<<<<<< 9bb85d6851a35aaa0a02bb590644da7d4ec4d92c
             {<div className='marker-info-search'>
 
                 <h4>Title: {marker.title}</h4>
                 <br/>
 
+=======
+            {<div className='marker-info-search'> 
+               
+                <h4>Title: {marker.title}</h4>  
+                <br/>  
+
+>>>>>>> added complete functionality between create , edit , show and collection pages.
 
                 <h4>Date: {marker.date}</h4>
                 <br/>
@@ -172,10 +188,15 @@ export default class Map extends Component {
                 <h4>Address: {marker.address || marker.formatted_address}</h4>
                 <br/>
 
+<<<<<<< 9bb85d6851a35aaa0a02bb590644da7d4ec4d92c
 
                 <h4>Type: {marker.type}</h4>
                 <br/>
 
+=======
+                <h4>Type: {marker.type}</h4>  
+                <br/>   
+>>>>>>> added complete functionality between create , edit , show and collection pages.
 
                 <h4>Description: {marker.description}</h4>
                 <br/>
@@ -279,6 +300,7 @@ export default class Map extends Component {
     return (
 
       <InfoWindow
+
           key={`${ref}_info_window`}
           onCloseclick={this.handleNewMarkerClose.bind(this, marker)} >
             {<div className='marker-info'>
@@ -289,6 +311,7 @@ export default class Map extends Component {
 
                 <h4> Date: </h4>
                   <input type="text" onChange={this.handlePinDate.bind(this)} className='pin-date' />
+
 
                 <br/>
 
@@ -329,10 +352,13 @@ export default class Map extends Component {
 
 
                 <button onClick={this.onInfoWindowButtonSubmit.bind(this, marker)} className='btn btn-info' >Save</button>
+
+
                 <br/>
                 <br/>
 
                <button onClick={this.onInfoWindowButtonDelete.bind(this, marker)} className='btn btn-warning' type='submit'>Delete Pin</button>
+
 
 
             </div>}
@@ -354,6 +380,7 @@ export default class Map extends Component {
 
                 <h4>Title: {marker.name}</h4>
                 <br/>
+
 
 
                 <h4>Address: {marker.address || marker.formatted_address}</h4>
@@ -394,6 +421,8 @@ export default class Map extends Component {
   handleInfoMarker(marker, event){
     marker.info = true;
 
+    console.log("Handle Marker Click state: ", this.state);
+
     this.setState(this.state)
   }
 
@@ -407,7 +436,6 @@ export default class Map extends Component {
 
 
     marker.showInfo = true;
-
 
     console.log("Handle New Marker Click state: ", this.state);
 
@@ -488,14 +516,12 @@ export default class Map extends Component {
                     <Marker
                     key={index}
                     ref={ref}
-
                     {...marker}
                       onClick={this.handleNewMarkerClick.bind(this, marker)}>
 
                     {infoWindow}
 
                     </Marker>
-
 
                 )
 
@@ -552,6 +578,7 @@ export default class Map extends Component {
                       ref={ref}
 
                       {...marker}
+
                         onClick={this.handleInfoMarker.bind(this, marker)}>
 
                         {infoSearchWindow}

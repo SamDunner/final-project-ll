@@ -245,7 +245,32 @@ const Create = React.createClass({
     }
   },
 
+  getMap: function(){
 
+    if(this.state.map_information.map_id){
+
+      $.ajax({
+        method: "GET",
+        data: {map_id: this.state.map_information.map_id,
+               user_id: this.props.params.user_id},
+        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id
+      }).done((results) => {
+        
+         this.setState({ map_information: {title: results[0].title,
+                                           location: results[0].location,
+                                           latitude: results[0].latitude,
+                                           longitude: results[0].longitude,
+                                           privacy: results[0].privacy,
+                                           published: results[0].published,
+                                           user_id: this.props.params.user_id,
+                                           map_id: results[0].map_id },
+
+                              create_map: {centre: {latitude: results[0].latitude, longitude: results[0].longitude }}
+                      })
+      })
+    }
+
+  },
 
   //gets all pins from database up receiving map_id being updated in state.
   getAllPins: function(){
@@ -269,24 +294,20 @@ const Create = React.createClass({
   },
 
   componentDidMount: function() {
-
+    this.getMap()
   },
 
 
   render: function() {
 
-  	// {if(this.state.map_information.map_id){
-  	// 	this.getAllPins()
-  	// }}
-
-
-    const style = {
+  	const style = {
             width: '100vw',
             height: '100vh'
-      }
+    }
 
     return (
       <div className="map-edit-page">
+
         <div className="standard-nav-bar">
               <NavBar />
         </div>

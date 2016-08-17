@@ -54,30 +54,6 @@ export default class Map extends Component {
 	              
 	            >
 
-	            {this.props.pins &&
-	              this.props.pins.map((marker, index) => {
-
-	                const ref=`marker_${index}`
-	                
-	                
-	                return (
-	                    
-	                     <Marker
-	                      key={marker.pin_id}
-	                      ref={ref}
-	                      {...marker} 
-	                        >
-	                       
-	                    </Marker>
-	                    
-	                )
-
-	              })
-	              
-	            }
-
-
-
 	            </GoogleMap>
 	          }
 	        />

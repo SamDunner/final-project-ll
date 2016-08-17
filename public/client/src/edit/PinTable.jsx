@@ -17,7 +17,7 @@ const PinTable = React.createClass({
 
     handleClick: function(pin){
       console.log("click", pin)
-      this.props.centreMapLocation({lat: pin.position.latitude, lng: pin.position.longitude}, "table");
+      this.props.centreMapLocation({lat: pin.position.lat, lng: pin.position.lng}, "table");
     },
 
     render: function(){

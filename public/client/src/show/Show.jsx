@@ -4,15 +4,14 @@ import Map from './MapShow.jsx';
 import MapShow_form from './MapShow_form.jsx';
 import $ from 'jquery';
 import PinTable from './PinTable.jsx'
+import { Link } from 'react-router';
 
 const Show = React.createClass({
 
 
-	getInitialState: function(){
+	 getInitialState: function() {
+    return  { map_information: { title: "",
 
-		console.log("params", this.props.params)
-
-		return  { map_information: { title: "",
                      location: "",
                      latitude: "",
                      longitude: "",
@@ -24,6 +23,9 @@ const Show = React.createClass({
           marker_information: { title: "",
                         description: "",
                         rating: "",
+                        address: "",
+                        date: "",
+                        type: "",
                         latitude: "",
                         longitude: "",
                         position: "",
@@ -31,21 +33,60 @@ const Show = React.createClass({
                       },
           pins: [],
           create_map: { centre: {latitude: 51.5074, longitude: -0.1278}},
-          map_places: []
+          map_places: [],
+          routePath: []
         }
-	},
-	
-  mapSearchLocations: function() {
- 	console.log("arrived at mapSearchLocations", this.state)
-  
-    this.forceUpdate()
   },
 
-  //updates the state of the map central location:
-  centreMapLocation: function(location){
-    this.setState({create_map:
-                   {centre: {latitude: location.lat, longitude: location.lng}}})
+  getCookie: function(){
+      return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
   },
+	
+    mapSearchLocations: function(locations) {
+    console.log("arrived at mapSearchLocations", locations)
+    var searchLocations = this.state.map_places;
+
+    for(var i = 0; i < locations.length; i++){
+
+        let marker = {
+          name: locations[i].name,
+          rating: locations[i].rating,
+          address: locations[i].formatted_address || locations[i].address,
+          position: locations[i].geometry.location,
+          key: locations[i].id,
+          content: this.props.infoWindowContent,
+          map_type: "search",
+          showSearchInfo: false,
+          showInfo: false,
+          defaultAnimation: 2
+        }
+
+        searchLocations.push(marker);
+
+    }
+
+    this.setState({map_places: searchLocations});
+
+    console.log("updated  state at mapSearchLocations", this.state)
+    this.forceUpdate()
+  },
+  
+
+  //updates the state of the map central location:
+  centreMapLocation: function(location, type){
+
+    if(type === "table"){
+      this.setState({create_map:
+                      {centre: {latitude: location.lat, longitude: location.lng}
+                  }})
+    } else {
+
+      this.setState({create_map:
+                       {centre: {latitude: location.lat(), longitude: location.lng()}
+                  }})
+    }
+  },
+
 
   getMap: function(){
 
@@ -77,6 +118,8 @@ const Show = React.createClass({
   */
   getAllPins: function(){
   	
+    var routes = this.state.routePath
+
   	$.ajax({
   		method: "GET",
   		data: {map_id: this.props.params.map_id,
@@ -84,14 +127,34 @@ const Show = React.createClass({
   		url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + '/pins'
   	}).done((results) => {
   		
-  		// for(var res in results){
-  		// 	this.state.pins.push(results[res]);
-  		// }
+  		console.log(results);
+      var markers = [];
+      for(var i = 0; i < results.length; i++){
 
-      this.setState({pins: results})
+        routes.push({lat:results[i].latitude, lng: results[i].longitude})
 
-  		console.log(this.state);
-  		this.forceUpdate();
+         let marker = {
+            title: results[i].title,
+            rating: results[i].rating,
+            date: results[i].date,
+            type: results[i].type,
+            address: results[i].formatted_address || results[i].address,
+            position: {lat: results[i].latitude, lng: results[i].longitude},
+            map_id: results[i].map_id,
+            user_id: results[i].user_id,
+            pin_id: results[i].pin_id,
+            showInfo: false,
+            description: results[i].description,
+            info: false,
+            defaultAnimation: 2
+          }
+          markers.push(marker)
+      }
+
+      this.setState({pins: markers, routePath: routes}, () => {
+        console.log(this.state)
+        this.forceUpdate()
+      })
   	})
   
   },
@@ -128,10 +191,13 @@ const Show = React.createClass({
 	            <div className="show-map" >
 		            <div id="show">
 		                <Map
+                      user_id={this.props.params.user_id}
+                      map_id={this.props.params.map_id}
 		                	marker_information={this.state.marker_information} 
 		                	map_location={this.state.create_map}
-		                    map_places={this.state.map_places} 
-		                    pins={this.state.pins} 
+                      routePath={this.state.routePath}
+		                  map_places={this.state.map_places} 
+		                  pins={this.state.pins} 
 		                />
 
 		            </div>
@@ -139,7 +205,7 @@ const Show = React.createClass({
 		                <MapShow_form marker_information={this.state.marker_information} 
 		                			        map_location={this.state.create_map}
 		                         	    mapSearchLocations={this.mapSearchLocations}
-		                         	    map_places={this.state.map_places}
+		                         	    
 		                />
 		            </div>
 	            </div>
@@ -155,6 +221,12 @@ const Show = React.createClass({
             <div className="panel-list">
 
             </div>
+
+            <Link className="btn btn-warning"
+                    to={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/edit"}
+                    >
+                  Edit
+            </Link>
 
 
             </div>

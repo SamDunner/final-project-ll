@@ -81,7 +81,7 @@ export default class Map extends Component {
                 */}
 
 
-               <button className='btn btn-danger' onClick={this.onDeletePin.bind(this, marker)} type='submit'>Delete</button>  
+               {/*<button className='btn btn-danger' onClick={this.onDeletePin.bind(this, marker)} type='submit'>Delete</button>*/}
             
             </div>}
 
