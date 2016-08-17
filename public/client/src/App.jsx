@@ -48,38 +48,26 @@ const App = React.createClass({
 	render: function() {
 
 		return (
-      <div className="home-page-general">
-        { !document.cookie &&
-          <div className="home-page-pre-login">
-            <div className="registration">
-                <Signup registrationInfo={this.state.registrationInfo} user_info={this.user_info} />
-              <br/>
-                <Login loginInfo={this.state.loginInfo} user_info={this.user_info} />
-            </div>
-          </div>
-        }
+      <div className="home-page-container">
+        <div className="row col-md-12 col-lg-12">
 
-        { document.cookie &&
-          <div className="home-page-post-login">
-            <div className="standard-nav-bar">
+          { !document.cookie &&
+            <div className="home-page-pre-login">
+              <div className="registration">
+                  <Signup registrationInfo={this.state.registrationInfo} user_info={this.user_info} />
+                <br/>
+                  <Login loginInfo={this.state.loginInfo} user_info={this.user_info} />
+              </div>
+            </div>
+          }
+
+          { document.cookie &&
+            <div className="home-page-navbar">
               <NavBar />
             </div>
-
-            <div className="map-list">
-            </div>
-
-            <div className="followers-list">
-            </div>
-
-            <div className="saved-map-list">
-            </div>
-
-            <br/>
-            <div className="fix-parent-collapser">
-            </div>
+            }
           </div>
-        }
-      </div>
+        </div>
     );
 	}
 });

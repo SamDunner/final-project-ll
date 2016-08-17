@@ -1,78 +1,79 @@
-html, body {
-  height: 100%;
-  max-width: 100vw;
-  font-family: 'Open Sans', sans-serif;
-}
+ html, body {
+   height: 100%;
+   max-width: 100vw;
+   font-family: 'Open Sans', sans-serif;
+ }
 
-#react-root {
-  height: 100%;
-}
+ #react-root {
+   height: 100%;
+ }
 
-.nav-bar {
-  width: 100%;
-  height: 75px;
-  border-bottom: 1px solid black;
-}
+ .nav-bar {
+   width: 100%;
+   height: 75px;
+   border-bottom: 1px solid black;
+ }
 
-.main-body {
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid black;
-}
+ .main-body {
+   margin: 10px;
+   padding: 10px;
+   border: 1px solid black;
+ }
 
-.main-body .registration-form {
-  margin: 40px;
-  padding: 10px;
-  border: 1px solid black;
-  box-sizing: border-box;
-  float: left;
-}
+ .main-body .registration-form {
+   margin: 40px;
+   padding: 10px;
+   border: 1px solid black;
+   box-sizing: border-box;
+   float: left;
+ }
 
-.main-body .login-form {
-  margin: 40px;
-  padding: 10px;
-  border: 1px solid black;
-  box-sizing: border-box;
-  float: right;
-}
+ .main-body .login-form {
+   margin: 40px;
+   padding: 10px;
+   border: 1px solid black;
+   box-sizing: border-box;
+   float: right;
+ }
 
-.main-body .fix-parent-collapser {
-  clear: both;
-}
+ .main-body .fix-parent-collapser {
+   clear: both;
+ }
 
-.map-edit-page {
-  height: 100%;
+ .map-edit-page {
+   height: 100%;
 }
 
 .create-map {
-  height: 100%;
-}
+   height: 100%;
+ }
 
-.create-map #create {
-  height: 100%;
-  width: 400px;
-  height: 300px;
-}
+ .create-map #create {
+   height: 100%;
+   width: 400px;
+   height: 300px;
+ }
 
-.edit-map {
-  padding-left: 230px;
-}
+ .edit-map {
+   padding-left: 230px;
+ }
 
-.edit-map #edit {
-  height: 100%;
-  width: 850px;
-  height: 600px;
-  border-radius: 10px;
-}
+ .edit-map #edit {
+   height: 100%;
+   width: 850px;
+   height: 600px;
+   border-radius: 10px;
+ }
 
-.map-show-page {
-  height: 100%;
-}
+ .map-show-page {
+   height: 100%;
+ }
 
-.show-map {
-  height: 100%;
-  padding-left: 200px;
-}
+ .show-map {
+   height: 100%;
+   padding-left: 200px;
+ }
+
 
 .show-map #show {
   height: 100%;
@@ -98,3 +99,10 @@ html, body {
 .profile-page {
   height: 100%;
 }
+
+ .show-map #show {
+   height: 100%;
+   width: 850px;
+   height: 600px;
+   border-radius: 10px;
+ }
