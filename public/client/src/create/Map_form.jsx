@@ -103,7 +103,7 @@ const Map_form = React.createClass({
           <br/>
 					<label>Create your map!
             <br/>
-          <button className='btn-submit' onClick={this.submitMap}>Register</button>
+          <button className='btn-submit' onClick={this.submitMap}>save</button>
           </label>
 				</form>
 			</div>
