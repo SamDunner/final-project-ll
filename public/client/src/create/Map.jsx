@@ -4,7 +4,7 @@ import React, { Component} from 'react';
 //import Map, {GoogleApiWrapper} from 'google-maps-react';
 //import MapOptions from './MapOptions.jsx'
 import { Link } from 'react-router';
-import {GoogleMapLoader, GoogleMap, Marker, InfoWindow, SearchBox} from "react-google-maps";
+import {GoogleMapLoader, GoogleMap, Marker, InfoWindow, Polyline, DrawingManager} from "react-google-maps";
 //import MarkerContent from './MarkerContent.jsx'
 import $ from 'jquery';
 
@@ -18,7 +18,7 @@ export default class Map extends Component {
     }
 
     this.onMapClick = this.onMapClick.bind(this);
-    this.handleMarkerClick = this.handleMarkerClick.bind(this);
+    this.handleNewMarkerClick = this.handleNewMarkerClick.bind(this);
     //this.handleMarkerRightclick = this.handleMarkerRightclick.bind(this);
     this.handlePinTitle = this.handlePinTitle.bind(this);
     this.handlePinDescription = this.handlePinDescription.bind(this);
@@ -31,12 +31,19 @@ export default class Map extends Component {
     this.setState(this.state);
   }
 
-  handleSearchMarkerClose(marker) {
-    // marker.showSearchInfo = false;
-    // this.setState(this.state);
+  handleWindowClose(marker){
+    marker.showSearchInfo = true
+    marker.showInfo = false
+    this.setState(this.state);
   }
 
-  handleMarkerClose(marker) {
+  handleSearchMarkerClose(marker) {
+    marker.showSearchInfo = false;
+    marker.showInfo = false;
+    this.setState(this.state);
+  }
+
+  handleNewMarkerClose(marker) {
     marker.showInfo = false;
     this.setState(this.state);
   }
@@ -97,14 +104,26 @@ export default class Map extends Component {
   }
 
   onInfoWindowButtonDelete(marker, event){
+<<<<<<< HEAD
+    
+    console.log("on new/search pin delete" , marker)
+    //if(marker.type == "new"){  
+      var markers = this.state.new_markers;
+      for(var i = 0; i < markers.length; i++){
+        if(marker.key == markers[i].key){
+          markers.splice(i, 1)
+          this.setState({new_markers: markers})
+        }
+=======
 
     var markers = this.state.new_markers;
     for(var i = 0; i < markers.length; i++){
       if(marker.key == markers[i].key){
         markers.splice(i, 1)
         this.setState({new_markers: markers})
+>>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
       }
-    }
+    //} 
   }
 
   handlePinTitle(event){
@@ -147,10 +166,17 @@ export default class Map extends Component {
       <InfoWindow
           key={`${ref}_info_window`}
           onCloseclick={this.handleClose.bind(this, marker)} >
+<<<<<<< HEAD
+            {<div className='marker-info-search'> 
+               
+                <h4>Title: {marker.title}</h4>  
+                <br/>  
+=======
             {<div className='marker-info-search'>
 
                 <h4>Title: {marker.name}</h4>
                 <br/>
+>>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
 
                 <h4>Date: {marker.date}</h4>
                 <br/>
@@ -158,8 +184,13 @@ export default class Map extends Component {
                 <h4>Address: {marker.address || marker.formatted_address}</h4>
                 <br/>
 
+<<<<<<< HEAD
+                <h4>Type: {marker.type}</h4>  
+                <br/>   
+=======
                 <h4>Type: {marker.name}</h4>
                 <br/>
+>>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
 
                 <h4>Description: {marker.description}</h4>
                 <br/>
@@ -190,7 +221,7 @@ export default class Map extends Component {
     )
   }
 
-/*
+
   renderWindow(ref, marker) {
     console.log("finding the ref", ref, marker)
 
@@ -244,32 +275,52 @@ export default class Map extends Component {
                 <br/>
                 <br/>
 
+<<<<<<< HEAD
+                <button onClick={this.onInfoWindowButtonSubmit.bind(this, marker)} className='btn btn-success' >Save</button>
+                <br/> 
+                <br/> 
+            
+=======
                 <button onClick={this.onInfoWindowButtonSubmit.bind(this, marker)} className='submit-marker' >Click here to create new pin</button>
                 <br/>
                 <br/>
 
                <button onClick={this.onInfoWindowButtonDelete.bind(this, marker)} className='btn btn-warning' type='submit'>Delete Pin</button>
 
+>>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
             </div>}
 
 
       </InfoWindow>
     )
   }
-*/
 
-  renderInfoWindow(ref, marker) {
+
+  renderNewWindow(ref, marker) {
     console.log("finding the ref", ref, marker)
 
     return (
 
       <InfoWindow
+<<<<<<< HEAD
+          key={`${ref}_info_window`} 
+          onCloseclick={this.handleNewMarkerClose.bind(this, marker)} >
+            {<div className='marker-info'> 
+               
+                <h4> Title: </h4> 
+                  <input type="text" onChange={this.handlePinTitle} className='pin-title' /> 
+                <br/> 
+
+                <h4> Date: </h4> 
+                  <input type="text" onChange={this.handlePinDate.bind(this)} className='pin-date' /> 
+=======
           key={`${ref}_info_window`}
           onCloseclick={this.handleSearchMarkerClose.bind(this, marker)} >
             {<div className='marker-info'>
 
                 <h4> Title: </h4>
                   <input type="text" onChange={this.handlePinTitle} className='pin-title' />
+>>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
                 <br/>
 
                 <h4> Date: </h4>
@@ -312,12 +363,21 @@ export default class Map extends Component {
                 <br/>
                 <br/>
 
+<<<<<<< HEAD
+                <button onClick={this.onInfoWindowButtonSubmit.bind(this, marker)} className='btn btn-info' >Save</button>
+                <br/> 
+                <br/> 
+               
+               <button onClick={this.onInfoWindowButtonDelete.bind(this, marker)} className='btn btn-warning' type='submit'>Delete Pin</button>  
+                
+=======
                 <button onClick={this.onInfoWindowButtonSubmit.bind(this, marker)} className='submit-marker' >Click here to create new pin</button>
                 <br/>
                 <br/>
 
                <button onClick={this.onInfoWindowButtonDelete.bind(this, marker)} className='btn btn-warning' type='submit'>Delete Pin</button>
 
+>>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
             </div>}
 
 
@@ -330,12 +390,21 @@ export default class Map extends Component {
     return (
 
       <InfoWindow
+<<<<<<< HEAD
+          key={`${ref}_info_window`} 
+          onCloseclick={this.handleSearchMarkerClose.bind(this, marker)} >
+            {<div className='marker-info-search'> 
+               
+                <h4>Title: {marker.name}</h4>  
+                <br/>  
+=======
           key={`${ref}_info_window`}
           onCloseclick={this.handleMarkerClose.bind(this, marker)} >
             {<div className='marker-info-search'>
 
                 <h4>Title: {marker.name}</h4>
                 <br/>
+>>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
 
                 <h4>Address: {marker.address || marker.formatted_address}</h4>
                 <br/>
@@ -365,37 +434,27 @@ export default class Map extends Component {
   handleSearchMarkerclick(marker, event){
 
     console.log('from handleSearchMarkerClick', marker, event)
-    // let InfoWindow = {
-    //   position: event.latLng,
-    //   key: Date.now(),
-    //   content: this.props.infoWindowContent
-    // }
-
-    // this.state.infoWindow = InfoWindow
-    // console.log(this.state)
-
-    // this.props.marker_information.latitude  = marker.position.lat()
-    // this.props.marker_information.longitude = marker.position.lng()
-    // this.props.marker_information.rating    = marker.position.rating;
 
     marker.showSearchInfo = true;
+    marker.showInfo = false;
+
     this.setState(this.state)
   }
 
-  handleMarker(marker, event){
-
-    console.log('from handleMarkerClick', marker, event)
-
+  handleInfoMarker(marker, event){
     marker.info = true;
+<<<<<<< HEAD
+=======
 
     console.log("Handle Marker Click state: ", this.state);
 
+>>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
     this.setState(this.state)
   }
 
-  handleMarkerClick(marker, event){
+  handleNewMarkerClick(marker, event){
 
-    console.log('from handleMarkerClick', marker, event)
+    console.log('from handleNewMarkerClick', marker, event)
 
     this.props.marker_information.latitude  = marker.position.lat()
     this.props.marker_information.longitude = marker.position.lng()
@@ -403,12 +462,19 @@ export default class Map extends Component {
 
 
     marker.showInfo = true;
+<<<<<<< HEAD
+    
+    console.log("Handle New Marker Click state: ", this.state);
+    
+=======
 
     console.log("Handle Marker Click state: ", this.state);
 
+>>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
     this.setState(this.state)
   }
 
+  
 
   onMapClick(event){
     let marker = {
@@ -473,7 +539,7 @@ export default class Map extends Component {
               this.state.new_markers.map((marker, index) => {
 
                 const ref=`marker_${index}`
-                var infoWindow = marker.showInfo ? this.renderInfoWindow(ref, marker) : null
+                var infoWindow = marker.showInfo ? this.renderNewWindow(ref, marker) : null
 
 
                 return (
@@ -481,6 +547,15 @@ export default class Map extends Component {
                     <Marker
                     key={index}
                     ref={ref}
+<<<<<<< HEAD
+                    {...marker} 
+                      onClick={this.handleNewMarkerClick.bind(this, marker)}>
+                    
+                    {infoWindow}
+
+                    </Marker>
+                    
+=======
                     {...marker}
                       onClick={this.handleMarkerClick.bind(this, marker)}>
 
@@ -489,6 +564,7 @@ export default class Map extends Component {
                     </Marker>
 
 
+>>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
                 )
 
               })
@@ -502,8 +578,8 @@ export default class Map extends Component {
 
                 var infoSearchWindow = marker.showSearchInfo ? this.renderSearchInfoWindow(ref, marker) : null
 
-                var infoWindow = marker.showInfo ? this.renderInfoWindow(ref, marker) : null
-                //debugger;//brken
+                var infoWindow = marker.showInfo ? this.renderWindow(ref, marker) : null
+                
 
                 return (
 
@@ -542,8 +618,13 @@ export default class Map extends Component {
                      <Marker
                       key={index+1000}
                       ref={ref}
+<<<<<<< HEAD
+                      {...marker} 
+                        onClick={this.handleInfoMarker.bind(this, marker)}>
+=======
                       {...marker}
                         onClick={this.handleMarker.bind(this, marker)}>
+>>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
                         {infoSearchWindow}
 
                     </Marker>
@@ -552,6 +633,16 @@ export default class Map extends Component {
 
               })
 
+            }
+
+            {this.props.routePath &&
+            <Polyline
+              path={this.props.routePath}
+               geodesic
+               strokeColor={'#5dcf17'}
+               strokeOpacity={1.0}
+               strokeWeight={10}
+            />
             }
 
 

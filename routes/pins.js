@@ -74,6 +74,7 @@ module.exports = (knex) => {
   router.delete("/:pin_id", (req, res) => {
     knex("pins").where('pin_id', req.params.pin_id)
     .del().then((results) => {
+      res.json(results)
       console.log("pin deleted")
 // Might be issue with deleting maps that have pins
     });

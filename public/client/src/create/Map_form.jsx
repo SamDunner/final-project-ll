@@ -76,6 +76,7 @@ const Map_form = React.createClass({
 
 
 		return (
+
 			<div>
 
 			<div id="map-create-form">
@@ -108,11 +109,9 @@ const Map_form = React.createClass({
 				</form>
 			</div>
 
+
 			</div>
-
-
-
-    	);
+			);
 	}
 
 })
