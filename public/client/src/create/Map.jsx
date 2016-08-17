@@ -104,26 +104,19 @@ export default class Map extends Component {
   }
 
   onInfoWindowButtonDelete(marker, event){
-<<<<<<< HEAD
-    
+
+
     console.log("on new/search pin delete" , marker)
-    //if(marker.type == "new"){  
+    //if(marker.type == "new"){
       var markers = this.state.new_markers;
       for(var i = 0; i < markers.length; i++){
         if(marker.key == markers[i].key){
           markers.splice(i, 1)
           this.setState({new_markers: markers})
         }
-=======
 
-    var markers = this.state.new_markers;
-    for(var i = 0; i < markers.length; i++){
-      if(marker.key == markers[i].key){
-        markers.splice(i, 1)
-        this.setState({new_markers: markers})
->>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
       }
-    //} 
+    //}
   }
 
   handlePinTitle(event){
@@ -166,17 +159,12 @@ export default class Map extends Component {
       <InfoWindow
           key={`${ref}_info_window`}
           onCloseclick={this.handleClose.bind(this, marker)} >
-<<<<<<< HEAD
-            {<div className='marker-info-search'> 
-               
-                <h4>Title: {marker.title}</h4>  
-                <br/>  
-=======
+
             {<div className='marker-info-search'>
 
-                <h4>Title: {marker.name}</h4>
+                <h4>Title: {marker.title}</h4>
                 <br/>
->>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
+
 
                 <h4>Date: {marker.date}</h4>
                 <br/>
@@ -184,13 +172,10 @@ export default class Map extends Component {
                 <h4>Address: {marker.address || marker.formatted_address}</h4>
                 <br/>
 
-<<<<<<< HEAD
-                <h4>Type: {marker.type}</h4>  
-                <br/>   
-=======
-                <h4>Type: {marker.name}</h4>
+
+                <h4>Type: {marker.type}</h4>
                 <br/>
->>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
+
 
                 <h4>Description: {marker.description}</h4>
                 <br/>
@@ -275,19 +260,11 @@ export default class Map extends Component {
                 <br/>
                 <br/>
 
-<<<<<<< HEAD
                 <button onClick={this.onInfoWindowButtonSubmit.bind(this, marker)} className='btn btn-success' >Save</button>
-                <br/> 
-                <br/> 
-            
-=======
-                <button onClick={this.onInfoWindowButtonSubmit.bind(this, marker)} className='submit-marker' >Click here to create new pin</button>
                 <br/>
                 <br/>
 
-               <button onClick={this.onInfoWindowButtonDelete.bind(this, marker)} className='btn btn-warning' type='submit'>Delete Pin</button>
 
->>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
             </div>}
 
 
@@ -302,25 +279,18 @@ export default class Map extends Component {
     return (
 
       <InfoWindow
-<<<<<<< HEAD
-          key={`${ref}_info_window`} 
-          onCloseclick={this.handleNewMarkerClose.bind(this, marker)} >
-            {<div className='marker-info'> 
-               
-                <h4> Title: </h4> 
-                  <input type="text" onChange={this.handlePinTitle} className='pin-title' /> 
-                <br/> 
 
-                <h4> Date: </h4> 
-                  <input type="text" onChange={this.handlePinDate.bind(this)} className='pin-date' /> 
-=======
           key={`${ref}_info_window`}
-          onCloseclick={this.handleSearchMarkerClose.bind(this, marker)} >
+          onCloseclick={this.handleNewMarkerClose.bind(this, marker)} >
             {<div className='marker-info'>
 
                 <h4> Title: </h4>
                   <input type="text" onChange={this.handlePinTitle} className='pin-title' />
->>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
+                <br/>
+
+                <h4> Date: </h4>
+                  <input type="text" onChange={this.handlePinDate.bind(this)} className='pin-date' />
+
                 <br/>
 
                 <h4> Date: </h4>
@@ -363,21 +333,14 @@ export default class Map extends Component {
                 <br/>
                 <br/>
 
-<<<<<<< HEAD
+
                 <button onClick={this.onInfoWindowButtonSubmit.bind(this, marker)} className='btn btn-info' >Save</button>
-                <br/> 
-                <br/> 
-               
-               <button onClick={this.onInfoWindowButtonDelete.bind(this, marker)} className='btn btn-warning' type='submit'>Delete Pin</button>  
-                
-=======
-                <button onClick={this.onInfoWindowButtonSubmit.bind(this, marker)} className='submit-marker' >Click here to create new pin</button>
                 <br/>
                 <br/>
 
                <button onClick={this.onInfoWindowButtonDelete.bind(this, marker)} className='btn btn-warning' type='submit'>Delete Pin</button>
 
->>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
+
             </div>}
 
 
@@ -390,21 +353,14 @@ export default class Map extends Component {
     return (
 
       <InfoWindow
-<<<<<<< HEAD
-          key={`${ref}_info_window`} 
-          onCloseclick={this.handleSearchMarkerClose.bind(this, marker)} >
-            {<div className='marker-info-search'> 
-               
-                <h4>Title: {marker.name}</h4>  
-                <br/>  
-=======
+
           key={`${ref}_info_window`}
-          onCloseclick={this.handleMarkerClose.bind(this, marker)} >
+          onCloseclick={this.handleSearchMarkerClose.bind(this, marker)} >
             {<div className='marker-info-search'>
 
                 <h4>Title: {marker.name}</h4>
                 <br/>
->>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
+
 
                 <h4>Address: {marker.address || marker.formatted_address}</h4>
                 <br/>
@@ -443,12 +399,7 @@ export default class Map extends Component {
 
   handleInfoMarker(marker, event){
     marker.info = true;
-<<<<<<< HEAD
-=======
 
-    console.log("Handle Marker Click state: ", this.state);
-
->>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
     this.setState(this.state)
   }
 
@@ -462,19 +413,15 @@ export default class Map extends Component {
 
 
     marker.showInfo = true;
-<<<<<<< HEAD
-    
+
+
     console.log("Handle New Marker Click state: ", this.state);
-    
-=======
 
-    console.log("Handle Marker Click state: ", this.state);
 
->>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
     this.setState(this.state)
   }
 
-  
+
 
   onMapClick(event){
     let marker = {
@@ -547,24 +494,15 @@ export default class Map extends Component {
                     <Marker
                     key={index}
                     ref={ref}
-<<<<<<< HEAD
-                    {...marker} 
-                      onClick={this.handleNewMarkerClick.bind(this, marker)}>
-                    
-                    {infoWindow}
 
-                    </Marker>
-                    
-=======
                     {...marker}
-                      onClick={this.handleMarkerClick.bind(this, marker)}>
+                      onClick={this.handleNewMarkerClick.bind(this, marker)}>
 
                     {infoWindow}
 
                     </Marker>
 
 
->>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
                 )
 
               })
@@ -579,7 +517,7 @@ export default class Map extends Component {
                 var infoSearchWindow = marker.showSearchInfo ? this.renderSearchInfoWindow(ref, marker) : null
 
                 var infoWindow = marker.showInfo ? this.renderWindow(ref, marker) : null
-                
+
 
                 return (
 
@@ -618,13 +556,10 @@ export default class Map extends Component {
                      <Marker
                       key={index+1000}
                       ref={ref}
-<<<<<<< HEAD
-                      {...marker} 
-                        onClick={this.handleInfoMarker.bind(this, marker)}>
-=======
+
                       {...marker}
-                        onClick={this.handleMarker.bind(this, marker)}>
->>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
+                        onClick={this.handleInfoMarker.bind(this, marker)}>
+
                         {infoSearchWindow}
 
                     </Marker>

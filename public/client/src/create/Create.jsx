@@ -105,7 +105,7 @@ const Create = React.createClass({
 
     /*TODO: make AJAX delete request */
 
-    $.ajax({ 
+    $.ajax({
       method: "DELETE",
       url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id + "/pins/" + marker.pin_id
     }).done((results) => {
@@ -120,7 +120,7 @@ const Create = React.createClass({
 
     })
 
-    
+
 
   },
 
@@ -157,9 +157,9 @@ const Create = React.createClass({
 
         console.log('receiving saved pin from db',results)
 
-      
+
         routes.push({lat: results[0].latitude, lng: results[0].longitude})
-      
+
 
       	let marker = {
 	          title: results[0].title,
@@ -320,15 +320,10 @@ const Create = React.createClass({
                   <div id="edit">
                     <Map
                       user_id={this.props.params.user_id}
-<<<<<<< HEAD
                       map_id={this.state.map_information.map_id}
-                    	marker_information={this.state.marker_information} 
-                      routePath={this.state.routePath}
-=======
-                      map_id={this.props.params.map_id}
                     	marker_information={this.state.marker_information}
+                      routePath={this.state.routePath}
 
->>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
                     	map_location={this.state.create_map}
                     	pins={this.state.pins}
                       map_places={this.state.map_places}
@@ -361,7 +356,7 @@ const Create = React.createClass({
                   Save
                   </Link>
 
-              	  
+
 
                 </div>
             }
