@@ -293,13 +293,10 @@ const Create = React.createClass({
                 <div className="edit-map" >
                   <div id="edit">
                     <Map
-<<<<<<< HEAD
                       user_id={this.props.params.user_id}
                       map_id={this.props.params.map_id}
                     	marker_information={this.state.marker_information} 
-=======
-                    	marker_information={this.state.marker_information}
->>>>>>> 8df5ef4eb505121f6a14ceec42bc24598eed8883
+
                     	map_location={this.state.create_map}
                     	pins={this.state.pins}
                       map_places={this.state.map_places}
