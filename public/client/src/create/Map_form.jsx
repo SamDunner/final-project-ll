@@ -15,24 +15,24 @@ const Map_form = React.createClass({
 
 		autocomplete.addListener('place_changed', () => {
 			console.log("place_changed map form ", autocomplete.getPlace());
-			
+
 			var place = autocomplete.getPlace();
 
 			if(place){
 				console.log(place.geometry.location.lat(), place.geometry.location.lng() );
 				this.props.centreMapLocation(place.geometry.location);
-				
+
 				this.setState({latitude: place.geometry.location.lat(),
-					   		   longitude: place.geometry.location.lng() })	
+					   		   longitude: place.geometry.location.lng() })
 			}
-				
+
 		});
 	},
 
 	componentDidMount: function() {
-		
+
 		this.getMapCentre();
-	
+
 	},
 
 	handleMapTitle: function(event) {
@@ -42,7 +42,7 @@ const Map_form = React.createClass({
 	},
 
 	handleMapLocationLatLongAndPrivacy: function(event) {
-	
+
 		var privacy;
 
 		if(document.getElementById('selectBox').value == 'Yes'){
@@ -51,7 +51,7 @@ const Map_form = React.createClass({
 			privacy = false;
 		}
 
-		this.setState({location: event.target.value,				   
+		this.setState({location: event.target.value,
 					   privacy: privacy,
 					   published: false });
 
@@ -64,44 +64,52 @@ const Map_form = React.createClass({
 
 		if(this.state.title !== "" && this.state.location !== ""){
 			this.props.map_info(this.state)
-			console.log(this.state)	
+			console.log(this.state)
 		}
 
-		
+
 	},
 
 	render: function() {
 
 
-		
+
 
 		return (
-			<div>
+						<div>
 
-			<div id="map-create-form">
-				<form className="create">
-					<label> What would you like to name this map? <input type="text" name="title"  onChange={this.handleMapTitle} />
-					</label>
-					<br/>
-					{/* id of input field below must not be changed */}
-					<label> Where would you like this map to be located: <input type="text" name="location" id="create-autocomplete" onChange={this.handleMapLocationLatLongAndPrivacy} />
-					</label>
-					<br/>
-					<label> Would you like this map to be private? <select id='selectBox'><option value="Yes">Yes</option>
-  																		   <option value="no">no</option> 
-  																		   
-  																    </select>
-  					</label>
-					<br/>
-					<button className='btn btn-success' onClick={this.submitMap}>Save</button>
-				</form>
+							<div id="map-create-form">
+								<form className="create">
+									<label> What would you like to name this map?
+				            <br/>
+				          <input type="text" name="title"  onChange={this.handleMapTitle} />
+									</label>
+									  <br/>
+				            <br/>
+									{/* id of input field below must not be changed */}
+									<label> Where would you like this map to be located?
+				            <br/>
+				          <input type="text" name="location" id="create-autocomplete" onChange={this.handleMapLocationLatLongAndPrivacy} />
+									</label>
+									  <br/>
+									  <br/>
+				          <label> Would you like this map to be private?
+				            <br/>
+				          <select id='selectBox'>
+				            <option value="Yes">Yes</option><option value="no">no</option>
+				          </select>
+				  				</label>
+									<br/>
+				          <br/>
+									<label>Create your map!
+				            <br/>
+				          <button className='btn-submit' onClick={this.submitMap}>save</button>
+				          </label>
+								</form>
+							</div>
+
 			</div>
-
-			</div>
-
-
-
-    	);
+			);
 	}
 
 })

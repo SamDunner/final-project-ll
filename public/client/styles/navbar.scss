@@ -2,7 +2,7 @@
 //navbar
 .standard-nav-bar {
   height: 60px;
-  position: fixed;
+  position: relative;
   background-color: yellow;
   font-family: "Courier New", Courier, monospace;
   text-align: center;
@@ -44,6 +44,14 @@
   transform: translate(0, -50%);
 }
 
+.get-started:visited {
+  color: #006bb3;
+}
+
+.get-started:hover {
+  opacity: 0.5;
+  text-decoration: none;
+}
 .thumbnail {
   width: 60px;
   height: 60px;
@@ -106,9 +114,9 @@
   text-decoration: none;
 }
 
-.profile-tab:active {
-  text-decoration: underline;
-}
+// .profile-tab:active {
+//   text-decoration: underline;
+// }
 
 .custom-margin-top {
   margin-top: -145px;
