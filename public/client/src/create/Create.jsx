@@ -35,7 +35,8 @@ const Create = React.createClass({
                       },
           pins: [],
           create_map: { centre: {latitude: 51.5074, longitude: -0.1278}},
-          map_places: []
+          map_places: [],
+          routePath: []
         }
   },
 
@@ -79,7 +80,6 @@ const Create = React.createClass({
 
   },
 
-
   removeMapLocation: function(marker, locs){
 
     console.log("from before removeMapLocation", marker, locs)
@@ -105,12 +105,22 @@ const Create = React.createClass({
 
     /*TODO: make AJAX delete request */
 
-    for(var i = 0; i < all_pins.length; i++){
-      if(marker.pin_id == all_pins[i].pin_id){
-        all_pins.splice(i, 1)
-        this.setState({pins: all_pins})
+    $.ajax({ 
+      method: "DELETE",
+      url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id + "/pins/" + marker.pin_id
+    }).done((results) => {
+      console.log(results);
+
+      for(var i = 0; i < all_pins.length; i++){
+        if(marker.pin_id == all_pins[i].pin_id){
+          all_pins.splice(i, 1)
+          this.setState({pins: all_pins})
+        }
       }
-    }
+
+    })
+
+    
 
   },
 
@@ -120,6 +130,7 @@ const Create = React.createClass({
   	console.log("from create pin" , this.state.marker_information);
 
   	var allPins = this.state.pins;
+    var routes = this.state.routePath
 
   	if(this.state.marker_information.rating == undefined || this.state.marker_information.rating == ""){ this.state.marker_information.rating = 0
     }
@@ -146,6 +157,9 @@ const Create = React.createClass({
       	
         console.log('receiving saved pin from db',results)
 
+      
+        routes.push({lat: results[0].latitude, lng: results[0].longitude})
+      
 
       	let marker = {
 	          title: results[0].title,
@@ -165,7 +179,7 @@ const Create = React.createClass({
 
   	    allPins.push(marker)
 
-  	    this.setState({pins: allPins})
+  	    this.setState({pins: allPins, routePath: routes })
 
       })
 
@@ -242,6 +256,13 @@ const Create = React.createClass({
   		url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id + '/pins'
   	}).done((results) => {
   		console.log(results);
+
+      // var routes = this.state.routePath
+
+      // for(var i = 0; i < results.length; i++){
+      //   routes.push({lat: results[i].latitude, lng: results[i].longitude})
+      // }
+
   		this.setState({pins: results})
 
   	})
@@ -296,9 +317,9 @@ const Create = React.createClass({
                   <div id="edit">
                     <Map
                       user_id={this.props.params.user_id}
-                      map_id={this.props.params.map_id}
+                      map_id={this.state.map_information.map_id}
                     	marker_information={this.state.marker_information} 
-
+                      routePath={this.state.routePath}
                     	map_location={this.state.create_map}
                     	pins={this.state.pins}
                       map_places={this.state.map_places}

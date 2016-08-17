@@ -8,8 +8,10 @@ import $ from 'jquery';
 
 const Edit = React.createClass({
 
+  
   getInitialState: function() {
     return  { map_information: { title: "",
+
                      location: "",
                      latitude: "",
                      longitude: "",
@@ -21,6 +23,9 @@ const Edit = React.createClass({
           marker_information: { title: "",
                         description: "",
                         rating: "",
+                        address: "",
+                        date: "",
+                        type: "",
                         latitude: "",
                         longitude: "",
                         position: "",
@@ -28,7 +33,8 @@ const Edit = React.createClass({
                       },
           pins: [],
           create_map: { centre: {latitude: 51.5074, longitude: -0.1278}},
-          map_places: []
+          map_places: [],
+          routePath: []
         }
   },
 
@@ -58,15 +64,27 @@ const Edit = React.createClass({
     console.log("from removeMapLocation", this.state)
   },
 
-  deletePin: function(marker){
+ deletePin: function(marker){
     var all_pins = this.state.pins;
 
-    for(var i = 0; i < all_pins.length; i++){
-      if(marker.pin_id == all_pins[i].pin_id){
-        all_pins.splice(i, 1)
-        this.setState({pins: all_pins})
+    /*TODO: make AJAX delete request */
+
+    $.ajax({ 
+      method: "DELETE",
+      url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + marker.pin_id
+    }).done((results) => {
+      console.log(results);
+
+      for(var i = 0; i < all_pins.length; i++){
+        if(marker.pin_id == all_pins[i].pin_id){
+          all_pins.splice(i, 1)
+          this.setState({pins: all_pins})
+        }
       }
-    }
+
+    })
+
+    
 
   },
 
@@ -76,46 +94,64 @@ const Edit = React.createClass({
     console.log("from create pin" , this.state.marker_information);
 
     var allPins = this.state.pins;
+    var routes = this.state.routePath
 
     if(this.state.marker_information.rating == undefined || this.state.marker_information.rating == ""){ this.state.marker_information.rating = 0
+    }
+
+    if(this.state.marker_information.type == undefined || this.state.marker_information.type == ""){ this.state.marker_information.type = "Restaurant"
     }
 
     $.ajax({
         method: "POST",
         data: {title: this.state.marker_information.title,
+               description: this.state.marker_information.description,
+               address: this.state.marker_information.address,
+               date: this.state.marker_information.date,
+               type: this.state.marker_information.type,
                latitude: this.state.marker_information.latitude,
                longitude: this.state.marker_information.longitude,
                rating: this.state.marker_information.rating,
-               map_id: this.state.map_information.map_id,
+               map_id: this.props.params.map_id,
                author_id: this.props.params.user_id },
-        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id + '/pins'
-      }).done((results) => {
 
+
+        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + '/pins' 
+      }).done((results) => {
+        
+        console.log('receiving saved pin from db',results)
+
+      
+        routes.push({lat: results[0].latitude, lng: results[0].longitude})
+      
 
         let marker = {
             title: results[0].title,
             rating: results[0].rating,
+            date: results[0].date,
+            type: results[0].type,
             address: results[0].formatted_address || results[0].address,
             position: {lat: results[0].latitude, lng: results[0].longitude},
+            map_id: results[0].map_id,
+            user_id: results[0].user_id,
             pin_id: results[0].pin_id,
             info: false,
             description: results[0].description,
             showInfo: false,
             defaultAnimation: 2
-          }
+        }
 
-      allPins.push(marker)
+        allPins.push(marker)
 
-      this.setState({pins: allPins})
-
-      //console.log("state from creating new pin", this.state);
-        //this.setState({marker_information: {pin_id: }})
+        this.setState({pins: allPins, routePath: routes })
 
       })
 
 
 
   },
+
+  
 
   handleChangeLoc: function(event){
 
@@ -203,6 +239,9 @@ const Edit = React.createClass({
 
   //gets all pins from database up receiving map_id being updated in state.
   getAllPins: function(){
+
+    var routes = this.state.routePath;
+
     $.ajax({
       method: "GET",
       data: {map_id: this.props.params.map_id,
@@ -212,12 +251,20 @@ const Edit = React.createClass({
       console.log(results);
       var markers = [];
       for(var i = 0; i < results.length; i++){
+
+        routes.push({lat:results[i].latitude, lng: results[i].longitude})
+
          let marker = {
             title: results[i].title,
             rating: results[i].rating,
+            date: results[i].date,
+            type: results[i].type,
             address: results[i].formatted_address || results[i].address,
             position: {lat: results[i].latitude, lng: results[i].longitude},
+            map_id: results[i].map_id,
+            user_id: results[i].user_id,
             pin_id: results[i].pin_id,
+            showInfo: false,
             description: results[i].description,
             info: false,
             defaultAnimation: 2
@@ -225,7 +272,7 @@ const Edit = React.createClass({
           markers.push(marker)
       }
 
-      this.setState({pins: markers}, () => {
+      this.setState({pins: markers, routePath: routes}, () => {
         console.log(this.state)
         this.forceUpdate()
       })
@@ -271,8 +318,11 @@ const Edit = React.createClass({
 
                 <div className="edit-map" >
                   <div id="edit">
-                    <Map
-                      marker_information={this.state.marker_information}
+                     <Map
+                      user_id={this.props.params.user_id}
+                      map_id={this.props.params.map_id}
+                      marker_information={this.state.marker_information} 
+                      routePath={this.state.routePath}
                       map_location={this.state.create_map}
                       pins={this.state.pins}
                       map_places={this.state.map_places}

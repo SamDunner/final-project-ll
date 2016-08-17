@@ -40,18 +40,17 @@ const MapSearch_form = React.createClass({
 	    service.textSearch({location: latLng, query: this.state.search }, (results, status) => {
 	      for(var i = 0; i < results.length; i++){
 
-	      	console.log(result[i]);
+	      	console.log(results[i]);
 
 	      	var placeInfo;
 	      	
-	      	/*
 	      	if(results[i].place_id){
-	      		service.getDetails({placeId: result[i].place_id, (place, status) => {
+	      		service.getDetails({placeId: results[i].place_id}, (place, status) => {
 	      			if(status === google.maps.places.PlacesServiceStatus.OK){
-	      				console.log(place)
+	      				console.log(place, status)
 	      			}
-	      		}})
-	      	}*/
+	      		})
+	      	}
 
 	        placeLocs.push(results[i])
 	        this.state.locs.push(results[i])

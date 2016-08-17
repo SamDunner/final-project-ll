@@ -4,7 +4,7 @@ import React, { Component} from 'react';
 //import Map, {GoogleApiWrapper} from 'google-maps-react';
 //import MapOptions from './MapOptions.jsx'
 import { Link } from 'react-router';
-import {GoogleMapLoader, GoogleMap, Marker, InfoWindow, SearchBox} from "react-google-maps";
+import {GoogleMapLoader, GoogleMap, Marker, InfoWindow, Polyline, DrawingManager} from "react-google-maps";
 //import MarkerContent from './MarkerContent.jsx'
 import $ from 'jquery';
 
@@ -544,6 +544,16 @@ export default class Map extends Component {
 
               })
               
+            }
+
+            {this.props.routePath &&
+            <Polyline
+              path={this.props.routePath}
+               geodesic
+               strokeColor={'#5dcf17'}
+               strokeOpacity={1.0}
+               strokeWeight={10}
+            />
             }
 
 
