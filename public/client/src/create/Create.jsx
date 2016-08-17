@@ -5,7 +5,9 @@ import Map from './Map.jsx';
 import MapSearch_form from './MapSearch_form.jsx';
 import Marker from './Map.jsx';
 import PinTable from './PinTable.jsx';
+import { Link } from 'react-router';
 import $ from 'jquery';
+
 
 const Create = React.createClass({
 
@@ -319,9 +321,17 @@ const Create = React.createClass({
                         		  pins={this.state.pins}/>
               	  </div>
 
-              	  <div className="panel-list">
+                  <div className="panel-list">
 
-              	  </div>
+                  </div>
+
+                  <Link className="btn btn-success"
+                    to={"/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id}
+                    >
+                  Save
+                  </Link>
+
+              	  
 
                 </div>
             }
