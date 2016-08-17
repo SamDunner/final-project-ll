@@ -29,43 +29,55 @@ const PinTable = React.createClass({
 
 
     return (
-        <div>
-          <table className="table table-sm">
-            <thead>
-              <tr>
-                <th>Pins:</th>
+      <div className="map-create-pins">
+          { this.props.pins.length > 0 &&
+            <div>
+              <div className="row">
+                <div className="col-xs-12">
+                  Created Pins:
+                </div>
+              </div>
 
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.pins.map((pin, index) => {
-                            return(
+            { this.props.pins.map((pin, index) => {
+              return(
 
-                                <tr>
-                                  <td>
-                                        <button onClick={this.handleClick.bind(this, pin)} type="button" className="btn btn-info">{pin.title}</button>
-                                        <button type="button" className="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          <span className="caret"></span>
-                                          <span className="sr-only">Toggle Dropdown</span>
-                                        </button>
-                                        <ul className="dropdown-menu">
-                                          <li><a href="#">Action</a></li>
-                                          <li><a href="#">Another action</a></li>
-                                          <li><a href="#">Something else here</a></li>
-                                          <li role="separator" className="divider"></li>
-                                          <li><a href="#">Separated link</a></li>
-                                        </ul>
-                                   </td>
-                                </tr>
+                <div className="row pin">
+                  <div className="col-xs-12">
 
-                            );
-                     })
-                }
+                    <button onClick={this.handleClick.bind(this, pin)} type="button" className="btn btn-info pin-name">
+                      find pin
+                    </button>
 
+                    <span className="pin-title">
+                      {pin.title}
+                    </span>
 
-            </tbody>
-          </table>
-        </div>
+                    <button type="button" className="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span className="caret"></span>
+                      <span className="sr-only">Toggle Dropdown</span>
+                    </button>
+
+                    <ul className="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li role="separator" className="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                </div>
+              );//return
+            })//map pin
+          }
+          </div>
+        }
+
+        { this.props.pins.length == 0 &&
+          <div className="message-to-user">
+            You have no pins! To create a pin, search for a location or click  a plot on the map.
+          </div>
+        }
+      </div>
     )
 
   },

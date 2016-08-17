@@ -1,3 +1,71 @@
-.container.move-edit-map #create {
-  margin-left: 375px;
+.container.move-edit-map {
+  padding: 2em;
+  border-style: solid;
+  border-color: black;
 }
+
+.container.move-edit-map #create {
+  margin-left: 2em;
+  border-style: solid;
+  border-color: black;
+}
+
+// .container.move-edit-map .create-map .map-form {
+//   top: 50%;
+//   transform: translate(0, -50%);
+// }
+
+.container.full-edit-map {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.row.name-map{
+  font-size: 180%;
+  text-align: center;
+}
+
+
+.edit-map #edit {
+  height: 100%;
+  width: 100%;
+  height: 400px;
+  text-align: center;
+  border-style: solid;
+  border-color: black;
+}
+
+.row.edit-form {
+  margin-top: 1em;
+}
+
+.map-create-form .btn-submit {
+  margin-left: 1em;
+}
+
+.map-create-pins{
+  .row.pin{
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #EEE;
+
+    .btn.pin-name{
+      width: 250px;
+    }
+  }
+}
+
+.row.submit-pin .btn-link {
+  font-size: 120%;
+}
+
+.row.submit-pin .btn-link:hover {
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+
+
+
+
+
+

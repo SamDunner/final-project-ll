@@ -43,7 +43,7 @@ const MapSearch_form = React.createClass({
 	      	console.log(results[i]);
 
 	      	var placeInfo;
-	      	
+
 	      	if(results[i].place_id){
 	      		service.getDetails({placeId: results[i].place_id}, (place, status) => {
 	      			if(status === google.maps.places.PlacesServiceStatus.OK){
@@ -54,14 +54,14 @@ const MapSearch_form = React.createClass({
 
 	        placeLocs.push(results[i])
 	        this.state.locs.push(results[i])
-	        
+
 
 	      }
 
 	      this.props.mapSearchLocations(placeLocs)
 	    })
 
-		
+
 	},
 
 	render: function() {
@@ -70,11 +70,10 @@ const MapSearch_form = React.createClass({
 
 			<div className="map-create-form">
 				<form className="">
-					<label> What are you searching for? <input type="text" name="place" onChange={this.handleSearchField} />
+					<label> Get a location: <input type="text" name="place" placeholder="Search here" onChange={this.handleSearchField} />
 					</label>
-					<br/>
-					
-					<button className='btn-submit' onClick={this.submitSearch}>Search</button>
+
+					<button className='btn-submit' onClick={this.submitSearch}>Find!</button>
 				</form>
 			</div>
 
