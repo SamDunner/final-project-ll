@@ -79,43 +79,38 @@ const ProfileNavBar = React.createClass({
 
   render: function() {
     return (
-      <div className="standard-nav-bar col-md-12 col-lg-12">
+      <div className="profile">
+        <div className="custom-margin-top">
           <NavBar />
+        </div>
+          <div className="row custom-profile-nav custom-element-margin-top">
+            <nav className="selection-nav-bar col-md-12 col-lg-12">
+              <Link className="profile-tab col-md-offset-4 col-lg-offset-4 col-md-1 col-lg-1"
+                    to={"/users/" + this.getCookie() + "/collection"}
+                    onClick={this.getCollection}>
+                collection
+              </Link>
 
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <div className="row">
-        <nav className="selection-nav-bar col-md-12 col-lg-12">
-            <Link className="btn btn-outline-primary col-md-2 col-lg-2"
-                  to={"/users/" + this.getCookie() + "/collection"}
-                  onClick={this.getCollection}>
-              my collection
-            </Link>
+              <Link className="profile-tab col-md-1 col-lg-1"
+                    to={"/users/" + this.getCookie() + "/followers"}
+                    onClick={this.getFollowers}>
+                followers
+              </Link>
 
-            <Link className="btn btn-outline-primary col-md-2 col-lg-2 col-md-offset-1"
-                  to={"/users/" + this.getCookie() + "/followers"}
-                  onClick={this.getFollowers}>
-              followers
-            </Link>
+              <Link className="profile-tab col-md-1 col-lg-1"
+                    to={"/users/" + this.getCookie() + "/following"}
+                    onClick={this.getFollowing}>
+                following
+              </Link>
 
-            <Link className="btn btn-outline-primary col-md-2 col-lg-2 col-md-offset-1"
-                  to={"/users/" + this.getCookie() + "/following"}
-                  onClick={this.getFollowing}>
-              following
-            </Link>
-
-            <Link className="btn btn-outline-primary col-md-2 col-lg-2 col-md-offset-1"
-                  to={"/users/" + this.getCookie() + "/favorites"}
-                  onClick={this.getFavorites}>
-              favorites
-            </Link>
-        </nav>
-      </div>
-      </div>
+              <Link className="profile-tab col-md-1 col-lg-1"
+                    to={"/users/" + this.getCookie() + "/favorites"}
+                    onClick={this.getFavorites}>
+                favorites
+              </Link>
+            </nav>
+          </div>
+        </div>
     );
   }
 });

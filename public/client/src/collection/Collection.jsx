@@ -60,11 +60,6 @@ const Collection = React.createClass({
             </nav>
           </div>
 
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-
         { this.state.maps &&
           this.state.maps.map((map, index) => {
             return (

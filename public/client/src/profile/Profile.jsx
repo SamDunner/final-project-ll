@@ -4,6 +4,7 @@ import App from '../App.jsx';
 import { render } from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import ProfileNavBar from '../navbar/ProfileNavBar.jsx';
+import NavBar from '../navbar/NavBar.jsx';
 
 
 const Profile = React.createClass({
@@ -24,9 +25,8 @@ const Profile = React.createClass({
 
   render: function() {
     return (
-
       <div className="profile-page">
-          <ProfileNavBar />
+          <ProfileNavBar/>
       </div>
 
     );
