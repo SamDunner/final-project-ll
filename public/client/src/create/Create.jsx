@@ -245,7 +245,32 @@ const Create = React.createClass({
     }
   },
 
+  getMap: function(){
 
+    if(this.state.map_information.map_id){
+
+      $.ajax({
+        method: "GET",
+        data: {map_id: this.state.map_information.map_id,
+               user_id: this.props.params.user_id},
+        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id
+      }).done((results) => {
+        
+         this.setState({ map_information: {title: results[0].title,
+                                           location: results[0].location,
+                                           latitude: results[0].latitude,
+                                           longitude: results[0].longitude,
+                                           privacy: results[0].privacy,
+                                           published: results[0].published,
+                                           user_id: this.props.params.user_id,
+                                           map_id: results[0].map_id },
+
+                              create_map: {centre: {latitude: results[0].latitude, longitude: results[0].longitude }}
+                      })
+      })
+    }
+
+  },
 
   //gets all pins from database up receiving map_id being updated in state.
   getAllPins: function(){
@@ -269,24 +294,20 @@ const Create = React.createClass({
   },
 
   componentDidMount: function() {
-
+    this.getMap()
   },
 
 
   render: function() {
 
-  	// {if(this.state.map_information.map_id){
-  	// 	this.getAllPins()
-  	// }}
-
-
-    const style = {
+  	const style = {
             width: '100vw',
             height: '100vh'
-      }
+    }
 
     return (
       <div className="map-edit-page">
+
         <div className="standard-nav-bar">
               <NavBar />
         </div>
@@ -317,18 +338,17 @@ const Create = React.createClass({
             {this.state.map_information.map_id &&
 
                 <div className="edit-map" >
+                  <div>
+                    {this.state.map_information.title}
+                  </div>
                   <div id="edit">
                     <Map
                       user_id={this.props.params.user_id}
-<<<<<<< HEAD
+
                       map_id={this.state.map_information.map_id}
                     	marker_information={this.state.marker_information} 
                       routePath={this.state.routePath}
-=======
-                      map_id={this.props.params.map_id}
-                    	marker_information={this.state.marker_information}
 
->>>>>>> 3941c82c987310d4172145b0cb5b93b9cf88b5ad
                     	map_location={this.state.create_map}
                     	pins={this.state.pins}
                       map_places={this.state.map_places}

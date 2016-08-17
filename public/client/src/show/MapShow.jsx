@@ -4,7 +4,7 @@ import React, { Component} from 'react';
 //import Map, {GoogleApiWrapper} from 'google-maps-react';
 //import MapOptions from './MapOptions.jsx'
 
-import {GoogleMapLoader, GoogleMap, Marker, InfoWindow, SearchBox} from "react-google-maps";
+import {GoogleMapLoader, GoogleMap, Marker, InfoWindow, DrawingManager, Polyline, SearchBox} from "react-google-maps";
 //import MarkerContent from './MarkerContent.jsx'
 import $ from 'jquery';
 
@@ -28,65 +28,130 @@ export default class Map extends Component {
 
   	}
 
+  handleClose(marker){
+    marker.info = false;
+    this.setState(this.state);
+  }
 
+  handleSearchMarkerClose(marker) {
+    marker.showSearchInfo = false;
+    marker.showInfo = false;
+    this.setState(this.state);
+  }
+
+  renderSearchInfoWindow(ref, marker) {
+
+    return (
+
+      <InfoWindow
+
+          key={`${ref}_info_window`} 
+          onCloseclick={this.handleSearchMarkerClose.bind(this, marker)} >
+            {<div className='marker-info-search'> 
+               
+                <h4>Title: {marker.name}</h4>  
+                <br/>  
+
+
+                <h4>Address: {marker.address || marker.formatted_address}</h4>
+                <br/>
+
+                <h4>Type: {marker.name}</h4>
+                <br/>
+
+                <h4>Description: {marker.description}</h4>
+                <br/>
+
+                {marker.rating &&
+                  <h4>rating: {marker.rating}</h4>
+                }
+                <br/>
+
+               {/*<button className='btn btn-success' onClick={this.renderInfoWindow(ref, marker)} onClick={this.onAddToPins.bind(this, marker)} type='submit'>Add to pins</button>*/}
+
+            </div>}
+
+
+      </InfoWindow>
+    )
+  }
+
+
+  renderInfo(ref, marker) {
+
+    return (
+
+      <InfoWindow
+          key={`${ref}_info_window`}
+          onCloseclick={this.handleClose.bind(this, marker)} >
+
+            {<div className='marker-info-search'> 
+               
+                <h4>Title: {marker.title}</h4>  
+                <br/>  
+
+
+                <h4>Date: {marker.date}</h4>
+                <br/>
+
+                <h4>Address: {marker.address || marker.formatted_address}</h4>
+                <br/>
+
+                <h4>Type: {marker.type}</h4>  
+                <br/>   
+
+                <h4>Description: {marker.description}</h4>
+                <br/>
+
+                {marker.rating &&
+                  <h4>rating: {marker.rating}</h4>
+                }
+                <br/>
+
+
+                <button /*href="/users/" + {this.props.user_id} + "/maps/" + {this.props.map_id} + "/pins/" + {marker.pin_id} + "/edit"*/ className='btn btn-info' type='submit'>Create Blog Entry</button>
+
+                <br />
+
+               {/*
+               <button className='btn btn-danger' onClick={this.renderInfoWindow(ref, marker)} /*onClick={Create Blo} type='submit'>Delete</button> */}
+               {/*
+               <button className='btn btn-warning' /*onClick={this.renderInfoWindow(ref, marker)} onClick={} type='submit'>Delete</button>
+                */}
+
+
+                	
+
+            </div>}
+
+
+      </InfoWindow>
+    )
+  }
+
+
+
+  handleInfoMarker(marker, event){
+    marker.info = true;
+
+    console.log("Handle Marker Click state: ", this.state);
+
+    this.setState(this.state)
+  }
+
+  handleSearchMarkerclick(marker, event){
+
+    console.log('from handleSearchMarkerClick', marker, event)
+
+    marker.showSearchInfo = true;
+    marker.showInfo = false;
+
+    this.setState(this.state)
+  }
 
   	render() {
 
-    
-	    { console.log("from render method Map.js, getting pins from DB", this.props)
-
-	      var markers = []
-	      
-
-	      if(this.props.pins){
-	      for(var i = 0; i < this.props.pins.length; i++){
-	        
-	        //console.log("render mapshow.jsx", this.props.pins[i])
-	               let marker = {
-	          title: this.props.pins[i].title,
-	          rating: this.props.pins[i].rating,
-	          address: this.props.pins[i].formatted_address || this.props.pins[i].address,
-	          position: {lat: this.props.pins[i].latitude, lng: this.props.pins[i].longitude},
-	          pin_id: this.props.pins[i].pin_id,
-	          description: this.props.pins[i].description,
-	          showInfo: false,
-	          defaultAnimation: 2
-	        }
-
-	        markers.push(marker);
-
-	      }
-	      console.log(markers)
-	    }}
-
-	    { console.log("from render method Map.js, searching for pins", this.props)
-
-	      var markers_search = []
-	      
-
-	      if(this.props.map_places){
-	      for(var i = 0; i < this.props.map_places.length; i++){
-	        
-	        console.log("render mapshow.jsx", this.props.pins[i])
-	        let marker = {
-	          name: this.props.map_places[i].name,
-	          rating: this.props.map_places[i].rating,
-	          address: this.props.map_places[i].formatted_address || this.props.map_places[i].address,
-	          position: this.props.map_places[i].geometry.location,
-	          key: this.props.map_places[i].id,
-	          content: this.props.infoWindowContent,
-	          showInfo: false,
-	          defaultAnimation: 2
-	        }
-
-	        markers_search.push(marker);
-
-	      }
-	      console.log(markers_search)
-	    }}
-
-
-	    return (
+       return (
 	        <div style={{height: "100%"}} >
 	        <GoogleMapLoader
 	          query={{ libraries: "geometry,drawing,places,visualization" }}
@@ -108,20 +173,23 @@ export default class Map extends Component {
 	              
 	            >
 
-	            {markers &&
-	              markers.map((marker, index) => {
+	            {this.props.pins &&
+	              this.props.pins.map((marker, index) => {
 
 	                const ref=`marker_${index}`
+
+	                var infoSearchWindow = marker.info ? this.renderInfo(ref, marker) : null
 	                
 	                return (
 	                    
-	                     <Marker
+	                    <Marker
 	                      key={marker.pin_id}
 	                      ref={ref}
-	                      {...marker} 
+	                      {...marker}
+	                       onClick={this.handleInfoMarker.bind(this, marker)}
 	                        >
 
-	                        
+	                    {infoSearchWindow}
 
 	                    </Marker>
 	                    
@@ -131,21 +199,22 @@ export default class Map extends Component {
 	              
 	            }
 
-	             {markers_search &&
-	              markers_search.map((marker, index) => {
+	             {this.props.map_places &&
+	              this.props.map_places.map((marker, index) => {
 
 	                const ref=`marker_${index}`
+
+	                var infoSearchWindow = marker.showSearchInfo ? this.renderSearchInfoWindow(ref, marker) : null
 	                
 	                return (
 	                    
 	                     <Marker
 	                      key={marker.pin_id}
 	                      ref={ref}
-	                      {...marker} 
-	                        >
+	                      {...marker}
+	                      onClick={this.handleSearchMarkerclick.bind(this, marker)}>
 
-	                        
-
+	                    {infoSearchWindow}                       
 	                    </Marker>
 	                    
 	                )
@@ -153,6 +222,16 @@ export default class Map extends Component {
 	              })
 	              
 	            }
+
+	              {this.props.routePath &&
+		            <Polyline
+		              path={this.props.routePath}
+		               geodesic
+		               strokeColor={'#5dcf17'}
+		               strokeOpacity={1.0}
+		               strokeWeight={10}
+		            />
+		            }
 
 
 

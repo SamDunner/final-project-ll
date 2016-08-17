@@ -5,6 +5,7 @@ import Map from './MapEdit.jsx';
 import MapSearch_form from './MapSearch_form.jsx';
 import PinTable from './PinTable.jsx';
 import $ from 'jquery';
+import { Link } from 'react-router';
 
 const Edit = React.createClass({
 
@@ -307,14 +308,10 @@ const Edit = React.createClass({
                     <NavBar />
                 </div>
 
-
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-
-
-
+                <br/>
+                <br/>
+                <br/>
+                <br/>
 
                 <div className="edit-map" >
                   <div id="edit">
@@ -349,14 +346,15 @@ const Edit = React.createClass({
 
                   </div>
 
+                  <Link className="btn btn-success"
+                    to={"/users/" + this.props.params.user_id + "/collection"}
+                    >
+                  Save
+                  </Link>
+
+
+
                 </div>
-
-
-
-
-
-
-
 
             </div>
 
