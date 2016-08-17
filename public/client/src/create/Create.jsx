@@ -139,9 +139,9 @@ const Create = React.createClass({
                author_id: this.props.params.user_id },
 
 
-        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id + '/pins' 
+        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id + '/pins'
       }).done((results) => {
-      	
+
         console.log('receiving saved pin from db',results)
 
 
@@ -263,12 +263,10 @@ const Create = React.createClass({
       }
 
     return (
-            <div className="map-edit-page">
-
-              <div className="standard-nav-bar">
-                    <NavBar />
-              </div>
-
+      <div className="map-edit-page">
+        <div className="standard-nav-bar">
+              <NavBar />
+        </div>
 
           <br/>
           <br/>
@@ -280,12 +278,17 @@ const Create = React.createClass({
               <div className="create-map" >
                 <div className="map-form">
                 <Map_form centreMapLocation={this.centreMapLocation} map_information={this.state.map_information} map_info={this.map_info} />
+                </div>
 
+                  <br/>
+                  <br/>
+
+                <div className="container move-edit-map">
+                  <div id="create">
+                    <Map map_location={this.state.create_map} marker_information={this.state.marker_information} />
+                  </div>
+                </div>
               </div>
-              <div id="create">
-                <Map map_location={this.state.create_map} marker_information={this.state.marker_information} />
-              </div>
-            </div>
             }
 
             {this.state.map_information.map_id &&
@@ -295,7 +298,7 @@ const Create = React.createClass({
                     <Map
                       user_id={this.props.params.user_id}
                       map_id={this.props.params.map_id}
-                    	marker_information={this.state.marker_information} 
+                    	marker_information={this.state.marker_information}
 
                     	map_location={this.state.create_map}
                     	pins={this.state.pins}
@@ -326,19 +329,12 @@ const Create = React.createClass({
                 </div>
             }
 
-
-
-
-
-
-
             </div>
 
       );
   }
 });
 
-//Pin code to be used later to add a new marker: <i class="fa fa-map-marker" aria-hidden="true"></i>
 
 export default Create;
 

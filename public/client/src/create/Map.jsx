@@ -59,16 +59,16 @@ export default class Map extends Component {
   onDeletePin(marker, event){
     this.props.deletePin(marker);
   }
-  
+
   onInfoWindowButtonSubmit(marker, event){
     console.log(marker)
     console.log(event)
     console.log(this.props.marker_information)
     marker.showInfo = false
-    
+
     if(marker.showSearchInfo){
       marker.showSearchInfo = true;
-    } 
+    }
 
     this.props.createPin();
 
@@ -78,10 +78,10 @@ export default class Map extends Component {
 
     var all_new_markers = this.state.new_markers;
     var all_search_markers = this.props.map_places;
-    
+
     if(marker.map_type == "new"){
       for(var i = 0; i < all_new_markers.length; i++){
-        
+
         if(marker.key == all_new_markers[i].key){
           all_new_markers.splice(i, 1)
           this.setState({new_markers: all_new_markers})
@@ -89,7 +89,7 @@ export default class Map extends Component {
       }
 
     } else if(marker.map_type == "search"){
-      
+
       this.props.removeMapLocation(marker, all_search_markers)
     }
 
@@ -97,7 +97,7 @@ export default class Map extends Component {
   }
 
   onInfoWindowButtonDelete(marker, event){
-    
+
     var markers = this.state.new_markers;
     for(var i = 0; i < markers.length; i++){
       if(marker.key == markers[i].key){
@@ -106,37 +106,37 @@ export default class Map extends Component {
       }
     }
   }
-  
+
   handlePinTitle(event){
-    
+
     //this.setState({pinContent : {title: event.target.value}});
     this.props.marker_information.title = event.target.value
   }
 
   handlePinAddress(event){
-    
-    this.props.marker_information.address = event.target.value 
+
+    this.props.marker_information.address = event.target.value
   }
 
   handlePinType(event){
     console.log(event.target.value);
-    this.props.marker_information.type = event.target.value 
+    this.props.marker_information.type = event.target.value
   }
 
   handlePinDate(event){
-    
-    this.props.marker_information.date = event.target.value 
+
+    this.props.marker_information.date = event.target.value
   }
 
   handlePinDescription(event){
-    
+
     //this.setState({pinContent : {description: event.target.value}});
     this.props.marker_information.description = event.target.value;
   }
 
   handlePinRating(event){
-  
-    this.props.marker_information.rating = event.target.value 
+
+    this.props.marker_information.rating = event.target.value
   }
 
 
@@ -145,29 +145,29 @@ export default class Map extends Component {
     return (
 
       <InfoWindow
-          key={`${ref}_info_window`} 
+          key={`${ref}_info_window`}
           onCloseclick={this.handleClose.bind(this, marker)} >
-            {<div className='marker-info-search'> 
-               
-                <h4>Title: {marker.name}</h4>  
-                <br/>  
+            {<div className='marker-info-search'>
 
-                <h4>Date: {marker.date}</h4>  
-                <br/> 
-
-                <h4>Address: {marker.address || marker.formatted_address}</h4> 
+                <h4>Title: {marker.name}</h4>
                 <br/>
 
-                <h4>Type: {marker.name}</h4>  
-                <br/>   
+                <h4>Date: {marker.date}</h4>
+                <br/>
 
-                <h4>Description: {marker.description}</h4>   
+                <h4>Address: {marker.address || marker.formatted_address}</h4>
+                <br/>
+
+                <h4>Type: {marker.name}</h4>
+                <br/>
+
+                <h4>Description: {marker.description}</h4>
                 <br/>
 
                 {marker.rating &&
-                  <h4>rating: {marker.rating}</h4> 
+                  <h4>rating: {marker.rating}</h4>
                 }
-                <br/> 
+                <br/>
 
 
                 <button /*href="/users/" + {this.props.user_id} + "/maps/" + {this.props.map_id} + "/pins/" + {marker.pin_id} + "/edit"*/ className='btn btn-info' type='submit'>Create Blog Entry</button>
@@ -177,12 +177,12 @@ export default class Map extends Component {
                {/*
                <button className='btn btn-danger' onClick={this.renderInfoWindow(ref, marker)} /*onClick={Create Blo} type='submit'>Delete</button> */}
                {/*
-               <button className='btn btn-warning' /*onClick={this.renderInfoWindow(ref, marker)} onClick={} type='submit'>Delete</button>    
+               <button className='btn btn-warning' /*onClick={this.renderInfoWindow(ref, marker)} onClick={} type='submit'>Delete</button>
                 */}
 
 
-               <button className='btn btn-danger' onClick={this.onDeletePin.bind(this, marker)} type='submit'>Delete</button>  
-            
+               <button className='btn btn-danger' onClick={this.onDeletePin.bind(this, marker)} type='submit'>Delete</button>
+
             </div>}
 
 
@@ -197,59 +197,59 @@ export default class Map extends Component {
     return (
 
       <InfoWindow
-          key={`${ref}_info_window`} 
+          key={`${ref}_info_window`}
           onCloseclick={this.handleSearchMarkerClose.bind(this, marker)} >
-            {<div className='marker-info'> 
-               
-                <h4> Title: </h4> 
-                  <input type="text" onChange={this.handlePinTitle} className='pin-title' /> 
-                <br/> 
+            {<div className='marker-info'>
 
-                <h4> Date: </h4> 
-                  <input type="text" onChange={this.handlePinDate.bind(this)} className='pin-date' /> 
+                <h4> Title: </h4>
+                  <input type="text" onChange={this.handlePinTitle} className='pin-title' />
                 <br/>
 
-                <h4> Address: </h4> 
-                  <input type="text" defaultValue={marker.address || marker.formatted_address} onChange={this.handlePinAddress.bind(this)} className='pin-address' /> 
+                <h4> Date: </h4>
+                  <input type="text" onChange={this.handlePinDate.bind(this)} className='pin-date' />
                 <br/>
 
-                <h4>Type: </h4> 
+                <h4> Address: </h4>
+                  <input type="text" defaultValue={marker.address || marker.formatted_address} onChange={this.handlePinAddress.bind(this)} className='pin-address' />
+                <br/>
 
-                  <select onChange={this.handlePinType.bind(this)} id='select-type'> 
-                      <option>Restaurant</option> 
-                      <option>Bar</option> 
-                      <option>Shop</option> 
+                <h4>Type: </h4>
+
+                  <select onChange={this.handlePinType.bind(this)} id='select-type'>
+                      <option>Restaurant</option>
+                      <option>Bar</option>
+                      <option>Shop</option>
                       <option>Home</option>
                       <option>Place of worship</option>
-                      <option>Other</option>  
-                  </select> 
-              
-                <br/> 
-                <h4>Description: </h4> 
-                  <textarea defaultValue={marker.description} type="text" onChange={this.handlePinDescription} className='pin-description'></textarea> 
-                
-                <br/>
-                <br/> 
-                
-                <h4>Rating: </h4> 
+                      <option>Other</option>
+                  </select>
 
-                  <select onChange={this.handlePinRating.bind(this)} id='select-type'> 
-                      <option>1</option> 
-                      <option>2</option> 
-                      <option>3</option> 
-                      <option>4</option>
-                      <option>5</option> 
-                  </select> 
-              
                 <br/>
-                <br/> 
+                <h4>Description: </h4>
+                  <textarea defaultValue={marker.description} type="text" onChange={this.handlePinDescription} className='pin-description'></textarea>
+
+                <br/>
+                <br/>
+
+                <h4>Rating: </h4>
+
+                  <select onChange={this.handlePinRating.bind(this)} id='select-type'>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                  </select>
+
+                <br/>
+                <br/>
 
                 <button onClick={this.onInfoWindowButtonSubmit.bind(this, marker)} className='submit-marker' >Click here to create new pin</button>
-                <br/> 
-                <br/> 
-               
-               <button onClick={this.onInfoWindowButtonDelete.bind(this, marker)} className='btn btn-warning' type='submit'>Delete Pin</button>  
-            
+                <br/>
+                <br/>
+
+               <button onClick={this.onInfoWindowButtonDelete.bind(this, marker)} className='btn btn-warning' type='submit'>Delete Pin</button>
+
             </div>}
 
 
@@ -264,60 +264,60 @@ export default class Map extends Component {
     return (
 
       <InfoWindow
-          key={`${ref}_info_window`} 
+          key={`${ref}_info_window`}
           onCloseclick={this.handleSearchMarkerClose.bind(this, marker)} >
-            {<div className='marker-info'> 
-               
-                <h4> Title: </h4> 
-                  <input type="text" onChange={this.handlePinTitle} className='pin-title' /> 
-                <br/> 
+            {<div className='marker-info'>
 
-                <h4> Date: </h4> 
-                  <input type="text" onChange={this.handlePinDate.bind(this)} className='pin-date' /> 
+                <h4> Title: </h4>
+                  <input type="text" onChange={this.handlePinTitle} className='pin-title' />
                 <br/>
 
-                <h4> Address: </h4> 
-                  <input type="text" onChange={this.handlePinAddress.bind(this)} className='pin-address' /> 
+                <h4> Date: </h4>
+                  <input type="text" onChange={this.handlePinDate.bind(this)} className='pin-date' />
                 <br/>
 
-                <h4>Type: </h4> 
+                <h4> Address: </h4>
+                  <input type="text" onChange={this.handlePinAddress.bind(this)} className='pin-address' />
+                <br/>
 
-                  <select onChange={this.handlePinType.bind(this)} id='select-type'> 
-                      <option>Restaurant</option> 
-                      <option>Bar</option> 
-                      <option>Shop</option> 
+                <h4>Type: </h4>
+
+                  <select onChange={this.handlePinType.bind(this)} id='select-type'>
+                      <option>Restaurant</option>
+                      <option>Bar</option>
+                      <option>Shop</option>
                       <option>Home</option>
                       <option>Place of worship</option>
-                      <option>Other</option>  
-                  </select> 
-              
-                <br/>              
+                      <option>Other</option>
+                  </select>
 
-                <h4>Description: </h4> 
+                <br/>
+
+                <h4>Description: </h4>
                   <textarea type="text" onChange={this.handlePinDescription} defaultValue={marker.description} className='pin-description'></textarea>
-                
-                <br/>
-                <br/> 
-                
-                <h4>Rating: </h4> 
 
-                  <select onChange={this.handlePinRating.bind(this)} id='select-type'> 
-                      <option>1</option> 
-                      <option>2</option> 
-                      <option>3</option> 
-                      <option>4</option>
-                      <option>5</option> 
-                  </select> 
-              
                 <br/>
-                <br/> 
+                <br/>
+
+                <h4>Rating: </h4>
+
+                  <select onChange={this.handlePinRating.bind(this)} id='select-type'>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                  </select>
+
+                <br/>
+                <br/>
 
                 <button onClick={this.onInfoWindowButtonSubmit.bind(this, marker)} className='submit-marker' >Click here to create new pin</button>
-                <br/> 
-                <br/> 
-               
-               <button onClick={this.onInfoWindowButtonDelete.bind(this, marker)} className='btn btn-warning' type='submit'>Delete Pin</button>  
-            
+                <br/>
+                <br/>
+
+               <button onClick={this.onInfoWindowButtonDelete.bind(this, marker)} className='btn btn-warning' type='submit'>Delete Pin</button>
+
             </div>}
 
 
@@ -330,29 +330,29 @@ export default class Map extends Component {
     return (
 
       <InfoWindow
-          key={`${ref}_info_window`} 
+          key={`${ref}_info_window`}
           onCloseclick={this.handleMarkerClose.bind(this, marker)} >
-            {<div className='marker-info-search'> 
-               
-                <h4>Title: {marker.name}</h4>  
-                <br/>  
+            {<div className='marker-info-search'>
 
-                <h4>Address: {marker.address || marker.formatted_address}</h4> 
+                <h4>Title: {marker.name}</h4>
                 <br/>
 
-                <h4>Type: {marker.name}</h4>  
-                <br/>   
+                <h4>Address: {marker.address || marker.formatted_address}</h4>
+                <br/>
 
-                <h4>Description: {marker.description}</h4>   
+                <h4>Type: {marker.name}</h4>
+                <br/>
+
+                <h4>Description: {marker.description}</h4>
                 <br/>
 
                 {marker.rating &&
-                  <h4>rating: {marker.rating}</h4> 
+                  <h4>rating: {marker.rating}</h4>
                 }
-                <br/> 
-               
-               <button className='btn btn-success' /*onClick={this.renderInfoWindow(ref, marker)}*/ onClick={this.onAddToPins.bind(this, marker)} type='submit'>Add to pins</button>  
-            
+                <br/>
+
+               <button className='btn btn-success' /*onClick={this.renderInfoWindow(ref, marker)}*/ onClick={this.onAddToPins.bind(this, marker)} type='submit'>Add to pins</button>
+
             </div>}
 
 
@@ -360,7 +360,7 @@ export default class Map extends Component {
     )
   }
 
-  
+
 
   handleSearchMarkerclick(marker, event){
 
@@ -387,9 +387,9 @@ export default class Map extends Component {
     console.log('from handleMarkerClick', marker, event)
 
     marker.info = true;
-    
+
     console.log("Handle Marker Click state: ", this.state);
-    
+
     this.setState(this.state)
   }
 
@@ -403,9 +403,9 @@ export default class Map extends Component {
 
 
     marker.showInfo = true;
-    
+
     console.log("Handle Marker Click state: ", this.state);
-    
+
     this.setState(this.state)
   }
 
@@ -441,11 +441,11 @@ export default class Map extends Component {
 
 
   }
-  
+
 
   render() {
 
-    
+
 
 
     return (
@@ -468,7 +468,7 @@ export default class Map extends Component {
               center={{lat: this.props.map_location.centre.latitude, lng: this.props.map_location.centre.longitude}}
               onClick={this.onMapClick}
             >
-            
+
             {this.state.new_markers &&
               this.state.new_markers.map((marker, index) => {
 
@@ -477,49 +477,49 @@ export default class Map extends Component {
 
 
                 return (
-    
-                    <Marker 
+
+                    <Marker
                     key={index}
                     ref={ref}
-                    {...marker} 
+                    {...marker}
                       onClick={this.handleMarkerClick.bind(this, marker)}>
-                    
+
                     {infoWindow}
 
                     </Marker>
-                    
+
 
                 )
 
               })
-              
+
             }
 
             {this.props.map_places &&
               this.props.map_places.map((marker, index) => {
 
                 const ref=`marker_${index}`
-                 
-                var infoSearchWindow = marker.showSearchInfo ? this.renderSearchInfoWindow(ref, marker) : null 
+
+                var infoSearchWindow = marker.showSearchInfo ? this.renderSearchInfoWindow(ref, marker) : null
 
                 var infoWindow = marker.showInfo ? this.renderInfoWindow(ref, marker) : null
                 //debugger;//brken
 
                 return (
-                    
+
                      <Marker
                       key={index+100}
                       ref={ref}
-                      {...marker} 
+                      {...marker}
                         onClick={this.handleSearchMarkerclick.bind(this, marker)}>
                         {infoSearchWindow}
                         {infoWindow}
                     </Marker>
-                    
+
                 )
 
               })
-              
+
             }
 
 
@@ -527,8 +527,8 @@ export default class Map extends Component {
               this.props.pins.map((marker, index) => {
 
                 const ref=`marker_${index}`
-                 
-                var infoSearchWindow = marker.info ? this.renderInfo(ref, marker) : null 
+
+                var infoSearchWindow = marker.info ? this.renderInfo(ref, marker) : null
 
                 //var infoWindow = marker.showInfo ? this.renderInfoWindow(ref, marker) : null
                 //debugger;//brken
@@ -538,31 +538,31 @@ export default class Map extends Component {
                 // }
 
                 return (
-                    
+
                      <Marker
                       key={index+1000}
                       ref={ref}
-                      {...marker} 
+                      {...marker}
                         onClick={this.handleMarker.bind(this, marker)}>
                         {infoSearchWindow}
-                        
+
                     </Marker>
-                    
+
                 )
 
               })
-              
+
             }
 
 
-          
-            
+
+
 
             </GoogleMap>
           }
         />
         </div>
-      
+
     );
 
   }
