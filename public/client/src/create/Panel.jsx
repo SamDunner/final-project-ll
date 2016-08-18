@@ -12,16 +12,16 @@ const Panel = React.createClass({
 
 	render: function(){
 
-
 		return(
 
 		<div className="Panel">
 
+
 			{this.props.panelInfo.name &&
 			<label>Name: {this.props.panelInfo.name}</label>
-			
+
 			}
-			
+
 			{this.props.panelInfo.address &&
 			<label>Address: {this.props.panelInfo.address}</label>
 			}
@@ -54,12 +54,12 @@ const Panel = React.createClass({
 							<div className="review-text">
 								{review.text}
 							</div>
-						</div>		
+						</div>
 					)
 				})
 			}
-				
-			
+
+
 		</div>
 
 		)

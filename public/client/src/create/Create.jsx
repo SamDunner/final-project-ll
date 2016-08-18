@@ -232,7 +232,7 @@ const Create = React.createClass({
 
   removePanelInfo: function(marker){
     console.log("from remove panelInfo", marker)
-    this.setState({panelInfo: {}})    
+    this.setState({panelInfo: {}})
   },
 
   createPanelInfo: function(marker){
@@ -252,7 +252,6 @@ const Create = React.createClass({
               rating: place.rating,
               reviews: place.reviews,
               url: place.url,
-              photos: place.photos,
               website: place.website
             }
 

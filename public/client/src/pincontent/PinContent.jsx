@@ -204,16 +204,20 @@ const PinContent = React.createClass({
               <div className="col-xs-6">
 
                 <div className="map-form">
-                    <BlogContent marker_information={this.state.marker_information}
-                           changeDescription={this.changeDescription}
-                    />
+                  <BlogContent marker_information={this.state.marker_information}
+                         changeDescription={this.changeDescription}
+                  />
 
+                  <div className="file_upload">
 
+                    <form method="POST" encType="multipart/form-data" action={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/edit/upload"} className="dropzone">
+                    </form>
+                  </div>
 
                 </div>
               </div>
 
-                <div className="create-map col-xs-6" >
+                <div className="create-map col-xs-6 map-search" >
                   <div id="create">
                     <Map
                       marker_information={this.state.marker_information}
@@ -222,16 +226,16 @@ const PinContent = React.createClass({
                         pins={this.state.pins}
                     />
                   </div>
+                  <div>
+                    <MapSearch_form marker_information={this.state.marker_information}
+                                    map_location={this.state.create_map}
+                                    mapSearchLocations={this.mapSearchLocations}
+                                    map_places={this.state.map_places}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="row map-search">
-                <div className="col-xs-offset-6 col-xs-6">
-                  <MapSearch_form marker_information={this.state.marker_information}
-                                  map_location={this.state.create_map}
-                                  mapSearchLocations={this.mapSearchLocations}
-                                  map_places={this.state.map_places}
-                  />
-                </div>
               </div>
 
 
@@ -251,14 +255,8 @@ const PinContent = React.createClass({
 
 		                <Link className="btn btn-warning" to={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/content"} > Save this Blog Entry </Link>
 
-		                <div className="file_upload">
-
-			            	<form method="POST" encType="multipart/form-data" action={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/edit/upload"} className="dropzone">
-			            	</form>
-		            	</div>
-
 		            </div>
-		            
+
 
 
           </div>

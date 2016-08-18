@@ -38,7 +38,7 @@ const PinContent = React.createClass({
           		create_map: { centre: {latitude: 51.5074, longitude: -0.1278}},
 
           		image_urls: []
-          		
+
 
         };
 	},
@@ -87,9 +87,9 @@ const PinContent = React.createClass({
 	    	for(var i = 0; i < results.length; i++){
 	    		urls.push(results[i].image_url)
 	    	}
-	    	
+
 	    	this.setState({image_url: urls})
-	    	
+
 	    })
 
   	},
@@ -197,15 +197,7 @@ const PinContent = React.createClass({
 
           <div className="container blog-edit-map">
 
-            <div className="all-images">
-		            	{this.state.image_urls &&
-		            		this.state.image_urls.map((image, index) => {
-		            			return(
-		            				<img key={index} src={"../../uploads/" + image} />
-		            			)
-		            		})
-		            	}
-		            </div>
+        {/* all images */}
 
             <div className="row name-map">
               <div className="col-xs-offset-6 col-xs-5">
@@ -221,6 +213,16 @@ const PinContent = React.createClass({
                     />
 
 
+                  <div className="all-images">
+                        {this.state.image_urls &&
+                          this.state.image_urls.map((image, index) => {
+                            return(
+                              <img key={index} src={"../../uploads/" + image} />
+                            )
+                          })
+                        }
+                  </div>
+
 
                 </div>
               </div>
@@ -234,22 +236,20 @@ const PinContent = React.createClass({
                         pins={this.state.pins}
                     />
                   </div>
+                  <div className="map-search">
+                    <MapSearch_form marker_information={this.state.marker_information}
+                                  map_location={this.state.create_map}
+                                  mapSearchLocations={this.mapSearchLocations}
+                                  map_places={this.state.map_places}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="row map-search">
                 <div className="col-xs-offset-6 col-xs-6">
-                  <MapSearch_form marker_information={this.state.marker_information}
-                                  map_location={this.state.create_map}
-                                  mapSearchLocations={this.mapSearchLocations}
-                                  map_places={this.state.map_places}
-                  />
+
                 </div>
               </div>
-
-
-                  <br/>
-                  <br/>
-
 
 		                 <Link className="btn btn-warning" to={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/edit"} > Edit this Blog Entry </Link>
 
