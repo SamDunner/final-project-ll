@@ -279,7 +279,6 @@ export default class Map extends Component {
     return (
 
       <InfoWindow
-
           key={`${ref}_info_window`}
           onCloseclick={this.handleNewMarkerClose.bind(this, marker)} >
             {<div className='marker-info'>
@@ -291,10 +290,6 @@ export default class Map extends Component {
                 <h4> Date: </h4>
                   <input type="text" onChange={this.handlePinDate.bind(this)} className='pin-date' />
 
-                <br/>
-
-                <h4> Date: </h4>
-                  <input type="text" onChange={this.handlePinDate.bind(this)} className='pin-date' />
                 <br/>
 
                 <h4> Address: </h4>
@@ -317,7 +312,6 @@ export default class Map extends Component {
                 <h4>Description: </h4>
                   <textarea type="text" onChange={this.handlePinDescription} defaultValue={marker.description} className='pin-description'></textarea>
 
-                <br/>
                 <br/>
 
                 <h4>Rating: </h4>
