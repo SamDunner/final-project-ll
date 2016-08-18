@@ -107,7 +107,6 @@ const Create = React.createClass({
   deletePin: function(marker){
     var all_pins = this.state.pins;
 
-    /*TODO: make AJAX delete request */
 
     $.ajax({
       method: "DELETE",
@@ -220,9 +219,6 @@ const Create = React.createClass({
   	    this.setState({pins: allPins, routePath: routes })
 
       })
-
-
-
   },
 
   createPanelInfo: function(marker){

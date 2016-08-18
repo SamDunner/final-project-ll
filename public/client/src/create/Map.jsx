@@ -554,7 +554,7 @@ export default class Map extends Component {
                      <Marker
                       key={index+1000}
                       ref={ref}
-
+                      label={index}
                       {...marker}
 
                         onClick={this.handleInfoMarker.bind(this, marker)}>

@@ -9,7 +9,6 @@ import { Link } from 'react-router';
 
 const Edit = React.createClass({
 
-
   getInitialState: function() {
     return  { map_information: { title: "",
 
@@ -35,7 +34,8 @@ const Edit = React.createClass({
           pins: [],
           create_map: { centre: {latitude: 51.5074, longitude: -0.1278}},
           map_places: [],
-          routePath: []
+          routePath: [],
+          panelInfo: {}
         }
   },
 
@@ -68,8 +68,6 @@ const Edit = React.createClass({
  deletePin: function(marker){
     var all_pins = this.state.pins;
 
-    /*TODO: make AJAX delete request */
-
     $.ajax({
       method: "DELETE",
       url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + marker.pin_id
@@ -88,6 +86,42 @@ const Edit = React.createClass({
 
 
   },
+
+  changeMapTitle: function(title){
+
+     $.ajax({
+        method: "PUT",
+        data: {title: title,
+               location: this.state.map_information.location,
+               latitude: this.state.map_information.latitude,
+               longitude: this.state.map_information.longitude,
+               privacy: this.state.map_information.privacy,
+               published: this.state.map_information.published },
+        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id
+      }).done((results) => {
+
+        console.log("map updated!");
+        console.log(results);
+
+          this.setState({
+            map_information: {
+              title: results[0].title,
+              location: results[0].location,
+              latitude: results[0].latitude,
+              longitude: results[0].longitude,
+              privacy: results[0].privacy,
+              published: results[0].published,
+              user_id: this.props.params.user_id,
+              map_id: results[0].map_id
+            }
+          }, () => {
+            console.log(this.state)
+            this.forceUpdate();
+          })
+          
+        })
+  },
+
 
 
   //function called when a pin is created in child map component.
@@ -147,8 +181,37 @@ const Edit = React.createClass({
         this.setState({pins: allPins, routePath: routes })
 
       })
+  },
 
 
+  createPanelInfo: function(marker){
+    console.log("from create panel info", marker)
+    var panelInfo = this.state.panelInfo
+    var service = new google.maps.places.PlacesService(document.createElement('div'));
+
+    if(marker.place_id){
+      service.getDetails({placeId: marker.place_id}, (place, status) => {
+        if(status === google.maps.places.PlacesServiceStatus.OK){
+          console.log("from inside create panel info", place)
+            
+            var panelData = {
+              name: place.name,
+              address: place.formatted_address,
+              phone_number: place.formatted_phone_number,
+              rating: place.rating,
+              reviews: place.reviews,
+              url: place.url,
+              photos: place.photos,
+              website: place.website
+            }
+
+          this.setState({panelInfo: panelData}, () => {
+            console.log("from inside the panel info", this.state)
+          })
+
+        }
+      })
+    }
 
   },
 
@@ -196,6 +259,48 @@ const Edit = React.createClass({
     console.log("updated  state at mapSearchLocations", this.state)
     this.forceUpdate()
   },
+
+
+  newMapLocation: function(latLng, location){
+
+      console.log("from map new location", latLng, location, this.state);
+
+      $.ajax({
+        method: "PUT",
+        data: {title: this.state.map_information.title,
+               location: location.formatted_address,
+               latitude: latLng.lat(),
+               longitude: latLng.lng(),
+               privacy: this.state.map_information.privacy,
+               published: this.state.map_information.published },
+        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id
+      }).done((results) => {
+
+        console.log("map updated!");
+        console.log(results);
+
+          this.setState({
+            map_information: {
+              title: results[0].title,
+              location: results[0].location,
+              latitude: results[0].latitude,
+              longitude: results[0].longitude,
+              privacy: results[0].privacy,
+              published: results[0].published,
+              user_id: this.props.params.user_id,
+              map_id: results[0].map_id
+            },
+            create_map: {centre: {latitude: results[0].latitude, longitude: results[0].longitude}
+          }}, () => {
+            console.log(this.state)
+            this.forceUpdate();
+          })
+          
+        })
+  },
+
+
+
 
   //updates the state of the map central location:
   centreMapLocation: function(location, type){
@@ -290,11 +395,6 @@ const Edit = React.createClass({
 
 
   render: function() {
-
-    // {if(this.state.map_information.map_id){
-    //  this.getAllPins()
-    // }}
-
 
     const style = {
             width: '100vw',
