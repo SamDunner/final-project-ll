@@ -318,6 +318,8 @@ const Edit = React.createClass({
                   </div>
                 </div>
 
+                <br/>
+
                 <div className="row edit-map" >
                   <div className="col-xs-12">
                   {/*<div>
@@ -325,54 +327,68 @@ const Edit = React.createClass({
                   </div>*/}
                   <div id="change-loc" >
                   </div>
-                  <div id="edit">
-                     <Map
-                      user_id={this.props.params.user_id}
-                      map_id={this.props.params.map_id}
-                      marker_information={this.state.marker_information}
-                      routePath={this.state.routePath}
-                      map_location={this.state.create_map}
-                      pins={this.state.pins}
-                      map_places={this.state.map_places}
-                      deletePin={this.deletePin}
-                      createPin={this.createPin}
-                      removeMapLocation={this.removeMapLocation}
-                    />
+                    <div id="edit">
+                       <Map
+                        user_id={this.props.params.user_id}
+                        map_id={this.props.params.map_id}
+                        marker_information={this.state.marker_information}
+                        routePath={this.state.routePath}
+                        map_location={this.state.create_map}
+                        pins={this.state.pins}
+                        map_places={this.state.map_places}
+                        deletePin={this.deletePin}
+                        createPin={this.createPin}
+                        removeMapLocation={this.removeMapLocation}
+                      />
 
+                    </div>
                   </div>
-                  </div>
-                  <div id="edit-map-form">
-                    <MapSearch_form marker_information={this.state.marker_information}
-                                    map_location={this.state.create_map}
-                                    mapSearchLocations={this.mapSearchLocations}
-                    />
-                  </div>
+                </div>
 
-                  <div className="pin-list">
+                <div className="row edit-form">
+                  <div className="col-xs-12">
+                    <div id="row edit-map-form">
+                      <MapSearch_form marker_information={this.state.marker_information}
+                                      map_location={this.state.create_map}
+                                      mapSearchLocations={this.mapSearchLocations}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <br/>
+
+
+                <div className="row pin-list">
+                  <div className="col-xs-12">
                     <PinTable centreMapLocation={this.centreMapLocation}
                               map_location={this.state.create_map}
-                              pins={this.state.pins}/>
+                              pins={this.state.pins}
+                    />
                   </div>
 
-                  <div className="panel-list">
 
-                  </div>
+                  <div className="row page-links">
+                    <div className="col-xs-offset-2 col-xs-3">
+                      <Link className="btn btn-link"
+                        to={"/users/" + this.props.params.user_id + "/collection"}
+                        >
+                        update map
+                      </Link>
+                    </div>
 
-                  <Link className="btn btn-success"
-                    to={"/users/" + this.props.params.user_id + "/collection"}
-                    >
-                  update map
-                  </Link>
-                   <Link className="btn btn-success"
+              <div className="col-xs-offset-2 col-xs-3">
+                   <Link className="btn btn-link"
                     to={"/users/" + this.props.params.user_id + "/collection"}
                     >
                   delete map
                   </Link>
-
-
-
+              </div>
 
               </div>
+
+                </div>
+
             </div>
           </div>
 
