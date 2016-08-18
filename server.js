@@ -106,7 +106,7 @@ app.use("/users/:user_id/maps", mapsRoutes(knex));
 app.use("/users/:user_id/favorites", favoritesRoutes(knex));
 app.use("/users/:user_id/maps/:map_id/comments", commentsRoutes(knex));
 app.use("/users/:user_id/maps/:map_id/pins", pinsRoutes(knex));
-app.use("/users/:user_id/maps/:map_id/pins/:pin_id/content", imagesRoutes(knex));
+app.use("/users/:user_id/maps/:map_id/pins/:pin_id/edit/upload", imagesRoutes(knex));
 
 
 

@@ -182,6 +182,7 @@ const PinContent = React.createClass({
 
 	render: function(){
 
+
 		return (
       <div className="pin-content">
 
@@ -237,8 +238,15 @@ const PinContent = React.createClass({
 
 		                <Link className="btn btn-warning" to={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/content"} > Edit this Blog Entry </Link>
 
+		                <div className="file_upload">
+
+			            	<form method="POST" encType="multipart/form-data" action={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/edit/upload"} className="dropzone">
+			            	</form>
+		            	</div>
 
 		            </div>
+		            
+
 
           </div>
 

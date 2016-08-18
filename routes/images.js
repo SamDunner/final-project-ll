@@ -27,16 +27,17 @@ module.exports = (knex) => {
     });
   });
 
-  router.post("/", (req, res) => {
-    knex("images").insert({
-      'content': req.body.content,
-      'image_url': req.body.image_url,
-      'pin_id': req.params.pin_id
-    })
-    .then((results) => {
-      console.log("content posted")
-    });
-  });
+  // router.post("/", (req, res) => {
+  //   console.log("arrived", req)
+
+  //   knex("images").insert({
+  //     'image_url': req.body.image_url,
+  //     'pin_id': req.params.pin_id
+  //   })
+  //   .then((results) => {
+  //     console.log("content posted")
+  //   });
+  // });
 
   router.put("/:content_id", (req, res) => {
     knex("images").where('content_id', req.params.pin_id)
@@ -50,14 +51,17 @@ module.exports = (knex) => {
     });
   });
 
-  router.post('/upload', upload.single('file'), (req, res, next) => {
+  router.post('/', upload.single('file'), (req, res, next) => {
+
+    console.log("is this it?",req.params)
+    debugger;
     knex("images")
       .insert({
-        'pin_id': req.params.pin_id,
+        'pin_id': req.session.req.baseUrl.split("/")[6],
         'image_url': req.file.filename
       })
       .then((results) => {
-        console.log("pin updated", results)
+        console.log("image updated", results)
       });
     console.log("testing for where it's going", req.file.path);
     req.file.path

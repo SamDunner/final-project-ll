@@ -40,6 +40,7 @@ export default class Map extends Component {
   handleSearchMarkerClose(marker) {
     marker.showSearchInfo = false;
     marker.showInfo = false;
+    this.props.removePanelInfo(marker);
     this.setState(this.state);
   }
 
@@ -549,12 +550,14 @@ export default class Map extends Component {
                 //   debugger;
                 // }
 
+                
+
                 return (
 
                      <Marker
                       key={index+1000}
                       ref={ref}
-                      label={index}
+                      label={(index + 1).toString()}
                       {...marker}
 
                         onClick={this.handleInfoMarker.bind(this, marker)}>

@@ -106,7 +106,7 @@ const Create = React.createClass({
 
   deletePin: function(marker){
     var all_pins = this.state.pins;
-
+    var route = this.state.routePath;
 
     $.ajax({
       method: "DELETE",
@@ -117,9 +117,18 @@ const Create = React.createClass({
       for(var i = 0; i < all_pins.length; i++){
         if(marker.pin_id == all_pins[i].pin_id){
           all_pins.splice(i, 1)
-          this.setState({pins: all_pins})
         }
       }
+
+
+
+      var newRoute = route.splice(-1,1);
+
+      this.setState({pins: all_pins,
+                     routePath: newRoute}, () => {
+                      this.forceUpdate();
+                     })
+
 
     })
   },
@@ -219,6 +228,11 @@ const Create = React.createClass({
   	    this.setState({pins: allPins, routePath: routes })
 
       })
+  },
+
+  removePanelInfo: function(marker){
+    console.log("from remove panelInfo", marker)
+    this.setState({panelInfo: {}})    
   },
 
   createPanelInfo: function(marker){
@@ -470,6 +484,7 @@ const Create = React.createClass({
                           createPin={this.createPin}
                           removeMapLocation={this.removeMapLocation}
                           createPanelInfo={this.createPanelInfo}
+                          removePanelInfo={this.removePanelInfo}
                         />
                       </div>
                     </div>

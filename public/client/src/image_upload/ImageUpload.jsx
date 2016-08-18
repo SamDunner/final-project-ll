@@ -7,32 +7,42 @@ import NavBar from '../navbar/NavBar.jsx';
 const ImageUpload = React.createClass({
 
   getInitialState: function() {
-    return this.props;
+
+    console.log(this.props)
+
+    return {image_url: ""}
   },
 
   componentDidMount : function() {
+    
+    $('#file_upload').on('change', (event) => {
+      console.log("in jquery", event)
+    })
 
   },
 
-  // uploadImage: function(event) {
-  //   event.preventDefault();
+  uploadImage: function(event) {
+    event.preventDefault();
+    
+    console.log(event)
 
-  //   const imageURL = "http://localhost:8080/users/" + this.getCookie('user_id') + "/maps/"
+   
 
-  //   $.ajax({
-  //       method: "POST",
-  //       data: {image_url:     },
-  //       url: "http://localhost:8080/users"
+    // $.ajax({
+    //     method: "POST",
+    //     data: {image_url:     },
+    //     url: "/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/edit/upload"
 
-  //     method: "POST",
-  //     data: {
-  //       image_url: this.state.image_url
-  //     }, //not sure what is passed in here"
-  //     url: imageURL
-  //   }).done((results) => {
-  //     console.log("image uploaded!")
-  //   });
-  // },
+    //   method: "POST",
+    //   data: {
+    //     image_url: this.state.image_url
+    //   }, //not sure what is passed in here"
+    //   url: imageURL
+    // }).done((results) => {
+    //   console.log("image uploaded!")
+    // });
+  },
+
 
   //users/:user_id/maps/:map_id/pins/:pin_id/content/pictures
 
@@ -52,7 +62,8 @@ const ImageUpload = React.createClass({
           <br/>
 
         <div>
-          <form method="post" encType="multipart/form-data" action={"/users/" + this.props.user_id + "/maps/" + this.props.map_id + "/pins/" + this.props.pin.pin_id + "/edit/upload"} className="dropzone">
+          <form method="POST" encType="multipart/form-data" action={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/edit/upload"} className="dropzone">
+            
           </form>
         </div>
 
