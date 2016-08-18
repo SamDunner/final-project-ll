@@ -5,9 +5,10 @@ import React, {Component}  from 'react';
 // import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import RaisedButton from 'material-ui/RaisedButton';
+import { Link } from 'react-router';
 import $ from 'jquery'
 import cookie from 'react-cookie';
-
+import bootstrap from 'bootstrap';
 // import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 
@@ -53,8 +54,10 @@ const PinTable = React.createClass({
                     <span className="pin-title">
                       {pin.title}
                     </span>
-                    <br/>
 
+                    <span className="blog-pin-title">
+                       <Link to={"/users/" + this.props.user_id + "/maps/" + this.props.map_id + "/pins/" + pin.pin_id + "/edit"} >Blog Entry </Link>
+                    </span>
 
                   </div>
                 </div>

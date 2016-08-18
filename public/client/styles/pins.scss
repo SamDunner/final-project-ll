@@ -44,4 +44,15 @@
 
 .row.pin .blog-pin-title {
   margin-left: 15px;
+  text-decoration: none;
+
+  >a:hover {
+    text-decoration: none;
+  }
 }
+
+.row.pin .blog-pin-title:hover {
+  opacity: 0.5;
+  text-decoration: none;
+}
+
