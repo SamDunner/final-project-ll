@@ -45,12 +45,12 @@ export default class Map extends Component {
 
       <InfoWindow
 
-          key={`${ref}_info_window`} 
+          key={`${ref}_info_window`}
           onCloseclick={this.handleSearchMarkerClose.bind(this, marker)} >
-            {<div className='marker-info-search'> 
-               
-                <h4>Title: {marker.name}</h4>  
-                <br/>  
+            {<div className='marker-info-search'>
+
+                <h4>Title: {marker.name}</h4>
+                <br/>
 
 
                 <h4>Address: {marker.address || marker.formatted_address}</h4>
@@ -85,26 +85,32 @@ export default class Map extends Component {
           key={`${ref}_info_window`}
           onCloseclick={this.handleClose.bind(this, marker)} >
 
-            {<div className='marker-info-search'> 
-               
-                <h4>Title: {marker.title}</h4>  
-                <br/>  
+            {<div className='marker-info'>
+
+                <h4>Title:</h4>
+                <h3> {marker.title}</h3>
 
 
-                <h4>Date: {marker.date}</h4>
-                <br/>
+                <h4>Date:</h4>
+                <h3>{marker.date}</h3>
 
-                <h4>Address: {marker.address || marker.formatted_address}</h4>
-                <br/>
 
-                <h4>Type: {marker.type}</h4>  
-                <br/>   
+                <h4>Address:</h4>
+                <h3>{marker.address || marker.formatted_address}</h3>
 
-                <h4>Description: {marker.description}</h4>
-                <br/>
+                <h4>Type:</h4>
+                <h3>{marker.type}</h3>
+
+
+                <h4>Description:</h4>
+                <h3>{marker.description}</h3>
+
 
                 {marker.rating &&
-                  <h4>rating: {marker.rating}</h4>
+                  <div className="marker-info">
+                    <h4>rating:</h4>
+                    <h3>{marker.rating}</h3>
+                  </div>
                 }
                 <br/>
 
@@ -120,7 +126,7 @@ export default class Map extends Component {
                 */}
 
 
-                	
+
 
             </div>}
 
@@ -170,7 +176,7 @@ export default class Map extends Component {
 	              ref="mapCanvas"
 	              defaultZoom={10}
 	              center={{lat: this.props.map_location.centre.latitude, lng: this.props.map_location.centre.longitude}}
-	              
+
 	            >
 
 	            {this.props.pins &&
@@ -179,9 +185,9 @@ export default class Map extends Component {
 	                const ref=`marker_${index}`
 
 	                var infoSearchWindow = marker.info ? this.renderInfo(ref, marker) : null
-	                
+
 	                return (
-	                    
+
 	                    <Marker
 	                      key={marker.pin_id}
 	                      ref={ref}
@@ -192,11 +198,11 @@ export default class Map extends Component {
 	                    {infoSearchWindow}
 
 	                    </Marker>
-	                    
+
 	                )
 
 	              })
-	              
+
 	            }
 
 	             {this.props.map_places &&
@@ -205,22 +211,22 @@ export default class Map extends Component {
 	                const ref=`marker_${index}`
 
 	                var infoSearchWindow = marker.showSearchInfo ? this.renderSearchInfoWindow(ref, marker) : null
-	                
+
 	                return (
-	                    
+
 	                     <Marker
 	                      key={marker.pin_id}
 	                      ref={ref}
 	                      {...marker}
 	                      onClick={this.handleSearchMarkerclick.bind(this, marker)}>
 
-	                    {infoSearchWindow}                       
+	                    {infoSearchWindow}
 	                    </Marker>
-	                    
+
 	                )
 
 	              })
-	              
+
 	            }
 
 	              {this.props.routePath &&
@@ -239,7 +245,7 @@ export default class Map extends Component {
 	          }
 	        />
 	        </div>
-	      
+
 	    );
 
 	  }
