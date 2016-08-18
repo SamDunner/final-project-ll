@@ -105,11 +105,6 @@ export default class Map extends Component {
 
   onInfoWindowButtonDelete(marker, event){
 
-<<<<<<< 9bb85d6851a35aaa0a02bb590644da7d4ec4d92c
-
-=======
-    
->>>>>>> added complete functionality between create , edit , show and collection pages.
     console.log("on new/search pin delete" , marker)
     //if(marker.type == "new"){
       var markers = this.state.new_markers;
@@ -118,13 +113,9 @@ export default class Map extends Component {
           markers.splice(i, 1)
           this.setState({new_markers: markers})
         }
-<<<<<<< 9bb85d6851a35aaa0a02bb590644da7d4ec4d92c
 
       }
-    //}
-=======
-      }
->>>>>>> added complete functionality between create , edit , show and collection pages.
+
   }
 
   handlePinTitle(event){
@@ -170,19 +161,12 @@ export default class Map extends Component {
           key={`${ref}_info_window`}
           onCloseclick={this.handleClose.bind(this, marker)} >
 
-<<<<<<< 9bb85d6851a35aaa0a02bb590644da7d4ec4d92c
             {<div className='marker-info-search'>
 
                 <h4>Title: {marker.title}</h4>
                 <br/>
 
-=======
-            {<div className='marker-info-search'> 
-               
-                <h4>Title: {marker.title}</h4>  
-                <br/>  
 
->>>>>>> added complete functionality between create , edit , show and collection pages.
 
                 <h4>Date: {marker.date}</h4>
                 <br/>
@@ -190,15 +174,10 @@ export default class Map extends Component {
                 <h4>Address: {marker.address || marker.formatted_address}</h4>
                 <br/>
 
-<<<<<<< 9bb85d6851a35aaa0a02bb590644da7d4ec4d92c
+
 
                 <h4>Type: {marker.type}</h4>
                 <br/>
-
-=======
-                <h4>Type: {marker.type}</h4>  
-                <br/>   
->>>>>>> added complete functionality between create , edit , show and collection pages.
 
                 <h4>Description: {marker.description}</h4>
                 <br/>
