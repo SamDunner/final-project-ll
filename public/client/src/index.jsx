@@ -68,7 +68,7 @@ render((
     <Route path="/users/:user_id/maps/:map_id/pins/:pin_id/content" component={PinContent_show}>
     </Route>
 
-    <Route path="/users/:user_id/maps/:map_id/pins/:pin_id/content/upload" component={ImageUpload}>
+    <Route path="/users/:user_id/maps/:map_id/pins/:pin_id/edit/upload" component={ImageUpload}>
     </Route>
 
 {/*    <Route path="/users/:user_id/maps/:map_id/pins/:pin_id/content" component={PinContent}>

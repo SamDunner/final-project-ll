@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Fieldset, Field, createValue} from 'react-forms';
 import cookie from 'react-cookie';
 import $ from 'jquery';
+import NavBar from '../navbar/NavBar.jsx';
 
 const ImageUpload = React.createClass({
 
@@ -42,10 +43,17 @@ const ImageUpload = React.createClass({
   render: function() {
     return (
 
-      <div>
+      <div className="image-upload-page">
+        <div className="standard-nav-bar">
+              <NavBar />
+        </div>
+
+          <br/>
+          <br/>
+
         <div>
-        <form method="post" encType="multipart/form-data" action={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/content/upload"} className="dropzone">
-        </form>
+          <form method="post" encType="multipart/form-data" action={"/users/" + this.props.user_id + "/maps/" + this.props.map_id + "/pins/" + this.props.pin.pin_id + "/edit/upload"} className="dropzone">
+          </form>
         </div>
 
         <br/>

@@ -185,18 +185,17 @@ const Show = React.createClass({
 
 	          <br/>
 	          <br/>
-	          <br/>
-	          <br/>
 
-            <div className="container">
+            <div className="container full-edit-map">
 
               <div className="row name-map">
                 <div className="col-xs-12">
                 {this.state.map_information.title}
                 </div>
               </div>
-	            <div className="row show-map col-xs-12" >
-		            <div id="show">
+	            <div className="row show-map" >
+                <div className="col-xs-12">
+		              <div id="show">
 		                <Map
                       user_id={this.props.params.user_id}
                       map_id={this.props.params.map_id}
@@ -207,18 +206,25 @@ const Show = React.createClass({
 		                  pins={this.state.pins}
 		                />
 
-		            </div>
-                <div className="row edit-form">
-                  <div className="col-xs-12">
-                    <div id="edit-map-form">
-                      <MapShow_form marker_information={this.state.marker_information}
-                                      map_location={this.state.create_map}
-                                      mapSearchLocations={this.mapSearchLocations}
+
+		              </div>
+                </div>
+              </div>
+
+              <div className="row edit-form">
+                 <div className="col-xs-12">
+                   <div id="edit-map-form">
+                     <MapShow_form marker_information={this.state.marker_information}
+                                  map_location={this.state.create_map}
+                                  mapSearchLocations={this.mapSearchLocations}
+
                       />
-                    </div>
                   </div>
                 </div>
+              </div>
 
+
+              <br/>
 
             <div className="row pin-list">
               <div className="col-xs-12">
@@ -227,29 +233,30 @@ const Show = React.createClass({
                           pins={this.state.pins} />
               </div>
 
+
               <div className="row page-links">
-                <div className="col-xs-offset-2 col-xs-3">
-              <Link className="btn btn-link"
-                      to={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/edit"}
-                      >
-                    Edit
-              </Link>
+                <div className="col-xs-offset-7 col-xs-2">
+                  <Link className="btn btn-link"
+                          to={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/edit"}
+                          >
+                        Edit
+                  </Link>
               </div>
 
-              <div className="col-xs-offset-2 col-xs-3">
-              <Link className="btn btn-link"
-                      to={"/users/" + this.props.params.user_id + "/collection"}
-                      >
-                    Back to Collections
-              </Link>
+              <div className="col-xs-offset-1 col-xs-2">
+                <Link className="btn btn-link"
+                        to={"/users/" + this.props.params.user_id + "/collection"}
+                        >
+                      Collection
+                </Link>
 
-                </div>
               </div>
-              </div>
-              </div>
+             </div>
+            </div>
+
           </div>
-
         </div>
+
 
       );
   }

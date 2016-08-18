@@ -76,8 +76,8 @@
   margin-top: 1em;
 }
 
-.col-xs-3 {
-  text-align: center;
+.col-xs-2 {
+  text-align: right;
 }
 
 .row.page-links .btn-link {
@@ -89,6 +89,14 @@
     text-decoration: none;
 }
 
+.edit-map #edit {
+  height: 100%;
+  width: 100%;
+  height: 400px;
+  text-align: center;
+  border-style: solid;
+  border-color: black;
+}
 
 
 

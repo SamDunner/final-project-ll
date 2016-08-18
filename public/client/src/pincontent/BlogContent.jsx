@@ -21,7 +21,7 @@ const BlogContent = React.createClass({
 		this.setState({description: event.target.value});
 	},
 
-	
+
 	submitBlog: function(event) {
 		event.preventDefault()
 
@@ -35,7 +35,7 @@ const BlogContent = React.createClass({
 			<div>
 
 			<div id="blog-form">
-				
+
 				<div className='blog-title'>
 					<label>Title: {this.props.marker_information.title}</label>
 				</div>
@@ -46,15 +46,15 @@ const BlogContent = React.createClass({
 
 				<div className='blog-address'>
 					<label>Address: {this.props.marker_information.address}</label>
-				</div>				
+				</div>
 
-				
+
 					<textarea defaultValue={this.props.marker_information.description} onChange={this.handleDescription} className='blog-description' type='text'>
 
 					</textarea>
 
 					<button className='btn-submit' onClick={this.submitBlog}>Save</button>
-				
+
 			</div>
 
 			</div>

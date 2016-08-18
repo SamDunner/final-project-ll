@@ -49,23 +49,15 @@ export default class Map extends Component {
           onCloseclick={this.handleSearchMarkerClose.bind(this, marker)} >
             {<div className='marker-info-search'>
 
-                <h4>Title: {marker.name}</h4>
-                <br/>
+                <h4>Title:</h4>
+                <h3>{marker.name}</h3>
 
+                <h4>Address: </h4>
+                <h3>{marker.address || marker.formatted_address}</h3>
 
-                <h4>Address: {marker.address || marker.formatted_address}</h4>
-                <br/>
+                <h4>Description:</h4>
+                <h3> {marker.description}</h3>
 
-                <h4>Type: {marker.name}</h4>
-                <br/>
-
-                <h4>Description: {marker.description}</h4>
-                <br/>
-
-                {marker.rating &&
-                  <h4>rating: {marker.rating}</h4>
-                }
-                <br/>
 
                {/*<button className='btn btn-success' onClick={this.renderInfoWindow(ref, marker)} onClick={this.onAddToPins.bind(this, marker)} type='submit'>Add to pins</button>*/}
 
@@ -112,12 +104,7 @@ export default class Map extends Component {
                     <h3>{marker.rating}</h3>
                   </div>
                 }
-                <br/>
 
-
-                <button /*href="/users/" + {this.props.user_id} + "/maps/" + {this.props.map_id} + "/pins/" + {marker.pin_id} + "/edit"*/ className='btn btn-info' type='submit'>Create Blog Entry</button>
-
-                <br />
 
                {/*
                <button className='btn btn-danger' onClick={this.renderInfoWindow(ref, marker)} /*onClick={Create Blo} type='submit'>Delete</button> */}

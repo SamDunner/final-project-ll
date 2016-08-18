@@ -30,42 +30,46 @@ const PinTable = React.createClass({
 
 
     return (
-        <div>
-          <table className="table table-sm">
-            <thead>
-              <tr>
-                <th>Pins:</th>
-
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.pins.map((pin, index) => {
-                            return(
-
-                              <tr>
-                                <td>
-                                    <div class="btn-group">
-                                      <button onClick={this.handleClick.bind(this, pin)} type="button" className="btn btn-info">{pin.title}</button>
-                                       <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="caret"></span>
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                      </button>
-                                       <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        
-                                      </ul>
-                                    </div>
-                                 </td>
-                              </tr>
-
-                            );
-                     })
-                }
+      <div className="map-create-pins">
+          { this.props.pins.length > 0 &&
+            <div>
+              <div className="row">
+                <div className="col-xs-12">
+                  Created Pins:
+                </div>
+              </div>
 
 
-            </tbody>
-          </table>
-        </div>
+            { this.props.pins.map((pin, index) => {
+              return(
+
+                <div className="row pin">
+                  <div className="col-xs-12">
+
+                    <button onClick={this.handleClick.bind(this, pin)} type="button" className="btn btn-info pin-name">
+                      find pin
+                    </button>
+
+                    <span className="pin-title">
+                      {pin.title}
+                    </span>
+                    <br/>
+
+
+                  </div>
+                </div>
+              );//return
+            })//map pin
+          }
+          </div>
+        }
+
+        { this.props.pins.length == 0 &&
+          <div className="message-to-user">
+            You have no pins! To create a pin, search for a location or click  a plot on the map.
+          </div>
+        }
+      </div>
     )
 
   },

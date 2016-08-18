@@ -405,73 +405,97 @@ const Edit = React.createClass({
             <div className="map-edit-page">
 
               <div className="standard-nav-bar">
-                    <NavBar />
+                <NavBar />
+              </div>
+
+                <br/>
+                <br/>
+
+              <div className="container full-edit-map">
+                <div className="row name-map">
+                  <div className="col-xs-12">
+                  {this.state.map_information.title}
+                  </div>
                 </div>
 
                 <br/>
-                <br/>
-                <br/>
-                <br/>
 
-                <div className="edit-map" >
+                <div className="row edit-map" >
+                  <div className="col-xs-12">
                   {/*<div>
                     <div id="title-input-change" contenteditable>{this.state.map_information.title}</div>
                   </div>*/}
                   <div id="change-loc" >
                   </div>
-                  <div id="edit">
-                     <Map
-                      user_id={this.props.params.user_id}
-                      map_id={this.props.params.map_id}
-                      marker_information={this.state.marker_information}
-                      routePath={this.state.routePath}
-                      map_location={this.state.create_map}
-                      pins={this.state.pins}
-                      map_places={this.state.map_places}
-                      deletePin={this.deletePin}
-                      createPin={this.createPin}
-                      removeMapLocation={this.removeMapLocation}
-                    />
+                    <div id="edit">
+                       <Map
+                        user_id={this.props.params.user_id}
+                        map_id={this.props.params.map_id}
+                        marker_information={this.state.marker_information}
+                        routePath={this.state.routePath}
+                        map_location={this.state.create_map}
+                        pins={this.state.pins}
+                        map_places={this.state.map_places}
+                        deletePin={this.deletePin}
+                        createPin={this.createPin}
+                        removeMapLocation={this.removeMapLocation}
+                      />
 
+                    </div>
                   </div>
-                  <div id="edit-map-form">
-                    <MapSearch_form marker_information={this.state.marker_information}
-                                    map_location={this.state.create_map}
-                                    mapSearchLocations={this.mapSearchLocations}
-                    />
-                  </div>
+                </div>
 
-                  <div className="pin-list">
+                <div className="row edit-form">
+                  <div className="col-xs-12">
+                    <div id="row edit-map-form">
+                      <MapSearch_form marker_information={this.state.marker_information}
+                                      map_location={this.state.create_map}
+                                      mapSearchLocations={this.mapSearchLocations}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <br/>
+
+
+                <div className="row pin-list">
+                  <div className="col-xs-12">
                     <PinTable centreMapLocation={this.centreMapLocation}
                               map_location={this.state.create_map}
-                              pins={this.state.pins}/>
+                              pins={this.state.pins}
+                    />
                   </div>
 
-                  <div className="panel-list">
 
-                  </div>
+                  <div className="row page-links">
+                    <div className="col-xs-offset-7 col-xs-2">
+                      <Link className="btn btn-link"
+                        to={"/users/" + this.props.params.user_id + "/collection"}
+                        >
+                        update map
+                      </Link>
+                    </div>
 
-                  <Link className="btn btn-success"
+
+              <div className="col-xs-offset-1 col-xs-2">
+                   <Link className="btn btn-link"
                     to={"/users/" + this.props.params.user_id + "/collection"}
                     >
-                  Save
+                  delete map
                   </Link>
-                   <Link className="btn btn-success"
-                    to={"/users/" + this.props.params.user_id + "/collection"}
-                    >
-                  Deletes
-                  </Link>
+              </div>
 
-
+              </div>
 
                 </div>
 
             </div>
+          </div>
 
       );
   }
 });
 
-//Pin code to be used later to add a new marker: <i class="fa fa-map-marker" aria-hidden="true"></i>
 
 export default Edit;
