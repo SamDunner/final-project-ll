@@ -54,7 +54,7 @@ const NavBar = React.createClass({
         </a>
 
         <Link className="btn btn-outline-primary col-md-1 col-lg-1 col-md-offset-2"
-              to={"/users/" + this.getCookie() }>
+              to={"/users/" + this.getCookie() + "/collection" }>
               profile
         </Link>
 
