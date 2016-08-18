@@ -573,7 +573,7 @@ export default class Map extends Component {
             <Polyline
               path={this.props.routePath}
                geodesic
-               strokeColor={'#5dcf17'}
+               strokeColor={'#FF0000'}
                strokeOpacity={1.0}
                strokeWeight={10}
             />
