@@ -182,25 +182,49 @@ const PinContent = React.createClass({
 
 	render: function(){
 
-		return (<div className="pin-content">
+		return (
+      <div className="pin-content">
 
 					<div className="standard-nav-bar">
 	                    <NavBar />
 	                </div>
-	               	<div id="pin-show-map">
+
+                  <br/>
+                  <br/>
+
+          <div className="container full-edit-map">
+
+            <div className="row name-map">
+              <div className="col-xs-12">
+                {this.state.map_information.title}
+                </div>
+              </div>
+            <div className="row show-map">
+              <div className="col-xs-12">
+	               	<div id="show">
 		                <Map
 		                	marker_information={this.state.marker_information}
 		                	map_location={this.state.create_map}
 		                    map_places={this.state.map_places}
 		                    pins={this.state.pins}
 		                />
-		            </div>
-		            <div id="show-map-form">
-		                <MapSearch_form marker_information={this.state.marker_information}
-		                		  	    map_location={this.state.create_map}
-		                         	    mapSearchLocations={this.mapSearchLocations}
-		                         	    map_places={this.state.map_places}
-		                />
+		              </div>
+                </div>
+              </div>
+
+              <div className="row edit-form">
+                 <div className="col-xs-12">
+    		            <div id="edit-map-form">
+    		                <MapSearch_form marker_information={this.state.marker_information}
+    		                		  	    map_location={this.state.create_map}
+    		                         	    mapSearchLocations={this.mapSearchLocations}
+    		                         	    map_places={this.state.map_places}
+    		                />
+                    </div>
+                  </div>
+                </div>
+
+                <br/>
 
 		                <BlogContent marker_information={this.state.marker_information}
 		                			 changeDescription={this.changeDescription}
@@ -216,10 +240,11 @@ const PinContent = React.createClass({
 
 		            </div>
 
+          </div>
 
 
 
-				</div>)
+        )
 
 	}
 
