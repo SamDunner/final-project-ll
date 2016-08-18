@@ -36,6 +36,7 @@ const PinContent = React.createClass({
           		pins: [],
           		map_places: [],
           		create_map: { centre: {latitude: 51.5074, longitude: -0.1278}},
+          		image_urls: []
           		
         };
 	},
@@ -69,7 +70,27 @@ const PinContent = React.createClass({
     this.forceUpdate()
   },
 
+  	getImages: function(){
 
+  		var urls = this.state.image_urls;
+
+  		 $.ajax({
+	      method: "GET",
+	      data: {pin_id: this.props.params.pin_id,
+	      		 map_id: this.props.params.map_id,
+	             user_id: this.props.params.user_id},
+	      url: "/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/edit/upload/" + this.props.params.pin_id
+	    }).done((results) => {
+	    	console.log("imagesss", results);
+	    	for(var i = 0; i < results.length; i++){
+	    		urls.push(results[i].image_url)
+	    	}
+	    	
+	    	this.setState({image_url: urls})
+	    	
+	    })
+
+  	},
 
 
 	getPin: function(){
@@ -155,6 +176,7 @@ const PinContent = React.createClass({
 	componentDidMount: function(){
 		this.getMap();
 		this.getPin();
+		this.getImages();
 	},
 
 	render: function(){
@@ -172,12 +194,25 @@ const PinContent = React.createClass({
 		                    pins={this.state.pins} 
 		                />
 		            </div>
+
+		            <div className="all-images">
+		            	{this.state.image_urls &&
+		            		this.state.image_urls.map((image, index) => {
+		            			return(
+		            				<img key={index} src={"../../uploads/" + image} />
+		            			)
+		            		})
+		            	}
+		            </div>
+
 		            <div id="show-map-form">
 		                <MapSearch_form marker_information={this.state.marker_information} 
 		                		  	    map_location={this.state.create_map}
 		                         	    mapSearchLocations={this.mapSearchLocations}
 		                         	    map_places={this.state.map_places}
 		                />
+
+		               
 
 		                <BlogContent marker_information={this.state.marker_information}
 		                			 changeDescription={this.changeDescription}

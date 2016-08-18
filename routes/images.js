@@ -20,7 +20,7 @@ module.exports = (knex) => {
     knex
       .select("*")
       .from("images")
-      .where('content_id', req.params.content_id)
+      .where('pin_id', req.query.pin_id)
       .then((results) => {
         res.json(results);
         console.log(results);
@@ -53,8 +53,6 @@ module.exports = (knex) => {
 
   router.post('/', upload.single('file'), (req, res, next) => {
 
-    console.log("is this it?",req.params)
-    debugger;
     knex("images")
       .insert({
         'pin_id': req.session.req.baseUrl.split("/")[6],
