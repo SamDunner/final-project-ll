@@ -52,7 +52,7 @@ const ImageUpload = React.createClass({
           <br/>
 
         <div>
-          <form method="post" encType="multipart/form-data" action={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/edit/upload"} className="dropzone">
+          <form method="post" encType="multipart/form-data" action={"/users/" + this.props.user_id + "/maps/" + this.props.map_id + "/pins/" + this.props.pin.pin_id + "/edit/upload"} className="dropzone">
           </form>
         </div>
 

@@ -369,7 +369,7 @@ const Edit = React.createClass({
 
 
                   <div className="row page-links">
-                    <div className="col-xs-offset-2 col-xs-3">
+                    <div className="col-xs-offset-7 col-xs-2">
                       <Link className="btn btn-link"
                         to={"/users/" + this.props.params.user_id + "/collection"}
                         >
@@ -377,7 +377,8 @@ const Edit = React.createClass({
                       </Link>
                     </div>
 
-              <div className="col-xs-offset-2 col-xs-3">
+
+              <div className="col-xs-offset-1 col-xs-2">
                    <Link className="btn btn-link"
                     to={"/users/" + this.props.params.user_id + "/collection"}
                     >

@@ -104,12 +104,7 @@ export default class Map extends Component {
                     <h3>{marker.rating}</h3>
                   </div>
                 }
-                <br/>
 
-
-                <button /*href="/users/" + {this.props.user_id} + "/maps/" + {this.props.map_id} + "/pins/" + {marker.pin_id} + "/edit"*/ className='btn btn-info' type='submit'>Create Blog Entry</button>
-
-                <br />
 
                {/*
                <button className='btn btn-danger' onClick={this.renderInfoWindow(ref, marker)} /*onClick={Create Blo} type='submit'>Delete</button> */}

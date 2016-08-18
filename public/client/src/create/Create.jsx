@@ -430,7 +430,7 @@ const Create = React.createClass({
               	    </div>
 
                   <div className="row submit-pin">
-                    <div className="col-xs-12">
+                    <div className="col-xs-offset-10 col-xs-2">
                       <Link className="btn btn-link"
                         to={"/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id}
                         >
