@@ -74,26 +74,29 @@ const Collection = React.createClass({
             </nav>
           </div>
 
-        { this.state.maps &&
-          this.state.maps.map((map, index) => {
-            return (
-              <div className="map-object">
-              
-                <Map key={map.map_id}
-                    map_location={{centre: {latitude: map.latitude, longitude: map.longitude}}} 
-                />
-                <Link className="profile-tab col-md-offset-4 col-lg-offset-4 col-md-1 col-lg-1"
-                    to={"/users/" + this.props.params.user_id + "/maps/" + map.map_id}
-                    >
-                    {map.title}
-                </Link>
-                
-              </div>
+          <div className="map-container col-sm-10 col-sm-offset-1">
+
+            { this.state.maps &&
+              this.state.maps.map((map, index) => {
+                return (
+                  <div className="container map-object col-xs-3">
+
+                    <Map key={map.map_id}
+                        map_location={{centre: {latitude: map.latitude, longitude: map.longitude}}}
+                    />
+                    <Link to={"/users/" + this.props.params.user_id + "/maps/" + map.map_id}
+                        >
+                        {map.title}
+                    </Link>
+
+                  </div>
 
 
-              )
-          })
-        }
+                  )
+              })
+            }
+
+          </div>
         </div>
     );
   }

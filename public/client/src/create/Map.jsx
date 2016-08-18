@@ -60,7 +60,7 @@ export default class Map extends Component {
 
     marker.showInfo = true;
     this.setState(this.state);
-    
+
   }
 
   onDeletePin(marker, event){
@@ -254,7 +254,6 @@ export default class Map extends Component {
                   <textarea defaultValue={marker.description} type="text" onChange={this.handlePinDescription} className='pin-description'></textarea>
 
                 <br/>
-                <br/>
 
                 <h4>Rating: </h4>
 
@@ -364,27 +363,16 @@ export default class Map extends Component {
 
           key={`${ref}_info_window`}
           onCloseclick={this.handleSearchMarkerClose.bind(this, marker)} >
-            {<div className='marker-info-search'>
+            {<div className='marker-info'>
 
-                <h4>Title: {marker.name}</h4>
-                <br/>
+                <h4>Title:</h4>
+                <h3>{marker.name}</h3>
 
 
 
-                <h4>Address: {marker.address || marker.formatted_address}</h4>
-                <br/>
 
-                <h4>Type: {marker.name}</h4>
-                <br/>
-
-                <h4>Description: {marker.description}</h4>
-                <br/>
-
-                {marker.rating &&
-                  <h4>rating: {marker.rating}</h4>
-                }
-                <br/>
-
+                <h4>Address:</h4>
+                <h3>{marker.address || marker.formatted_address}</h3>
                <button className='btn btn-success' /*onClick={this.renderInfoWindow(ref, marker)}*/ onClick={this.onAddToPins.bind(this, marker)} type='submit'>Add to pins</button>
 
             </div>}

@@ -1,7 +1,7 @@
  html, body {
-   height: 100%;
-   max-width: 100vw;
-   font-family: 'Open Sans', sans-serif;
+  height: 100%;
+  max-width: 100vw;
+  font-family: "Courier New", Courier, monospace;
  }
 
  #react-root {
@@ -42,19 +42,6 @@
    height: 100%;
  }
 
- .show-map {
-   height: 100%;
-   padding-left: 200px;
- }
-
-
-.show-map #show {
-  height: 100%;
-  width: 850px;
-  height: 600px;
-  border-radius: 10px;
-}
-
 .pin-content {
   height: 100%
 }
@@ -65,13 +52,6 @@
   height: 300px;
 }
 
-.map-object {
-  height: 100%;
-  height: 200px;
-  width: 300px;
-  padding: 10px; 
-  float: left; 
-}
 
 .profile-page {
   height: 100%;
