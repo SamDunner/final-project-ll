@@ -6,12 +6,12 @@ import cookie from 'react-cookie'
 
 
 
-const MapEdit_form = React.createClass({
+const MapSearch_form = React.createClass({
 
 	getInitialState: function(){
 		return {
-			search: ""
-			
+			search: "",
+			locs: []
 		}
 	},
 
@@ -20,7 +20,10 @@ const MapEdit_form = React.createClass({
 	},
 
 	handleSearchField: function(event) {
+
 		this.setState({search: event.target.value});
+		//console.log('from search field, MapEdit_form.jsx:', this.state)
+
 	},
 
 
@@ -31,20 +34,34 @@ const MapEdit_form = React.createClass({
 
 		var latLng = new google.maps.LatLng(this.props.map_location.centre.latitude, this.props.map_location.centre.longitude);
 
-		
+		var placeLocs = [];
 
 	    var service = new google.maps.places.PlacesService(document.createElement('div'));
 	    service.textSearch({location: latLng, query: this.state.search }, (results, status) => {
 	      for(var i = 0; i < results.length; i++){
-	        this.props.map_places.push(results[i]);
+
+	      	console.log(results[i]);
+
+	      	var placeInfo;
+
+	      	if(results[i].place_id){
+	      		service.getDetails({placeId: results[i].place_id}, (place, status) => {
+	      			if(status === google.maps.places.PlacesServiceStatus.OK){
+	      				console.log(place, status)
+	      			}
+	      		})
+	      	}
+
+	        placeLocs.push(results[i])
+	        this.state.locs.push(results[i])
+
+
 	      }
 
-	      this.props.mapSearchLocations()
-
-	      
+	      this.props.mapSearchLocations(placeLocs)
 	    })
 
-		
+
 	},
 
 	render: function() {
@@ -53,11 +70,10 @@ const MapEdit_form = React.createClass({
 
 			<div className="map-create-form">
 				<form className="">
-					<label> What are you searching for? <input type="text" name="place" onChange={this.handleSearchField} />
+					<label> Get a location: <input type="text" name="place" placeholder="Search here" onChange={this.handleSearchField} />
 					</label>
-					<br/>
-					
-					<button className='btn-submit' onClick={this.submitSearch}>Search</button>
+
+					<button className='btn-submit' onClick={this.submitSearch}>Find!</button>
 				</form>
 			</div>
 
@@ -70,4 +86,4 @@ const MapEdit_form = React.createClass({
 
 })
 
-export default MapEdit_form;
+export default MapSearch_form;

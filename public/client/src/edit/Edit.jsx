@@ -357,6 +357,11 @@ const Edit = React.createClass({
                     >
                   Save
                   </Link>
+                   <Link className="btn btn-success"
+                    to={"/users/" + this.props.params.user_id + "/collection"}
+                    >
+                  Deletes
+                  </Link>
 
 
 

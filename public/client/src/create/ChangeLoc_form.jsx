@@ -20,7 +20,7 @@ const Map_form = React.createClass({
 
 			if(place){
 				console.log(place.geometry.location.lat(), place.geometry.location.lng() );
-				this.props.centreMapLocation(place.geometry.location);
+				this.props.newMapLocation(place.geometry.location, place);
 
 				this.setState({latitude: place.geometry.location.lat(),
 					   		   longitude: place.geometry.location.lng() })
@@ -37,15 +37,7 @@ const Map_form = React.createClass({
 
 
 	handleMapLocationLatLong: function(event) {
-
-		var privacy;
-
-		if(document.getElementById('selectBox').value == 'Yes'){
-			privacy = true;
-		} else {
-			privacy = false;
-		}
-
+		
 
 	},
 

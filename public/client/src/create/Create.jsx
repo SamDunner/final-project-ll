@@ -8,6 +8,7 @@ import PinTable from './PinTable.jsx';
 import { Link } from 'react-router';
 import $ from 'jquery';
 import ChangeLoc_form from './ChangeLoc_form.jsx'
+import ChangeTitle from './ChangeTitle.jsx'
 
 
 const Create = React.createClass({
@@ -231,6 +232,44 @@ const Create = React.createClass({
     this.forceUpdate()
   },
 
+  newMapLocation: function(latLng, location){
+
+      console.log(this.state);
+
+      $.ajax({
+        method: "PUT",
+        data: {title: this.state.map_information.title,
+               location: location.formatted_address,
+               latitude: latLng.lat(),
+               longitude: latLng.lat(),
+               privacy: this.state.map_information.privacy,
+               published: this.state.map_information.published },
+        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id
+      }).done((results) => {
+
+        console.log("map updated!");
+        console.log(results);
+
+          this.setState({
+            map_information: {
+              title: results[0].title,
+              location: results[0].location,
+              latitude: results[0].latitude,
+              longitude: results[0].longitude,
+              privacy: results[0].privacy,
+              published: results[0].published,
+              user_id: this.props.params.user_id,
+              map_id: results[0].map_id
+            },
+            create_map: {centre: {latitude: results[0].latitude, longitude: results[0].longitude}
+          }}, () => {
+            console.log(this.state)
+          })
+          
+        })
+
+  },
+
   //updates the state of the map central location:
   centreMapLocation: function(location, type){
 
@@ -342,6 +381,9 @@ const Create = React.createClass({
                   <div className="row name-map">
                     <div className="col-xs-12">
                     {this.state.map_information.title}
+                    <ChangeTitle map_information={this.state.map_information} />
+                    <ChangeLoc_form newMapLocation={this.newMapLocation}
+                    />
                     </div>
                   </div>
 
@@ -383,6 +425,8 @@ const Create = React.createClass({
                   <div className="row pin-list">
                     <div className="col-xs-12">
               			<PinTable centreMapLocation={this.centreMapLocation}
+                              user_id={this.props.params.user_id}
+                              map_id={this.state.map_information.map_id}
                         		  map_location={this.state.create_map}
                         		  pins={this.state.pins}/>
               	    </div>

@@ -6,6 +6,7 @@ import MapSearch_form from './MapSearch_form.jsx';
 //import Marker from './Map.jsx';
 //import PinTable from './PinTable.jsx';
 import $ from 'jquery';
+import { Link } from 'react-router';
 
 const PinContent = React.createClass({
 	
@@ -203,6 +204,8 @@ const PinContent = React.createClass({
 		                <BlogContent marker_information={this.state.marker_information}
 		                			 changeDescription={this.changeDescription}
 		                />
+
+		                <Link className="btn btn-warning" to={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/content"} > Edit this Blog Entry </Link>
 
 
 		            </div>

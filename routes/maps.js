@@ -43,6 +43,9 @@ module.exports = (knex) => {
   });
 
   router.put("/:map_id", (req, res) => {
+
+    console.log(req.body)
+
     knex("maps").where('map_id', req.params.map_id)
     .update({
       'title': req.body.title,
@@ -51,8 +54,9 @@ module.exports = (knex) => {
       'longitude': req.body.longitude,
       'privacy': req.body.privacy,
       'published': req.body.published
-    })
+    }).returning('*')
     .then((results) => {
+      res.json(results);
       console.log("map updated")
     });
   });

@@ -5,8 +5,10 @@ import React, {Component}  from 'react';
 // import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import RaisedButton from 'material-ui/RaisedButton';
+import { Link } from 'react-router';
 import $ from 'jquery'
 import cookie from 'react-cookie';
+import bootstrap from 'bootstrap';
 // import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 
@@ -38,6 +40,7 @@ const PinTable = React.createClass({
                 </div>
               </div>
 
+
             { this.props.pins.map((pin, index) => {
               return(
 
@@ -51,19 +54,11 @@ const PinTable = React.createClass({
                     <span className="pin-title">
                       {pin.title}
                     </span>
-
-                    <button type="button" className="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <span className="caret"></span>
-                      <span className="sr-only">Toggle Dropdown</span>
-                    </button>
-
-                    <ul className="dropdown-menu">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li role="separator" className="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                    </ul>
+                    <br/>
+                    <span className="pin-title">
+                       <Link to={"/users/" + this.props.user_id + "/maps/" + this.props.map_id + "/pins/" + pin.pin_id + "/edit"} > Create Blog Entry </Link>
+                    </span>
+                                        
                   </div>
                 </div>
               );//return

@@ -49,6 +49,7 @@ app.use(methodOverride('_method'));
 // Log knex SQL queries to STDOUT as well
 // app.use(knexLogger(knex));
 app.use(cookieParser());
+app.use(express.static('public'))
 
 
 app.use(logger('combined'));

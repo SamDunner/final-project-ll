@@ -187,15 +187,15 @@ export default class Map extends Component {
                 }
                 <br/>
 
-                {/*<Link className="btn btn-outline-primary col-md-1 col-lg-1 col-md-offset-2"
-                  to={"/users/" + {this.props.user_id} + "/maps/" + {this.props.map_id} + "/pins/" + {marker.pin_id} + "/edit" }>
+                <Link className="btn btn-outline-primary col-md-1 col-lg-1 col-md-offset-2"
+                  to="PinContent" >
                 Create Blog Entry
-                </Link>*/}
+                </Link>
 
                 {/*<a href=link_to_blog className='btn btn-info'>Create Blog Entry</a>*/  }
 
 
-                <button /*href="/users/" + {this.props.user_id} + "/maps/" + {this.props.map_id} + "/pins/" + {marker.pin_id} + "/edit"*/ className='btn btn-info' type='submit'>Create Blog Entry</button>
+                {/*<button href="/users/" + {this.props.user_id} + "/maps/" + {this.props.map_id} + "/pins/" + {marker.pin_id} + "/edit" className='btn btn-info' type='submit'>Create Blog Entry</button>*/}
 
                 <br />
 

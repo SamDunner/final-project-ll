@@ -59,7 +59,6 @@ render((
     <Route path="/users/:user_id/maps/:map_id" component={Show}>
     </Route>
 
-
     <Route path="/users/:user_id/maps/:map_id/edit" component={Edit}>
     </Route>
 
