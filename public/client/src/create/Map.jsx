@@ -162,6 +162,8 @@ export default class Map extends Component {
 
   renderInfo(ref, marker) {
 
+    var link_to_blog = "/users/" + this.props.user_id +"/maps/" + this.props.map_id + "/pins/" + marker.pin_id + "/edit"
+
     return (
 
       <InfoWindow
@@ -205,6 +207,13 @@ export default class Map extends Component {
                   <h4>rating: {marker.rating}</h4>
                 }
                 <br/>
+
+                {/*<Link className="btn btn-outline-primary col-md-1 col-lg-1 col-md-offset-2"
+                  to={"/users/" + {this.props.user_id} + "/maps/" + {this.props.map_id} + "/pins/" + {marker.pin_id} + "/edit" }>
+                Create Blog Entry
+                </Link>*/}
+
+                {/*<a href=link_to_blog className='btn btn-info'>Create Blog Entry</a>*/  }
 
 
                 <button /*href="/users/" + {this.props.user_id} + "/maps/" + {this.props.map_id} + "/pins/" + {marker.pin_id} + "/edit"*/ className='btn btn-info' type='submit'>Create Blog Entry</button>

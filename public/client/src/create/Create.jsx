@@ -7,6 +7,7 @@ import Marker from './Map.jsx';
 import PinTable from './PinTable.jsx';
 import { Link } from 'react-router';
 import $ from 'jquery';
+import ChangeLoc_form from './ChangeLoc_form.jsx'
 
 
 const Create = React.createClass({
@@ -343,7 +344,9 @@ const Create = React.createClass({
                     {this.state.map_information.title}
                     </div>
                   </div>
+
                   <br/>
+
 
                   <div className="row edit-map">
                     <div className="col-xs-12">

@@ -228,6 +228,12 @@ const Show = React.createClass({
                   Edit
             </Link>
 
+            <Link className="btn btn-info"
+                    to={"/users/" + this.props.params.user_id + "/collection"}
+                    >
+                  Back to Collections
+            </Link>
+
 
             </div>
 

@@ -314,6 +314,12 @@ const Edit = React.createClass({
                 <br/>
 
                 <div className="edit-map" >
+                  {/*<div>
+                    <div id="title-input-change" contenteditable>{this.state.map_information.title}</div>
+                  </div>*/} 
+                  <div id="change-loc" >
+                    <ChangeLoc_form centreMapLocation={this.centreMapLocation} />
+                  </div>
                   <div id="edit">
                      <Map
                       user_id={this.props.params.user_id}

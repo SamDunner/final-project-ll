@@ -22,7 +22,8 @@ const Map_form = React.createClass({
 				console.log(place.geometry.location.lat(), place.geometry.location.lng() );
 				this.props.centreMapLocation(place.geometry.location);
 
-				this.setState({latitude: place.geometry.location.lat(),
+				this.setState({location: place.formatted_address,
+							   latitude: place.geometry.location.lat(),
 					   		   longitude: place.geometry.location.lng() })
 			}
 
@@ -51,8 +52,7 @@ const Map_form = React.createClass({
 			privacy = false;
 		}
 
-		this.setState({location: event.target.value,
-					   privacy: privacy,
+		this.setState({privacy: privacy,
 					   published: false });
 
 	},
@@ -61,6 +61,8 @@ const Map_form = React.createClass({
 
 	submitMap: function(event) {
 		event.preventDefault()
+
+		
 
 		if(this.state.title !== "" && this.state.location !== ""){
 			this.props.map_info(this.state)
