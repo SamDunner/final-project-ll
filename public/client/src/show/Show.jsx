@@ -208,6 +208,16 @@ const Show = React.createClass({
 		                />
 
 		            </div>
+                <div className="row edit-form">
+                  <div className="col-xs-12">
+                    <div id="edit-map-form">
+                      <MapShow_form marker_information={this.state.marker_information}
+                                      map_location={this.state.create_map}
+                                      mapSearchLocations={this.mapSearchLocations}
+                      />
+                    </div>
+                  </div>
+                </div>
 
 
             <div className="row pin-list">

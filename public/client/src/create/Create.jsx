@@ -121,11 +121,45 @@ const Create = React.createClass({
       }
 
     })
+  },
 
+
+  changeMapTitle: function(title){
+
+     $.ajax({
+        method: "PUT",
+        data: {title: title,
+               location: this.state.map_information.location,
+               latitude: this.state.map_information.latitude,
+               longitude: this.state.map_information.longitude,
+               privacy: this.state.map_information.privacy,
+               published: this.state.map_information.published },
+        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id
+      }).done((results) => {
+
+        console.log("map updated!");
+        console.log(results);
+
+          this.setState({
+            map_information: {
+              title: results[0].title,
+              location: results[0].location,
+              latitude: results[0].latitude,
+              longitude: results[0].longitude,
+              privacy: results[0].privacy,
+              published: results[0].published,
+              user_id: this.props.params.user_id,
+              map_id: results[0].map_id
+            }
+          }, () => {
+            console.log(this.state)
+            this.forceUpdate();
+          })
+          
+        })
 
 
   },
-
 
   //function called when a pin is created in child map component.
   createPin: function(){
@@ -234,14 +268,14 @@ const Create = React.createClass({
 
   newMapLocation: function(latLng, location){
 
-      console.log(this.state);
+      console.log("from map new location", latLng, location, this.state);
 
       $.ajax({
         method: "PUT",
         data: {title: this.state.map_information.title,
                location: location.formatted_address,
                latitude: latLng.lat(),
-               longitude: latLng.lat(),
+               longitude: latLng.lng(),
                privacy: this.state.map_information.privacy,
                published: this.state.map_information.published },
         url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id
@@ -264,6 +298,7 @@ const Create = React.createClass({
             create_map: {centre: {latitude: results[0].latitude, longitude: results[0].longitude}
           }}, () => {
             console.log(this.state)
+            this.forceUpdate();
           })
           
         })
@@ -381,7 +416,9 @@ const Create = React.createClass({
                   <div className="row name-map">
                     <div className="col-xs-12">
                     {this.state.map_information.title}
-                    <ChangeTitle map_information={this.state.map_information} />
+                    <ChangeTitle  changeMapTitle={this.changeMapTitle}
+                                  map_information={this.state.map_information} />
+
                     <ChangeLoc_form newMapLocation={this.newMapLocation}
                     />
                     </div>
@@ -398,7 +435,6 @@ const Create = React.createClass({
                           map_id={this.state.map_information.map_id}
                         	marker_information={this.state.marker_information}
                           routePath={this.state.routePath}
-
                         	map_location={this.state.create_map}
                         	pins={this.state.pins}
                           map_places={this.state.map_places}
