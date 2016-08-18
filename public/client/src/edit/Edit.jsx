@@ -6,6 +6,8 @@ import MapSearch_form from './MapSearch_form.jsx';
 import PinTable from './PinTable.jsx';
 import $ from 'jquery';
 import { Link } from 'react-router';
+import ChangeLoc_form from '../create/ChangeLoc_form.jsx';
+import ChangeTitle from '../create/ChangeTitle.jsx';
 
 const Edit = React.createClass({
 
@@ -118,7 +120,7 @@ const Edit = React.createClass({
             console.log(this.state)
             this.forceUpdate();
           })
-          
+
         })
   },
 
@@ -193,7 +195,7 @@ const Edit = React.createClass({
       service.getDetails({placeId: marker.place_id}, (place, status) => {
         if(status === google.maps.places.PlacesServiceStatus.OK){
           console.log("from inside create panel info", place)
-            
+
             var panelData = {
               name: place.name,
               address: place.formatted_address,
@@ -295,7 +297,7 @@ const Edit = React.createClass({
             console.log(this.state)
             this.forceUpdate();
           })
-          
+
         })
   },
 
@@ -456,12 +458,23 @@ const Edit = React.createClass({
                   </div>
                 </div>
 
+                    <ChangeTitle  changeMapTitle={this.changeMapTitle}
+                                  map_information={this.state.map_information} />
+
+                    <ChangeLoc_form newMapLocation={this.newMapLocation}
+                    />
+
                 <br/>
 
 
                 <div className="row pin-list">
                   <div className="col-xs-12">
-                    <PinTable centreMapLocation={this.centreMapLocation}
+                    <PinTable
+                              user_id={this.props.params.user_id}
+                              map_id={this.props.params.map_id}
+
+
+                              centreMapLocation={this.centreMapLocation}
                               map_location={this.state.create_map}
                               pins={this.state.pins}
                     />
@@ -471,7 +484,7 @@ const Edit = React.createClass({
                   <div className="row page-links">
                     <div className="col-xs-offset-7 col-xs-2">
                       <Link className="btn btn-link"
-                        to={"/users/" + this.props.params.user_id + "/collection"}
+                        to={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id}
                         >
                         update map
                       </Link>

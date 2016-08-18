@@ -193,50 +193,63 @@ const PinContent = React.createClass({
                   <br/>
                   <br/>
 
-          <div className="container full-edit-map">
+          <div className="container blog-edit-map">
 
             <div className="row name-map">
-              <div className="col-xs-12">
+              <div className="col-xs-offset-6 col-xs-5">
                 {this.state.map_information.title}
-                </div>
               </div>
-            <div className="row show-map">
-              <div className="col-xs-12">
-	               	<div id="show">
-		                <Map
-		                	marker_information={this.state.marker_information}
-		                	map_location={this.state.create_map}
-		                    map_places={this.state.map_places}
-		                    pins={this.state.pins}
-		                />
-		              </div>
+
+            <div className="row create-map">
+              <div className="col-xs-6">
+
+                <div className="map-form">
+                    <BlogContent marker_information={this.state.marker_information}
+                           changeDescription={this.changeDescription}
+                    />
+
+
+
                 </div>
               </div>
 
-              <div className="row edit-form">
-                 <div className="col-xs-12">
-    		            <div id="edit-map-form">
-    		                <MapSearch_form marker_information={this.state.marker_information}
-    		                		  	    map_location={this.state.create_map}
-    		                         	    mapSearchLocations={this.mapSearchLocations}
-    		                         	    map_places={this.state.map_places}
-    		                />
-                    </div>
+                <div className="create-map col-xs-6" >
+                  <div id="create">
+                    <Map
+                      marker_information={this.state.marker_information}
+                      map_location={this.state.create_map}
+                        map_places={this.state.map_places}
+                        pins={this.state.pins}
+                    />
                   </div>
                 </div>
+              </div>
+              <div className="row map-search">
+                <div className="col-xs-offset-6 col-xs-6">
+                  <MapSearch_form marker_information={this.state.marker_information}
+                                  map_location={this.state.create_map}
+                                  mapSearchLocations={this.mapSearchLocations}
+                                  map_places={this.state.map_places}
+                  />
+                </div>
+              </div>
 
-                <br/>
 
-		                <BlogContent marker_information={this.state.marker_information}
-		                			 changeDescription={this.changeDescription}
-		                />
+
+
+
+
+
 
   {/*}                                <div>
                                     <ImageUpload />
                                   </div>
   */}
 
-		                <Link className="btn btn-warning" to={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/content"} > Edit this Blog Entry </Link>
+<br/>
+<br/>
+
+		                <Link className="btn btn-warning" to={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/content"} > Save this Blog Entry </Link>
 
 		                <div className="file_upload">
 
@@ -248,6 +261,7 @@ const PinContent = React.createClass({
 		            
 
 
+          </div>
           </div>
 
 

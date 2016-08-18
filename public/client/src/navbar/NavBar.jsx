@@ -50,7 +50,7 @@ const NavBar = React.createClass({
 
         <a className="site-name col-md-2 col-lg-2"
            href="/">
-           PLOTLINE
+           plotline
         </a>
 
         <Link className="btn btn-outline-primary col-md-1 col-lg-1 col-md-offset-2"

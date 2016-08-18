@@ -36,16 +36,14 @@ const BlogContent = React.createClass({
 
 			<div id="blog-form">
 
-				<div className='blog-title'>
-					<label>Title: {this.props.marker_information.title}</label>
-				</div>
+				<h2 className='create'>{this.props.marker_information.title}</h2>
 
 				<div className='blog-date'>
-					<label>Date: {this.props.marker_information.date}</label>
+					{this.props.marker_information.date}
 				</div>
 
 				<div className='blog-address'>
-					<label>Address: {this.props.marker_information.address}</label>
+					{this.props.marker_information.address}
 				</div>
 
 

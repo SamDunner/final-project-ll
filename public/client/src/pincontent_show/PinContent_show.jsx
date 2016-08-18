@@ -9,7 +9,7 @@ import $ from 'jquery';
 import { Link } from 'react-router';
 
 const PinContent = React.createClass({
-	
+
 	getInitialState: function(){
 
 		return {map_information: { title: "",
@@ -36,8 +36,12 @@ const PinContent = React.createClass({
           		pins: [],
           		map_places: [],
           		create_map: { centre: {latitude: 51.5074, longitude: -0.1278}},
+<<<<<<< HEAD
           		image_urls: []
           		
+=======
+
+>>>>>>> a66417cfd7f943b2f214c8bc6a53da36384ac7e4
         };
 	},
 
@@ -46,7 +50,7 @@ const PinContent = React.createClass({
     var searchLocations = this.state.map_places;
 
   	for(var i = 0; i < locations.length; i++){
-        
+
         let marker = {
           name: locations[i].name,
           rating: locations[i].rating,
@@ -102,7 +106,7 @@ const PinContent = React.createClass({
 	             user_id: this.props.params.user_id},
 	      url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id
 	    }).done((results) => {
-	      	
+
 	    	console.log(results)
 
 	    	let marker = {
@@ -140,7 +144,7 @@ const PinContent = React.createClass({
 	    	}, () => {
 	    		console.log(this.state)
 	    	})
-	     
+
 	    })
 
   	},
@@ -153,7 +157,7 @@ const PinContent = React.createClass({
               user_id: this.props.params.user_id},
       url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id
     }).done((results) => {
-      
+
        this.setState({ map_information: {title: results[0].title,
                                          location: results[0].location,
                                          latitude: results[0].latitude,
@@ -168,7 +172,7 @@ const PinContent = React.createClass({
                     	console.log(this.state)
                     })
 
-     
+
     	})
 
 	},
@@ -183,19 +187,19 @@ const PinContent = React.createClass({
 
 		return (<div className="pin-content">
 
-					<div className="standard-nav-bar">
-	                    <NavBar />
-	                </div>
-	               	<div id="pin-show-map">
-		                <Map
-		                	marker_information={this.state.marker_information} 
-		                	map_location={this.state.create_map}
-		                    map_places={this.state.map_places} 
-		                    pins={this.state.pins} 
-		                />
-		            </div>
 
-		            <div className="all-images">
+      <div className="pin-content">
+
+          <div className="standard-nav-bar">
+                      <NavBar />
+                  </div>
+
+                  <br/>
+                  <br/>
+
+          <div className="container blog-edit-map">
+
+            <div className="all-images">
 		            	{this.state.image_urls &&
 		            		this.state.image_urls.map((image, index) => {
 		            			return(
@@ -205,27 +209,56 @@ const PinContent = React.createClass({
 		            	}
 		            </div>
 
-		            <div id="show-map-form">
-		                <MapSearch_form marker_information={this.state.marker_information} 
-		                		  	    map_location={this.state.create_map}
-		                         	    mapSearchLocations={this.mapSearchLocations}
-		                         	    map_places={this.state.map_places}
-		                />
+            <div className="row name-map">
+              <div className="col-xs-offset-6 col-xs-5">
+                {this.state.map_information.title}
+              </div>
 
-		               
+            <div className="row create-map">
+              <div className="col-xs-6">
 
-		                <BlogContent marker_information={this.state.marker_information}
-		                			 changeDescription={this.changeDescription}
-		                />
+                <div className="map-form">
+                    <BlogContent marker_information={this.state.marker_information}
+                           changeDescription={this.changeDescription}
+                    />
+
+
+
+                </div>
+              </div>
+
+                <div className="create-map col-xs-6" >
+                  <div id="create">
+                    <Map
+                      marker_information={this.state.marker_information}
+                      map_location={this.state.create_map}
+                        map_places={this.state.map_places}
+                        pins={this.state.pins}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="row map-search">
+                <div className="col-xs-offset-6 col-xs-6">
+                  <MapSearch_form marker_information={this.state.marker_information}
+                                  map_location={this.state.create_map}
+                                  mapSearchLocations={this.mapSearchLocations}
+                                  map_places={this.state.map_places}
+                  />
+                </div>
+              </div>
+
+
+                  <br/>
+                  <br/>
+
 
 		                 <Link className="btn btn-warning" to={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/edit"} > Edit this Blog Entry </Link>
 
 
 		            </div>
-		            
-		            
-			
-
+		        </div>
+          </div>
 				</div>)
 
 	}

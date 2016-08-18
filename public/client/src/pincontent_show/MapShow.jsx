@@ -33,9 +33,9 @@ export default class Map extends Component {
 	  console.log('from handleMarkerClick', marker, event)
 
 	  marker.info = true;
-	    
+
 	  console.log("Handle Marker Click state: ", this.state);
-	    
+
 	  this.setState(this.state)
 	}
 
@@ -45,29 +45,29 @@ export default class Map extends Component {
 	  return (
 
 	    <InfoWindow
-	        key={`${ref}_info_window`} 
+	        key={`${ref}_info_window`}
 	        onCloseclick={this.handleClose.bind(this, marker)} >
-	          {<div className='marker-info-search'> 
-             
-                <h4>Title: {marker.name}</h4>  
-                <br/>  
+	          {<div className='marker-info-search'>
 
-                <h4>Date: {marker.date}</h4>  
-                <br/> 
-
-                <h4>Address: {marker.address || marker.formatted_address}</h4> 
+                <h4>Title: {marker.name}</h4>
                 <br/>
 
-                <h4>Type: {marker.name}</h4>  
-                <br/>   
+                <h4>Date: {marker.date}</h4>
+                <br/>
 
-                <h4>Description: {marker.description}</h4>   
+                <h4>Address: {marker.address || marker.formatted_address}</h4>
+                <br/>
+
+                <h4>Type: {marker.name}</h4>
+                <br/>
+
+                <h4>Description: {marker.description}</h4>
                 <br/>
 
                 {marker.rating &&
-                  <h4>rating: {marker.rating}</h4> 
+                  <h4>rating: {marker.rating}</h4>
                 }
-                <br/> 
+                <br/>
 
 
                 <button /*href="/users/" + {this.props.user_id} + "/maps/" + {this.props.map_id} + "/pins/" + {marker.pin_id} + "/edit"*/ className='btn btn-info' type='submit'>Create Blog Entry</button>
@@ -77,12 +77,12 @@ export default class Map extends Component {
                {/*
                <button className='btn btn-danger' onClick={this.renderInfoWindow(ref, marker)} /*onClick={Create Blo} type='submit'>Delete</button> */}
                {/*
-               <button className='btn btn-warning' /*onClick={this.renderInfoWindow(ref, marker)} onClick={} type='submit'>Delete</button>    
+               <button className='btn btn-warning' /*onClick={this.renderInfoWindow(ref, marker)} onClick={} type='submit'>Delete</button>
                 */}
 
 
-               <button className='btn btn-danger' onClick={this.onDeletePin.bind(this, marker)} type='submit'>Delete</button>  
-            
+               <button className='btn btn-danger' onClick={this.onDeletePin.bind(this, marker)} type='submit'>Delete</button>
+
             </div>}
 
 
@@ -114,52 +114,52 @@ export default class Map extends Component {
 	              ref="mapCanvas"
 	              defaultZoom={10}
 	              center={{lat: this.props.map_location.centre.latitude, lng: this.props.map_location.centre.longitude}}
-	              
+
 	            >
 
 	            {this.props.pins &&
 	              this.props.pins.map((marker, index) => {
 
 	                const ref=`marker_${index}`
-	                var infoSearchWindow = marker.info ? this.renderInfo(ref, marker) : null 
-	                
+	                var infoSearchWindow = marker.info ? this.renderInfo(ref, marker) : null
+
 	                return (
-	                    
+
 	                     <Marker
 	                      key={marker.pin_id}
 	                      ref={ref}
-	                      {...marker} 
+	                      {...marker}
 	                        >
 	                       {infoSearchWindow}
 	                    </Marker>
-	                    
+
 	                )
 
 	              })
-	              
+
 	            }
 
 	            {this.props.map_places &&
 	              this.props.map_places.map((marker, index) => {
 
 	                const ref=`marker_${index}`
-	                
+
 	                return (
-	                    
+
 	                     <Marker
 	                      key={marker.pin_id}
 	                      ref={ref}
-	                      {...marker} 
+	                      {...marker}
 	                        >
 
-	                        
+
 
 	                    </Marker>
-	                    
+
 	                )
 
 	              })
-	              
+
 	            }
 
 
@@ -168,7 +168,7 @@ export default class Map extends Component {
 	          }
 	        />
 	        </div>
-	      
+
 	    );
 
 	  }

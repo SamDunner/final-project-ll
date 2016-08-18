@@ -56,7 +56,9 @@ const PinTable = React.createClass({
                     </span>
 
                     <span className="blog-pin-title">
-                       <Link to={"/users/" + this.props.user_id + "/maps/" + this.props.map_id + "/pins/" + pin.pin_id + "/edit"} >  Blog Entry </Link>
+
+                       <Link to={"/users/" + this.props.user_id + "/maps/" + this.props.map_id + "/pins/" + pin.pin_id + "/edit"} >Blog Entry </Link>
+
                     </span>
 
                   </div>

@@ -37,7 +37,7 @@ const Map_form = React.createClass({
 
 
 	handleMapLocationLatLong: function(event) {
-		
+
 
 	},
 
@@ -53,13 +53,13 @@ const Map_form = React.createClass({
 			<div id="map-create-form">
 				<form className="change-map-location">
 					{/* id of input field below must not be changed */}
-					<label> Change Location:
+					<label> Change map view location:
 		          	<input type="text" name="location" id="create-autocomplete" onChange={this.handleMapLocationLatLong} />
 					</label>
 				</form>
 			</div>
 			);
-	
+
 	}
 })
 

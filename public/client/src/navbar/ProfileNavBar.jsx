@@ -84,30 +84,21 @@ const ProfileNavBar = React.createClass({
           <NavBar />
         </div>
           <div className="row custom-profile-nav custom-element-margin-top">
-            <nav className="selection-nav-bar col-md-12 col-lg-12">
-              <Link className="profile-tab col-md-offset-4 col-lg-offset-4 col-md-1 col-lg-1"
-                    to={"/users/" + this.getCookie() + "/collection"}
-                    onClick={this.getCollection}>
-                collection
-              </Link>
-
-              <Link className="profile-tab col-md-1 col-lg-1"
-                    to={"/users/" + this.getCookie() + "/followers"}
-                    onClick={this.getFollowers}>
-                followers
-              </Link>
-
-              <Link className="profile-tab col-md-1 col-lg-1"
-                    to={"/users/" + this.getCookie() + "/following"}
-                    onClick={this.getFollowing}>
-                following
-              </Link>
-
-              <Link className="profile-tab col-md-1 col-lg-1"
-                    to={"/users/" + this.getCookie() + "/favorites"}
-                    onClick={this.getFavorites}>
-                favorites
-              </Link>
+            <nav className="selection-nav-bar row">
+              <div className="col-xs-6 right-adjust-col">
+                <Link className="profile-tab"
+                      to={"/users/" + this.getCookie() + "/collection"}
+                      onClick={this.getCollection}>
+                  collection
+                </Link>
+              </div>
+              <div className="col-xs-6 left-adjust-col">
+                <Link className="profile-tab"
+                      to={"/users/" + this.getCookie() + "/favorites"}
+                      onClick={this.getFavorites}>
+                  favorites
+                </Link>
+              </div>
             </nav>
           </div>
         </div>

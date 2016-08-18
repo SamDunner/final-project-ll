@@ -25,14 +25,15 @@ const ChangeTitle = React.createClass({
 
 
 		return (
-				<div>		
-					<div id="change-title-input">
-						<input onChange={this.handleTitle} defaultValue={this.props.map_information.title}/>
-					</div>
-					<div className="change-title-btn">
-						<button onClick={this.submitNewTitle} className="btn btn-default">Change Title</button>
-					</div>					
-				</div>
+				<div>
+					<div className="change-title-input">
+  						<form className="">
+              <label>Rename your map: <input onChange={this.handleTitle} placeholder={this.props.map_information.title}/>
+              </label>
+    						<button className='btn-submit' onClick={this.submitNewTitle}>Rename</button>
+            </form>
+				  </div>
+        </div>
 			);
 	}
 

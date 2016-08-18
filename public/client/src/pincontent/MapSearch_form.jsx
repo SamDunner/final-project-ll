@@ -56,8 +56,8 @@ const MapSearch_form = React.createClass({
 
 			<div className="map-create-form">
 				<form className="">
-					<label> Get a location: <input type="text" placeholder="Search here" name="place" onChange={this.handleSearchField} />
-					</label>
+
+          <input type="text" placeholder="Search here" name="place" onChange={this.handleSearchField} /><br/>
 
 					<button className='btn-submit' onClick={this.submitSearch}>Find!</button>
 				</form>

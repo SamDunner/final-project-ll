@@ -7,9 +7,9 @@ import Marker from './Map.jsx';
 import PinTable from './PinTable.jsx';
 import { Link } from 'react-router';
 import $ from 'jquery';
-import ChangeLoc_form from './ChangeLoc_form.jsx'
-import ChangeTitle from './ChangeTitle.jsx'
-import Panel from './Panel.jsx'
+import ChangeLoc_form from './ChangeLoc_form.jsx';
+import ChangeTitle from './ChangeTitle.jsx';
+import Panel from './Panel.jsx';
 
 
 const Create = React.createClass({
@@ -165,7 +165,7 @@ const Create = React.createClass({
             console.log(this.state)
             this.forceUpdate();
           })
-          
+
         })
 
 
@@ -244,7 +244,7 @@ const Create = React.createClass({
       service.getDetails({placeId: marker.place_id}, (place, status) => {
         if(status === google.maps.places.PlacesServiceStatus.OK){
           console.log("from inside create panel info", place)
-            
+
             var panelData = {
               name: place.name,
               address: place.formatted_address,
@@ -444,7 +444,7 @@ const Create = React.createClass({
                 </div>
               </div>
 
-                <div className="create-map col-md-6 col-lg-6" >
+                <div className="create-map col-xs-6" >
                   <div id="create">
                     <Map map_location={this.state.create_map} marker_information={this.state.marker_information} />
                   </div>
@@ -458,11 +458,6 @@ const Create = React.createClass({
                   <div className="row name-map">
                     <div className="col-xs-12">
                     {this.state.map_information.title}
-                    <ChangeTitle  changeMapTitle={this.changeMapTitle}
-                                  map_information={this.state.map_information} />
-
-                    <ChangeLoc_form newMapLocation={this.newMapLocation}
-                    />
                     </div>
                   </div>
 
@@ -499,6 +494,12 @@ const Create = React.createClass({
                       </div>
                     </div>
                   </div>
+
+                    <ChangeTitle  changeMapTitle={this.changeMapTitle}
+                                  map_information={this.state.map_information} />
+
+                    <ChangeLoc_form newMapLocation={this.newMapLocation}
+                    />
 
                   <br/>
 
