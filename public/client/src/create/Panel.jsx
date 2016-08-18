@@ -16,18 +16,6 @@ const Panel = React.createClass({
 		return(
 
 		<div className="Panel">
-			{this.props.panelInfo.photos > 0 &&
-
-				this.props.panelInfo.photos.map((photo, index) => {
-
-					return (
-						<div style={{float: left}} className="panel-photos">
-							<img src={photo.getUrl()} />
-
-						</div>		
-					)
-				})
-			}
 
 			{this.props.panelInfo.name &&
 			<label>Name: {this.props.panelInfo.name}</label>

@@ -36,12 +36,10 @@ const PinContent = React.createClass({
           		pins: [],
           		map_places: [],
           		create_map: { centre: {latitude: 51.5074, longitude: -0.1278}},
-<<<<<<< HEAD
+
           		image_urls: []
           		
-=======
 
->>>>>>> a66417cfd7f943b2f214c8bc6a53da36384ac7e4
         };
 	},
 
