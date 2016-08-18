@@ -49,7 +49,7 @@ const App = React.createClass({
 
 		return (
       <div className="home-page-container">
-        <div className="row col-md-12 col-lg-12">
+        <div className="row">
 
           { !document.cookie &&
             <div className="home-page-pre-login">
@@ -62,8 +62,13 @@ const App = React.createClass({
           }
 
           { document.cookie &&
+           <div>
             <div className="home-page-navbar">
               <NavBar />
+            </div>
+            <div>
+              <img src="/images/van-big-min.jpg" className="banner-image img-responsive"/>
+            </div>
             </div>
             }
           </div>

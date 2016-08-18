@@ -3,7 +3,7 @@ import NavBar from '../navbar/NavBar.jsx';
 import Map from './MapShow.jsx';
 import MapShow_form from './MapShow_form.jsx';
 import $ from 'jquery';
-import PinTable from './PinTable.jsx'
+import PinTable from './PinTable.jsx';
 import { Link } from 'react-router';
 
 const Show = React.createClass({
@@ -252,6 +252,8 @@ const Show = React.createClass({
 
               </div>
              </div>
+
+
             </div>
 
           </div>
