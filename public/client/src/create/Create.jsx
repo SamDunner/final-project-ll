@@ -9,6 +9,7 @@ import { Link } from 'react-router';
 import $ from 'jquery';
 import ChangeLoc_form from './ChangeLoc_form.jsx'
 import ChangeTitle from './ChangeTitle.jsx'
+import Panel from './Panel.jsx'
 
 
 const Create = React.createClass({
@@ -38,7 +39,8 @@ const Create = React.createClass({
           pins: [],
           create_map: { centre: {latitude: 51.5074, longitude: -0.1278}},
           map_places: [],
-          routePath: []
+          routePath: [],
+          panelInfo: {}
         }
   },
 
@@ -223,6 +225,37 @@ const Create = React.createClass({
 
   },
 
+  createPanelInfo: function(marker){
+    console.log("from create panel info", marker)
+    var panelInfo = this.state.panelInfo
+    var service = new google.maps.places.PlacesService(document.createElement('div'));
+
+    if(marker.place_id){
+      service.getDetails({placeId: marker.place_id}, (place, status) => {
+        if(status === google.maps.places.PlacesServiceStatus.OK){
+          console.log("from inside create panel info", place)
+            
+            var panelData = {
+              name: place.name,
+              address: place.formatted_address,
+              phone_number: place.formatted_phone_number,
+              rating: place.rating,
+              reviews: place.reviews,
+              url: place.url,
+              photos: place.photos,
+              website: place.website
+            }
+
+          this.setState({panelInfo: panelData}, () => {
+            console.log("from inside the panel info", this.state)
+          })
+
+        }
+      })
+    }
+
+  },
+
   handleChangeLoc: function(event){
 
     //var map = new google.maps.Map(this.refs.mapCanvas)
@@ -250,6 +283,7 @@ const Create = React.createClass({
           position: locations[i].geometry.location,
           key: locations[i].id,
           content: this.props.infoWindowContent,
+          place_id: locations[i].place_id,
           map_type: "search",
           showSearchInfo: false,
           showInfo: false,
@@ -441,6 +475,7 @@ const Create = React.createClass({
                           deletePin={this.deletePin}
                           createPin={this.createPin}
                           removeMapLocation={this.removeMapLocation}
+                          createPanelInfo={this.createPanelInfo}
                         />
                       </div>
                     </div>
@@ -475,6 +510,12 @@ const Create = React.createClass({
                       update map
                       </Link>
                     </div>
+                  </div>
+
+                  <div className="panel-list">
+                      <div className="col-xs-12">
+                      <Panel panelInfo={this.state.panelInfo}/>
+                      </div>
                   </div>
 
                   </div>

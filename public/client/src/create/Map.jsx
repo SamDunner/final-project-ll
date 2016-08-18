@@ -357,6 +357,8 @@ export default class Map extends Component {
 
   renderSearchInfoWindow(ref, marker) {
 
+    this.props.createPanelInfo(marker)
+
     return (
 
       <InfoWindow
