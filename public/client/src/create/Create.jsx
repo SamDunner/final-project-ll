@@ -265,7 +265,7 @@ const Create = React.createClass({
           }}, () => {
             console.log(this.state)
           })
-          
+
         })
 
   },
@@ -352,8 +352,6 @@ const Create = React.createClass({
               <NavBar />
         </div>
 
-          <br/>
-          <br/>
           <br/>
           <br/>
 

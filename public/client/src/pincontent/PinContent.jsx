@@ -7,9 +7,10 @@ import MapSearch_form from './MapSearch_form.jsx';
 //import PinTable from './PinTable.jsx';
 import $ from 'jquery';
 import { Link } from 'react-router';
+import ImageUpload from '../image_upload/ImageUpload.jsx'
 
 const PinContent = React.createClass({
-	
+
 	getInitialState: function(){
 
 		return { map_information: { title: "",
@@ -36,7 +37,7 @@ const PinContent = React.createClass({
           		pins: [],
           		map_places: [],
           		create_map: { centre: {latitude: 51.5074, longitude: -0.1278}},
-          		
+
         };
 	},
 
@@ -45,7 +46,7 @@ const PinContent = React.createClass({
     var searchLocations = this.state.map_places;
 
   	for(var i = 0; i < locations.length; i++){
-        
+
         let marker = {
           name: locations[i].name,
           rating: locations[i].rating,
@@ -87,7 +88,7 @@ const PinContent = React.createClass({
 			      'author_id': this.props.params.user_id },
 	      url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id
 	    }).done((results) => {
-	    	
+
 
 	    });
 
@@ -103,7 +104,7 @@ const PinContent = React.createClass({
 	             user_id: this.props.params.user_id},
 	      url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id
 	    }).done((results) => {
-	      	
+
 	    	console.log(results)
 
 	    	let marker = {
@@ -141,7 +142,7 @@ const PinContent = React.createClass({
 	    	}, () => {
 	    		console.log(this.state)
 	    	})
-	     
+
 	    })
 
   	},
@@ -154,7 +155,7 @@ const PinContent = React.createClass({
               user_id: this.props.params.user_id},
       url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id
     }).done((results) => {
-      
+
        this.setState({ map_information: {title: results[0].title,
                                          location: results[0].location,
                                          latitude: results[0].latitude,
@@ -169,7 +170,7 @@ const PinContent = React.createClass({
                     	console.log(this.state)
                     })
 
-     
+
     	})
 
 	},
@@ -188,14 +189,14 @@ const PinContent = React.createClass({
 	                </div>
 	               	<div id="pin-show-map">
 		                <Map
-		                	marker_information={this.state.marker_information} 
+		                	marker_information={this.state.marker_information}
 		                	map_location={this.state.create_map}
-		                    map_places={this.state.map_places} 
-		                    pins={this.state.pins} 
+		                    map_places={this.state.map_places}
+		                    pins={this.state.pins}
 		                />
 		            </div>
 		            <div id="show-map-form">
-		                <MapSearch_form marker_information={this.state.marker_information} 
+		                <MapSearch_form marker_information={this.state.marker_information}
 		                		  	    map_location={this.state.create_map}
 		                         	    mapSearchLocations={this.mapSearchLocations}
 		                         	    map_places={this.state.map_places}
@@ -205,13 +206,18 @@ const PinContent = React.createClass({
 		                			 changeDescription={this.changeDescription}
 		                />
 
+  {/*}                                <div>
+                                    <ImageUpload />
+                                  </div>
+  */}
+
 		                <Link className="btn btn-warning" to={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + this.props.params.pin_id + "/content"} > Edit this Blog Entry </Link>
 
 
 		            </div>
-		            
-		            
-			
+
+
+
 
 				</div>)
 

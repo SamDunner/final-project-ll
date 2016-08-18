@@ -305,15 +305,21 @@ const Edit = React.createClass({
             <div className="map-edit-page">
 
               <div className="standard-nav-bar">
-                    <NavBar />
+                <NavBar />
+              </div>
+
+                <br/>
+                <br/>
+
+              <div className="container full-edit-map">
+                <div className="row name-map">
+                  <div className="col-xs-12">
+                  {this.state.map_information.title}
+                  </div>
                 </div>
 
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-
-                <div className="edit-map" >
+                <div className="row edit-map" >
+                  <div className="col-xs-12">
                   {/*<div>
                     <div id="title-input-change" contenteditable>{this.state.map_information.title}</div>
                   </div>*/}
@@ -333,6 +339,7 @@ const Edit = React.createClass({
                       removeMapLocation={this.removeMapLocation}
                     />
 
+                  </div>
                   </div>
                   <div id="edit-map-form">
                     <MapSearch_form marker_information={this.state.marker_information}
@@ -354,24 +361,24 @@ const Edit = React.createClass({
                   <Link className="btn btn-success"
                     to={"/users/" + this.props.params.user_id + "/collection"}
                     >
-                  Save
+                  update map
                   </Link>
                    <Link className="btn btn-success"
                     to={"/users/" + this.props.params.user_id + "/collection"}
                     >
-                  Deletes
+                  delete map
                   </Link>
 
 
 
-                </div>
 
+              </div>
             </div>
+          </div>
 
       );
   }
 });
 
-//Pin code to be used later to add a new marker: <i class="fa fa-map-marker" aria-hidden="true"></i>
 
 export default Edit;
