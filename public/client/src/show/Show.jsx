@@ -41,7 +41,7 @@ const Show = React.createClass({
   getCookie: function(){
       return document.cookie.substring(document.cookie.length - 1, document.cookie.length);
   },
-	
+
     mapSearchLocations: function(locations) {
     console.log("arrived at mapSearchLocations", locations)
     var searchLocations = this.state.map_places;
@@ -70,7 +70,7 @@ const Show = React.createClass({
     console.log("updated  state at mapSearchLocations", this.state)
     this.forceUpdate()
   },
-  
+
 
   //updates the state of the map central location:
   centreMapLocation: function(location, type){
@@ -96,7 +96,7 @@ const Show = React.createClass({
            user_id: this.props.params.user_id},
       url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id
     }).done((results) => {
-      
+
        this.setState({ map_information: {title: results[0].title,
                                          location: results[0].location,
                                          latitude: results[0].latitude,
@@ -117,7 +117,7 @@ const Show = React.createClass({
   *
   */
   getAllPins: function(){
-  	
+
     var routes = this.state.routePath
 
   	$.ajax({
@@ -126,7 +126,7 @@ const Show = React.createClass({
   			   user_id: this.props.params.user_id},
   		url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + '/pins'
   	}).done((results) => {
-  		
+
   		console.log(results);
       var markers = [];
       for(var i = 0; i < results.length; i++){
@@ -156,7 +156,7 @@ const Show = React.createClass({
         this.forceUpdate()
       })
   	})
-  
+
   },
 
   getCookie: function(){
@@ -188,54 +188,58 @@ const Show = React.createClass({
 	          <br/>
 	          <br/>
 
-	            <div className="show-map" >
+            <div className="container">
+
+              <div className="row name-map">
+                <div className="col-xs-12">
+                {this.state.map_information.title}
+                </div>
+              </div>
+	            <div className="row show-map col-xs-12" >
 		            <div id="show">
 		                <Map
                       user_id={this.props.params.user_id}
                       map_id={this.props.params.map_id}
-		                	marker_information={this.state.marker_information} 
+		                	marker_information={this.state.marker_information}
 		                	map_location={this.state.create_map}
                       routePath={this.state.routePath}
-		                  map_places={this.state.map_places} 
-		                  pins={this.state.pins} 
+		                  map_places={this.state.map_places}
+		                  pins={this.state.pins}
 		                />
 
 		            </div>
-		            <div id="show-map-form">
-		                <MapShow_form marker_information={this.state.marker_information} 
-		                			        map_location={this.state.create_map}
-		                         	    mapSearchLocations={this.mapSearchLocations}
-		                         	    
-		                />
-		            </div>
-	            </div>
-            
-
-            <div className="pin-list">
-              <PinTable centreMapLocation={this.centreMapLocation}
-                        map_location={this.state.create_map}
-                        pins={this.state.pins} />
-            </div>
 
 
-            <div className="panel-list">
+            <div className="row pin-list">
+              <div className="col-xs-12">
+                <PinTable centreMapLocation={this.centreMapLocation}
+                          map_location={this.state.create_map}
+                          pins={this.state.pins} />
+              </div>
 
-            </div>
+              <div className="row page-links">
+                <div className="col-xs-offset-2 col-xs-3">
+              <Link className="btn btn-link"
+                      to={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/edit"}
+                      >
+                    Edit
+              </Link>
+              </div>
 
-            <Link className="btn btn-warning"
-                    to={"/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/edit"}
-                    >
-                  Edit
-            </Link>
+              <div className="col-xs-offset-2 col-xs-3">
+              <Link className="btn btn-link"
+                      to={"/users/" + this.props.params.user_id + "/collection"}
+                      >
+                    Back to Collections
+              </Link>
 
-            <Link className="btn btn-info"
-                    to={"/users/" + this.props.params.user_id + "/collection"}
-                    >
-                  Back to Collections
-            </Link>
+                </div>
+              </div>
+              </div>
+              </div>
+          </div>
 
-
-            </div>
+        </div>
 
       );
   }
@@ -243,7 +247,5 @@ const Show = React.createClass({
 
 
 });
-
-//Pin code to be used later to add a new marker: <i class="fa fa-map-marker" aria-hidden="true"></i>
 
 export default Show;

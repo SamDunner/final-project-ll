@@ -4,12 +4,17 @@
 
 .marker-info {
 
-  h4 {
+  > h4 {
     font-size: 14px;
     margin-bottom: 1px;
   }
 
-  input, textarea {
+  > h3 {
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+
+  > input, textarea {
     width: 95%;
   }
 }

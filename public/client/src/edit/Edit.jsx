@@ -9,7 +9,7 @@ import { Link } from 'react-router';
 
 const Edit = React.createClass({
 
-  
+
   getInitialState: function() {
     return  { map_information: { title: "",
 
@@ -70,7 +70,7 @@ const Edit = React.createClass({
 
     /*TODO: make AJAX delete request */
 
-    $.ajax({ 
+    $.ajax({
       method: "DELETE",
       url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + "/pins/" + marker.pin_id
     }).done((results) => {
@@ -85,7 +85,7 @@ const Edit = React.createClass({
 
     })
 
-    
+
 
   },
 
@@ -117,14 +117,14 @@ const Edit = React.createClass({
                author_id: this.props.params.user_id },
 
 
-        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + '/pins' 
+        url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.props.params.map_id + '/pins'
       }).done((results) => {
-        
+
         console.log('receiving saved pin from db',results)
 
-      
+
         routes.push({lat: results[0].latitude, lng: results[0].longitude})
-      
+
 
         let marker = {
             title: results[0].title,
@@ -152,7 +152,7 @@ const Edit = React.createClass({
 
   },
 
-  
+
 
   handleChangeLoc: function(event){
 
@@ -316,15 +316,14 @@ const Edit = React.createClass({
                 <div className="edit-map" >
                   {/*<div>
                     <div id="title-input-change" contenteditable>{this.state.map_information.title}</div>
-                  </div>*/} 
+                  </div>*/}
                   <div id="change-loc" >
-                    <ChangeLoc_form centreMapLocation={this.centreMapLocation} />
                   </div>
                   <div id="edit">
                      <Map
                       user_id={this.props.params.user_id}
                       map_id={this.props.params.map_id}
-                      marker_information={this.state.marker_information} 
+                      marker_information={this.state.marker_information}
                       routePath={this.state.routePath}
                       map_location={this.state.create_map}
                       pins={this.state.pins}

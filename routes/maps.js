@@ -9,14 +9,13 @@ module.exports = (knex) => {
     knex
       .select("*")
       .from("maps")
+      .orderBy('updated_at', 'desc')
       .then((results) => {
         res.json(results);
     });
   });
 
   router.get("/:map_id", (req, res) => {
-
-    
     knex
       .select("*")
       .from("maps")

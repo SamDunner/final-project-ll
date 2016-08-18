@@ -295,7 +295,7 @@ const Create = React.createClass({
                user_id: this.props.params.user_id},
         url: "http://localhost:8080/users/" + this.props.params.user_id + "/maps/" + this.state.map_information.map_id
       }).done((results) => {
-        
+
          this.setState({ map_information: {title: results[0].title,
                                            location: results[0].location,
                                            latitude: results[0].latitude,
@@ -360,7 +360,7 @@ const Create = React.createClass({
           {!this.state.map_information.map_id &&
 
             <div className="container move-edit-map">
-              <div className="create-map col-md-6 col-lg-6">
+              <div className="create-map col-xs-6">
             <br/>
                 <div className="map-form">
                 <Map_form centreMapLocation={this.centreMapLocation} map_information={this.state.map_information} map_info={this.map_info} />
