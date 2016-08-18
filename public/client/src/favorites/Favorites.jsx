@@ -33,7 +33,9 @@ const Favorites = React.createClass({
               <ProfileNavBar />
             </nav>
           </div>
-          favorites test
+          <div className="center center-text releasing-shortly">
+            We will be releasing favorites shortly. Please stay tuned.
+          </div>
         </div>
     );
   }

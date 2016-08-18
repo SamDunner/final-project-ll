@@ -1,0 +1,42 @@
+.container.blog-edit-map {
+  padding: 2em;
+  font-size: 12px;
+
+  .row.name-map {
+    margin-right: 50px;
+  }
+}
+
+.container.blog-edit-map #create {
+  border-style: solid;
+  border-color: black;
+}
+
+#blog-form {
+  text-align: left;
+}
+
+.blog-date {
+  color: #006bb3;
+}
+
+.blog-address {
+  color: #999;
+}
+
+textarea.blog-description {
+  width: 90%;
+}
+
+.row.map-search {
+  text-align: left;
+
+  input {
+    width: 400px;
+  }
+
+  .btn-submit {
+    margin: 0;
+  }
+
+}

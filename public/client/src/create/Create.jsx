@@ -430,7 +430,7 @@ const Create = React.createClass({
                 </div>
               </div>
 
-                <div className="create-map col-md-6 col-lg-6" >
+                <div className="create-map col-xs-6" >
                   <div id="create">
                     <Map map_location={this.state.create_map} marker_information={this.state.marker_information} />
                   </div>
