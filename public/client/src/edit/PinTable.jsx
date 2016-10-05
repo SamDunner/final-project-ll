@@ -8,7 +8,7 @@ import React, {Component}  from 'react';
 import { Link } from 'react-router';
 import $ from 'jquery'
 import cookie from 'react-cookie';
-import bootstrap from 'bootstrap';
+//import bootstrap from 'bootstrap';
 // import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 
