@@ -18,28 +18,28 @@ const Panel = React.createClass({
 
 
 			{this.props.panelInfo.name &&
-			<label>Name: {this.props.panelInfo.name}</label>
+			<div className="name">Name: {this.props.panelInfo.name}</div>
 
 			}
 
 			{this.props.panelInfo.address &&
-			<label>Address: {this.props.panelInfo.address}</label>
+			<div className="address">Address: {this.props.panelInfo.address}</div>
 			}
 
 			{this.props.panelInfo.phone_number &&
-			<label>Phone no.: {this.props.panelInfo.phone_number}</label>
+			<div className="phone-number">Phone no.: {this.props.panelInfo.phone_number}</div>
 			}
 
 			{this.props.panelInfo.rating &&
-			<label>Rating: {this.props.panelInfo.rating}</label>
+			<div className="rating">Rating: {this.props.panelInfo.rating}</div>
 			}
 
 			{this.props.panelInfo.url &&
-			<label>google url: {this.props.panelInfo.url}</label>
+			<div className="url">Google url: {this.props.panelInfo.url}</div>
 			}
 
 			{this.props.panelInfo.website &&
-			<label>website: {this.props.panelInfo.website}</label>
+			<div className="website">website: {this.props.panelInfo.website}</div>
 			}
 
 			{this.props.panelInfo.reviews &&
